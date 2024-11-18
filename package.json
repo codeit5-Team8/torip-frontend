@@ -12,7 +12,7 @@
     "test:watch": "jest --watch --passWithNoTests"
   },
   "lint-staged": {
-    "./src/app/**/*.{js,ts,jsx,tsx}": [
+    "*.{js,jsx,ts,tsx}": [
       "eslint --ext .tsx,.ts . --quiet --fix",
       "prettier --config ./.prettierrc.json --write -u"
     ]
