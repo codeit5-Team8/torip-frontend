@@ -12,11 +12,11 @@
     "test:watch": "jest --watch --passWithNoTests"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --max-warnings=0",
-      "prettier --write"
-    ]
-  },
+  "*.{js,jsx,ts,tsx}": [
+    "eslint --max-warnings=0",
+    "prettier --write"
+  ]
+},
   "dependencies": {
     "next": "15.0.3",
     "react": "^18.3.1",
