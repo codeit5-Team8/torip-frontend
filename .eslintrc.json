@@ -1,27 +1,21 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true
-  },
-  "parser": "@typescript-eslint/parser", // TypeScript 파서 설정
-  "parserOptions": {
-    "ecmaVersion": 12,
-    "sourceType": "module"
-  },
-  "extends": [
-    "eslint:recommended",
-    "plugin:prettier/recommended",
-    "plugin:@typescript-eslint/recommended" // TypeScript 관련 규칙 추가
-  ],
-  "plugins": [
-    "react",
-    "jsx-a11y",
-    "prettier",
-    "@typescript-eslint" // TypeScript 플러그인 추가
-  ],
+  "extends": ["plugin:@typescript-eslint/recommended", "next/core-web-vitals"],
+  "plugins": ["@typescript-eslint"],
+  "parser": "@typescript-eslint/parser",
   "rules": {
-    "no-console": "warn",
-    "no-unused-vars": "warn",
-    "@typescript-eslint/no-unused-vars": "warn" // TypeScript용 규칙 추가
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "require-jsdoc": "off",
+    "react/display-name": "off",
+    "quotes": ["error", "single"] // 문자열 들을 단일 따옴표로 감싸도록 강제
   }
 }
