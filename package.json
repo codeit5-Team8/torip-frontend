@@ -13,8 +13,8 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --ext .tsx,.ts . --quiet --fix",
-      "prettier --config ./.prettierrc.json --write -u"
+      "eslint --fix",
+      "prettier --write"
     ]
   },
   "dependencies": {
