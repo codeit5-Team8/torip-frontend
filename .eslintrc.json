@@ -3,17 +3,25 @@
     "browser": true,
     "es2021": true
   },
-  "extends": [
-    "eslint:recommended", // ESLint 기본 추천 규칙
-    "plugin:prettier/recommended" // Prettier와 통합
-  ],
+  "parser": "@typescript-eslint/parser", // TypeScript 파서 설정
   "parserOptions": {
     "ecmaVersion": 12,
     "sourceType": "module"
   },
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended" // TypeScript 관련 규칙 추가
+  ],
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "prettier",
+    "@typescript-eslint" // TypeScript 플러그인 추가
+  ],
   "rules": {
-    // 필요에 따라 Prettier 외 추가 규칙 설정
-    "no-console": "warn", // console.log 경고
-    "no-unused-vars": "warn" // 사용하지 않는 변수 경고
+    "no-console": "warn",
+    "no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": "warn" // TypeScript용 규칙 추가
   }
 }
