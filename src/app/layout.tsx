@@ -19,10 +19,7 @@ export default function RootLayout({
         <title>Next.js</title>
       </head>
 
-      <body className={`antialiased`}>
-      <body
-        className={`antialiased`}
-      >
+      <body>
         {children}
         <SpeedInsights />
       </body>
