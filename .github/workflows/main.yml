@@ -47,6 +47,27 @@ jobs:
           name: coverage-report-${{ matrix.node-version }}
           path: coverage/
 
+      # 7. 성공 시 PR에 코멘트 추가
+      - name: Add Success Comment for Build and Test
+        if: success()
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ✅ **테스트 파일 실행** 작업이 성공적으로 완료되었습니다!
+
+      # 8. 실패 시 PR에 코멘트 추가
+      - name: Add Failure Comment for Build and Test
+        if: failure()
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ❌ **테스트 파일 실행** 작업이 실패했습니다.
+            - 오류 내용을 확인해주세요.
+
   lint:
     name: Lint
     runs-on: ubuntu-latest
@@ -72,3 +93,24 @@ jobs:
       # 4. Lint 검사
       - name: Run Lint
         run: npm run lint
+
+      # 5. 성공 시 PR에 코멘트 추가
+      - name: Add Success Comment for Lint
+        if: success()
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ✅ **Lint 확인** 작업이 성공적으로 완료되었습니다!
+
+      # 6. 실패 시 PR에 코멘트 추가
+      - name: Add Failure Comment for Lint
+        if: failure()
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ❌ **Lint 확인** 작업이 실패했습니다.
+            - 오류 내용을 확인해주세요.
