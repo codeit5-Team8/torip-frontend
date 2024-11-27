@@ -86,7 +86,7 @@ jobs:
       - build-and-test
       - lint
 
-    # PR 이벤트에서만 comment 등록 실행
+    # PR에서만 comment 등록 실행
     if: github.event_name == 'pull_request'
 
     steps:
