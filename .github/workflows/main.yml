@@ -1,0 +1,98 @@
+name: Test and Lint
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'dev'
+  pull_request:
+    branches:
+      - '**'
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20]
+
+    steps:
+      # 1. 코드 체크아웃
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Node.js 설정
+      - name: Setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # 3. 의존성 설치
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Lint 검사
+      - name: Run Lint
+        run: npm run lint
+
+      # 5. Jest 테스트 실행 및 커버리지 리포트 생성
+      - name: Run Jest Tests with Coverage
+        id: jest-step
+        run: npm run test -- --coverage
+
+    outputs:
+      build-test-status: ${{ steps.jest-step.outcome }}
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20]
+
+    steps:
+      # 1. 코드 체크아웃
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Node.js 설정
+      - name: Setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # 3. 의존성 설치
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Lint 검사
+      - name: Run Lint
+        id: lint-step
+        run: npm run lint
+
+    outputs:
+      lint-status: ${{ steps.lint-step.outcome }}
+
+  comment:
+    name: Post Comment
+    runs-on: ubuntu-latest
+    needs:
+      - build-and-test
+      - lint
+
+    steps:
+      - name: Post PR Comment
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ### ✅ GitHub Actions 실행 결과
+            - **Build and Test**: ${{ needs.build-and-test.outputs.build-test-status == 'success' && '성공 🎉' || '실패 ❌' }}
+            - **Lint**: ${{ needs.lint.outputs.lint-status == 'success' && '성공 🎉' || '실패 ❌' }}
