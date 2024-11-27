@@ -1,0 +1,73 @@
+name: Test and Lint
+
+on:
+  push:
+    branches: -main
+      -dev
+  pull_request:
+    branches: -main
+      -dev
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16, 18, 20]
+
+    steps:
+      # 1. 코드 체크아웃
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Node.js 설정
+      - name: Setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # 3. 의존성 설치
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Lint 검사
+      - name: Run Lint
+        run: npm run lint
+
+      # 5. Jest 테스트 실행 및 커버리지 리포트 생성
+      - name: Run Jest Tests with Coverage
+        run: npm run test -- --coverage
+
+      # 6. 코드 커버리지 리포트를 GitHub Actions에 표시
+      - name: Upload Coverage to GitHub
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report-${{ matrix.node-version }}
+          path: coverage/
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16, 18, 20]
+
+    steps:
+      # 1. 코드 체크아웃
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Node.js 설정
+      - name: Setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # 3. 의존성 설치
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Lint 검사
+      - name: Run Lint
+        run: npm run lint
