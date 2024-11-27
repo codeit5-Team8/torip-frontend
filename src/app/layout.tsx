@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import localFont from 'next/font/local';
 import './globals.css';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
@@ -17,7 +18,11 @@ export default function RootLayout({
       <head>
         <title>Next.js</title>
       </head>
+
       <body className={`antialiased`}>
+      <body
+        className={`antialiased`}
+      >
         {children}
         <SpeedInsights />
       </body>
