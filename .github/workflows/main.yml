@@ -80,11 +80,14 @@ jobs:
       lint-status: ${{ steps.lint-step.outcome }}
 
   comment:
-    name: Post Comment
+    name: Add Comment
     runs-on: ubuntu-latest
     needs:
       - build-and-test
       - lint
+
+    # PR에서만 comment 등록 실행
+    if: github.event_name == 'pull_request'
 
     steps:
       - name: Post PR Comment
