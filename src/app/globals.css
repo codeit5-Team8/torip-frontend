@@ -8,6 +8,10 @@
   html {
     font-family: 'Pretendard Variable', system-ui, sans-serif;
   }
+
+  body {
+    @apply text-slate-800;
+  }
 }
 
 /* Custom CSS */

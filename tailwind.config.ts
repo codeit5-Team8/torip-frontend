@@ -8,37 +8,22 @@ export default {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Pretendard', 'sans-serif'],
-      },
-      fontSize: {
-        xs: ['12px', '16px'],
-        sm: ['14px', '20px'],
-        base: ['16px', '24px'],
-        lg: ['18px', '28px'],
-        xl: ['20px', '28px'],
-        '2xl': ['24px', '32px'],
-        '3xl': ['30px', '36px'],
-      },
-      fontWeight: {
-        light: '300',
-        normal: '400',
-        medium: '500',
-        semibold: '600',
-        bold: '700',
-      },
       colors: {
-        primary: {
-          light: '#ffffff',
-          default: '#ffffff',
-          dark: '#ffffff',
+        primary: '#19D1CB',
+        secondary: '#000000',
+        mint: {
+          50: '#F3FCFC',
+          100: '#E6F9F9',
+          200: '#BFF3F3',
+          300: '#9AEEEF',
+          400: '#5BE1DD',
+          500: '#28D7D2',
+          600: '#19D1CB',
+          700: '#20ACAC',
+          800: '#1C8787',
+          900: '#156565',
+          950: '#115A5A',
         },
-        secondary: {
-          light: '#000000',
-          default: '#000000',
-          dark: '#000000',
-        },
-        success: '#3B82F6',
         warning: '#B91C1C',
       },
       boxShadow: {
