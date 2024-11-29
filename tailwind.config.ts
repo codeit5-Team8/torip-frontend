@@ -47,6 +47,7 @@ export default {
       screens: {
         mobile: '375px',
         tablet: '744px',
+
       },
     },
   },
