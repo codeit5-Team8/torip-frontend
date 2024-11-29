@@ -9,8 +9,9 @@
     "lint": "next lint",
     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
     "prepare": "husky install",
-    "test": "jest --passWithNoTests --coverage",
-    "test:watch": "jest --watch --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --watch --passWithNoTests",
+    "format": "prettier --write ."
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -27,6 +28,7 @@
     "date-fns": "^4.1.0",
     "next": "^14.2.18",
     "next-auth": "^4.24.10",
+   "prettier-plugin-tailwindcss": "^0.6.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.2",
@@ -43,8 +45,8 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "@typescript-eslint/eslint-plugin": "^8.14.0",
-    "@typescript-eslint/parser": "^8.14.0",
+    "@typescript-eslint/eslint-plugin": "^8.16.0",
+    "@typescript-eslint/parser": "^8.16.0",
     "cypress": "^13.16.0",
     "eslint": "^8.57.1",
     "eslint-config-next": "15.0.3",

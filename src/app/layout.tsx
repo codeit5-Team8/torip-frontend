@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import QueryProvider from './provider/QueryProvider';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -13,18 +15,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <head>
-        <title>Next.js</title>
-      </head>
-
-      <body className={`antialiased`}>
-      <body
-        className={`antialiased`}
-      >
-        {children}
-        <SpeedInsights />
-      </body>
-    </html>
+    <QueryProvider>
+      <html lang="en">
+        <body>{children}
+          <SpeedInsights /></body>
+        
+      </html>
+    </QueryProvider>
   );
 }
