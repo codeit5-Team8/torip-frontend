@@ -1,19 +1,15 @@
 import { create } from 'zustand';
 
-interface IPopupProps {
-  isOpen: boolean;
+interface IShowPopupArguments {
   popupText: string;
   showCancelButton: boolean;
   confirmButtonText: string;
   onConfirm?: () => void;
   onCancel?: () => void;
-  showPopup: (options: {
-    popupText: string;
-    showCancelButton: boolean;
-    confirmButtonText: string;
-    onConfirm?: () => void;
-    onCancel?: () => void;
-  }) => void;
+}
+interface IPopupProps extends IShowPopupArguments {
+  isOpen: boolean;
+  showPopup: (args: IShowPopupArguments) => void;
   closePopup: () => void;
 }
 
