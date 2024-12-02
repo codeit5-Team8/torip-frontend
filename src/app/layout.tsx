@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import QueryProvider from './Provider/QueryProvider';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import Popup from './ui/common/Popup';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,6 +18,7 @@ export default function RootLayout({
     <QueryProvider>
       <html lang="en">
         <body>
+          <Popup />
           {children}
           <SpeedInsights />
         </body>
