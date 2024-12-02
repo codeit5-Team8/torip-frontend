@@ -1,19 +1,20 @@
 import { create } from 'zustand';
 
-interface IShowPopupArguments {
+interface IShowPopupParameter {
   popupText: string;
   showCancelButton: boolean;
   confirmButtonText: string;
   onConfirm?: () => void;
   onCancel?: () => void;
 }
-interface IPopupProps extends IShowPopupArguments {
+
+interface IPopup extends IShowPopupParameter {
   isOpen: boolean;
-  showPopup: (args: IShowPopupArguments) => void;
+  showPopup: (params: IShowPopupParameter) => void;
   closePopup: () => void;
 }
 
-export const usePopupStore = create<IPopupProps>((set) => ({
+export const usePopupStore = create<IPopup>((set) => ({
   isOpen: false,
   popupText: '',
   showCancelButton: true,
