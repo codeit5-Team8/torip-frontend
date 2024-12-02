@@ -1,20 +1,20 @@
 import { create } from 'zustand';
 
 interface IPopupProps {
-  isOpen: boolean; // 팝업 제어 boolean
-  popupText: string; // 팝업에 들어 갈 text
-  showCancelButton: boolean; // cancel 버튼 출력 유무 boolean
-  confirmButtonText: string; // confirm 역할을 하는 버튼에 들어가는 text
-  onConfirm?: () => void; // confirm 버튼 클릭 시 실행 할 함수
-  onCancel?: () => void; // cancel 버튼 클릭 시 실행 할 함수
-  showPopup: (
-    popupText: string,
-    showCancelButton: boolean,
-    confirmButtonText: string,
-    onConfirm?: () => void,
-    onCancel?: () => void,
-  ) => void; // 팝업 열기 함수, 팝업에 들어 갈 정보를 인자로 넘겨줍니다.
-  closePopup: () => void; // 팝업 닫기 함수
+  isOpen: boolean;
+  popupText: string;
+  showCancelButton: boolean;
+  confirmButtonText: string;
+  onConfirm?: () => void;
+  onCancel?: () => void;
+  showPopup: (options: {
+    popupText: string;
+    showCancelButton: boolean;
+    confirmButtonText: string;
+    onConfirm?: () => void;
+    onCancel?: () => void;
+  }) => void;
+  closePopup: () => void;
 }
 
 export const usePopupStore = create<IPopupProps>((set) => ({
@@ -24,13 +24,13 @@ export const usePopupStore = create<IPopupProps>((set) => ({
   confirmButtonText: '확인',
   onConfirm: undefined,
   onCancel: undefined,
-  showPopup: (
+  showPopup: ({
     popupText,
     showCancelButton,
     confirmButtonText,
     onConfirm,
     onCancel,
-  ) =>
+  }) =>
     set({
       isOpen: true,
       popupText,
