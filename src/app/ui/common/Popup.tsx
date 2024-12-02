@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 'use client';
 
+import { useEffect, useRef } from 'react';
 import { usePopupStore } from '../../store/popup.store';
 import Button from './Button';
 
@@ -16,6 +17,8 @@ export default function Popup() {
     onCancel,
     closePopup,
   } = usePopupStore();
+
+  const popupRef = useRef<HTMLDivElement>(null); // 팝업 전체를 참조
 
   const handleConfirm = () => {
     if (onConfirm) {
@@ -31,9 +34,27 @@ export default function Popup() {
     closePopup();
   };
 
-  const handleOverlayClick = () => {
-    closePopup();
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      closePopup();
+    }
   };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Escape') {
+      closePopup(); // ESC 키로 팝업 닫기
+    }
+    if (e.key === 'Enter') {
+      handleConfirm(); // Enter 키로 확인 버튼 동작
+    }
+  };
+
+  // 팝업이 열릴 때 포커스를 이동
+  useEffect(() => {
+    if (isOpen && popupRef.current) {
+      popupRef.current.focus(); // 팝업 컨테이너에 포커스 설정
+    }
+  }, [isOpen]);
 
   if (!isOpen) {
     return null;
@@ -48,15 +69,23 @@ export default function Popup() {
       aria-labelledby="popup-text"
     >
       <div
+        ref={popupRef} // 팝업 컨테이너 참조
         className="z-2 absolute left-1/2 top-1/2 mx-auto my-0 w-[300px] -translate-x-1/2 -translate-y-1/2 transform cursor-default rounded-lg bg-white tablet:w-[450px]"
+        tabIndex={-1} // 키보드 포커스를 받을 수 있도록 설정
+        onKeyDown={handleKeyDown}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="box-border flex flex-col gap-6 p-6">
           {!showCancelButton && (
             <section className="text-right">
               {/* TODO: X 아이콘 삽입하기 */}
-              <button onClick={handleCancel}>X</button>{' '}
-              {/* 아이콘 들어올 자리 */}
+              <button
+                onClick={handleCancel}
+                aria-label="닫기"
+                className="text-xl"
+              >
+                X
+              </button>
             </section>
           )}
           <main className="mx-auto my-0 text-center">
