@@ -108,17 +108,15 @@ export default function Popup() {
           <footer className="mx-auto my-0 flex justify-center gap-2">
             {showCancelButton && (
               <Button
+                size="large"
                 variant="outlined"
-                className="h-[48px] w-[120px] px-[46px] py-[12px] font-semibold"
+                className="w-[120px]"
                 onClick={handleCancel}
               >
                 취소
               </Button>
             )}
-            <Button
-              className="h-[48px] w-[120px] px-[46px] py-[12px] font-semibold"
-              onClick={handleConfirm}
-            >
+            <Button size="large" className="w-[120px]" onClick={handleConfirm}>
               {confirmButtonText}
             </Button>
           </footer>
