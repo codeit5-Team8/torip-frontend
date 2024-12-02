@@ -31,8 +31,8 @@ export default {
         base: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
       },
       screens: {
-        mobile: '375px',
-        tablet: '744px',
+        tablet: '640px',
+        desktop: '1024px',
       },
     },
   },
