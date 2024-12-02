@@ -56,13 +56,27 @@ export default function Popup() {
     }
   }, [isOpen]);
 
+  // 팝업이 열렸을 때 스크롤 막기
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'; // 스크롤 막기
+    } else {
+      document.body.style.overflow = ''; // 스크롤 다시 활성화
+    }
+
+    // 컴포넌트 언마운트 시 스크롤 다시 활성화
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   if (!isOpen) {
     return null;
   }
 
   return (
     <div
-      className="absolute h-[100vh] w-full cursor-pointer bg-black bg-opacity-50"
+      className="absolute z-[9999] h-[100vh] w-full cursor-pointer bg-black bg-opacity-50"
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"
@@ -70,7 +84,7 @@ export default function Popup() {
     >
       <div
         ref={popupRef} // 팝업 컨테이너 참조
-        className="z-2 absolute left-1/2 top-1/2 mx-auto my-0 w-[300px] -translate-x-1/2 -translate-y-1/2 transform cursor-default rounded-lg bg-white tablet:w-[450px]"
+        className="absolute left-1/2 top-1/2 mx-auto my-0 w-[300px] -translate-x-1/2 -translate-y-1/2 transform cursor-default rounded-lg bg-white tablet:w-[450px]"
         tabIndex={-1} // 키보드 포커스를 받을 수 있도록 설정
         onKeyDown={handleKeyDown}
         onClick={(e) => e.stopPropagation()}
