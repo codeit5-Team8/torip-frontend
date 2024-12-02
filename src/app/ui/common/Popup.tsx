@@ -60,11 +60,7 @@ export default function Popup() {
             </section>
           )}
           <main className="mx-auto my-0 text-center">
-            {popupText.map((text, index) => (
-              <p className="font-medium" key={index}>
-                {text}
-              </p>
-            ))}
+            <p className="whitespace-pre-wrap break-words">{popupText}</p>
           </main>
           <footer className="mx-auto my-0 flex justify-center gap-2">
             {showCancelButton && (
