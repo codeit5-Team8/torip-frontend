@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import QueryProvider from './Provider/QueryProvider';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import MainLayout from './layout/MainLayout';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,7 +18,7 @@ export default function RootLayout({
     <QueryProvider>
       <html lang="en">
         <body>
-          {children}
+          <MainLayout>{children}</MainLayout>
           <SpeedInsights />
         </body>
       </html>
