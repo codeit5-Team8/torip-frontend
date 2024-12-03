@@ -21,7 +21,13 @@
       "jsx": true
     }
   },
-  "plugins": ["react", "jsx-a11y", "@typescript-eslint", "prettier"],
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "@typescript-eslint",
+    "prettier",
+    "tailwindcss"
+  ],
   "rules": {
     "prettier/prettier": "error",
     "react/react-in-jsx-scope": "off",

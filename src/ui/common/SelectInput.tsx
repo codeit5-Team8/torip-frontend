@@ -3,11 +3,12 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-} from '@/components/ui/select';
+} from '@components/ui/select';
 import { twMerge } from 'tailwind-merge';
-import { INPUT_CLASSNAME, INPUT_MESSAGE } from '@/constant/input';
+
 import { ComponentPropsWithRef } from 'react';
-import { TInputErrorType } from '@/app/types/input';
+import { TInputErrorType } from '@type/input';
+import { INPUT_CLASSNAME, INPUT_MESSAGE } from '@constant/input';
 
 export type TSelectOptionsType = {
   label: string;

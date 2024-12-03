@@ -1,7 +1,7 @@
 import { ComponentPropsWithRef, forwardRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { INPUT_CLASSNAME, INPUT_MESSAGE } from '@/constant/input';
-import { TInputErrorType } from '@/app/types/input';
+import { INPUT_CLASSNAME, INPUT_MESSAGE } from '@constant/input';
+import { TInputErrorType } from '@type/input';
 
 interface IPasswordInputProps
   extends Omit<ComponentPropsWithRef<'input'>, 'type'> {

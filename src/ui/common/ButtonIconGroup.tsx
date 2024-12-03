@@ -1,5 +1,5 @@
 import { twMerge } from 'tailwind-merge';
-import KebabButton from './KebabButton';
+import KebabButton from '@ui/common/KebabButton';
 
 /**
  * 할일 옆에 나오는 아이콘 그룹 컴포넌트입니다.
