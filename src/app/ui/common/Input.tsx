@@ -1,22 +1,7 @@
 import { forwardRef } from 'react';
-import { InputHTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { INPUT_CLASSNAME, INPUT_MESSAGE } from '@/constant/input';
-
-export type TInputErrorType =
-  | 'required'
-  | 'passwordTooShort'
-  | 'passwordsDoNotMatch'
-  | 'invalidEmail'
-  | 'passwordWrong'
-  | 'passwordNotSame';
-
-export interface IInputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'>,
-    React.RefAttributes<HTMLInputElement> {
-  type: 'text' | 'email';
-  errorType?: TInputErrorType;
-}
+import { IInputProps } from '@/app/types/input';
 
 /**
  * 공통 Input 컴포넌트 입니다.

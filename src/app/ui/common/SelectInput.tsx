@@ -7,7 +7,7 @@ import {
 import { twMerge } from 'tailwind-merge';
 import { INPUT_CLASSNAME, INPUT_MESSAGE } from '@/constant/input';
 import { ComponentPropsWithRef } from 'react';
-import { TInputErrorType } from './Input';
+import { TInputErrorType } from '@/app/types/input';
 
 export type TSelectOptionsType = {
   label: string;
