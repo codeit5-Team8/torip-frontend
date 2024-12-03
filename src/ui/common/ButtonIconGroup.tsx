@@ -1,5 +1,5 @@
 import { twMerge } from 'tailwind-merge';
-import DropdownMenu from './DropdownMenu';
+import KebabButton from '@ui/common/KebabButton';
 
 /**
  * 할일 옆에 나오는 아이콘 그룹 컴포넌트입니다.
@@ -13,17 +13,19 @@ import DropdownMenu from './DropdownMenu';
  *
  * @param {function} onFileClick - 파일 버튼 클릭 시 호출되는 핸들러
  * @param {function} onDocClick - 문서 버튼 클릭 시 호출되는 핸들러
+ * @param {function} onKebabClick - 케밥 버튼 클릭 시 호출되는 핸들러(드롭다운 연결하기)
  *
  */
 interface IButtonIconGroupProps {
   onFileClick: () => void;
   onDocClick: () => void;
+  onKebabClick: () => void;
   className?: string;
 }
-
 export default function ButtonIconGroup({
   onFileClick,
   onDocClick,
+  onKebabClick,
   className,
 }: IButtonIconGroupProps) {
   const buttonStyle =
@@ -43,18 +45,7 @@ export default function ButtonIconGroup({
       >
         {/* 문서 아이콘 부분 */}
       </button>
-      {/* 케밥 메뉴 */}
-      <DropdownMenu
-        items={[
-          // TODO: 기능 추가 필요
-          /* eslint-disable no-console */
-          { label: '수정하기', onClick: () => console.log('Edit clicked') },
-          { label: '삭제하기', onClick: () => console.log('Delete clicked') },
-          /* eslint-disable no-console */
-        ]}
-      >
-        {/* 케밥 아이콘 부분 */} :
-      </DropdownMenu>
+      <KebabButton onClick={onKebabClick} />
     </div>
   );
 }

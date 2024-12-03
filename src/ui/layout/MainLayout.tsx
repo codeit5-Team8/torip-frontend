@@ -1,5 +1,5 @@
 import Header from '@ui/common/Header';
-import SideBar from '@ui/SideBar/SideBar';
+import SideBar from '@ui/common/SideBar';
 
 interface IMainLayoutProps {
   children: React.ReactNode;
@@ -7,15 +7,15 @@ interface IMainLayoutProps {
 
 export default function MainLayout({ children }: IMainLayoutProps) {
   return (
-    <>
-      <div className="flex min-h-[100vh] w-full flex-col items-center bg-slate-100">
+    <div className="flex h-screen">
+      {/* 사이드바 고정 */}
+      <SideBar />
+
+      {/* Content 스크롤 가능 */}
+      <div className="flex-1 overflow-y-auto">
         <Header />
-        <SideBar />
-        <main className="container ml-0 flex flex-1 flex-col md:pl-[4.75rem] min-[1400px]:pl-[1rem]">
-          {/* Contents 영역 */}
-          {children}
-        </main>
+        {children}
       </div>
-    </>
+    </div>
   );
 }

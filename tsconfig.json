@@ -22,18 +22,15 @@
     "paths": {
       "@components/*": ["components/*"],
       "@lib/*": ["./src/lib/*"],
-      "@util/*": ["./src/util/*"],
+      "@utils/*": ["./src/utils/*"],
       "@ui/*": ["./src/ui/*"],
-      "@common/*": ["./src/ui/common/*"],
       "@store/*": ["./src/store/*"],
       "@type/*": ["./src/types/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@provider/*": ["./src/provider/*"],
       "@seo/*": ["./src/seo/*"],
       "@app/*": ["./src/app/*"],
-      "@constant/*": ["./src/constant/*"],
-      "@model/*": ["./src/model/*"],
-      "@service/*": ["./src/lib/api/service/*"]
+      "@constant/*": ["./src/constant/*"]
     }
   },
   "include": [
