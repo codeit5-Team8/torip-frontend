@@ -7,10 +7,9 @@ interface IMainLayoutProps {
 
 export default function MainLayout({ children }: IMainLayoutProps) {
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-slate-200">
       {/* 사이드바 고정 */}
       <SideBar />
-
       {/* Content 스크롤 가능 */}
       <div className="flex-1 overflow-y-auto">
         <Header />
