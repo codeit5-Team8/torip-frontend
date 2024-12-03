@@ -7,7 +7,7 @@ interface IMainLayoutProps {
 
 export default function MainLayout({ children }: IMainLayoutProps) {
   return (
-    <div className="item-center bg-gray-600">
+    <div className="item-center">
       {/* 사이드바 고정 */}
       <SideBar />
 
