@@ -30,9 +30,8 @@ export default function SelectInput(props: ISelectInputProps) {
     errorType && INPUT_CLASSNAME.error.border,
   );
 
-  const SelectOptionClassName = twMerge(
-    'p-0 gap-0 rounded-bl-xl rounded-br-xl bg-gray-50 font-normal leading-normal text-slate-800 text-sm sm:text-base',
-  );
+  const SelectOptionClassName =
+    'p-0 gap-0 rounded-bl-xl rounded-br-xl bg-gray-50 font-normal leading-normal text-slate-800 text-sm sm:text-base';
 
   const selectedOptions = options.find((option) => option.value === value);
 
