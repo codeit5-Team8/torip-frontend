@@ -1,4 +1,4 @@
-import { THyperLinkType } from '@/types';
+import { THyperLinkType } from '@type/link';
 import Link from 'next/link';
 
 interface IHyperLinkProps {

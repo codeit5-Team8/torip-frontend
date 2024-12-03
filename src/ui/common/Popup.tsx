@@ -3,8 +3,8 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 'use client';
 
+import { usePopupStore } from '@store/popup.store';
 import { useEffect, useRef } from 'react';
-import { usePopupStore } from '../../store/popup.store';
 import Button from './Button';
 
 export default function Popup() {
@@ -76,7 +76,7 @@ export default function Popup() {
 
   return (
     <div
-      className="absolute z-[9999] h-[100vh] w-full cursor-pointer bg-black bg-opacity-50"
+      className="absolute z-[9999] h-[100vh] w-full bg-black bg-opacity-50"
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"

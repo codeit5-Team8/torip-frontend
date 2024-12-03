@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { INPUT_CLASSNAME, INPUT_MESSAGE } from '@/constant/input';
-import { IInputProps } from '@/app/types/input';
+import { INPUT_CLASSNAME, INPUT_MESSAGE } from '@constant/input';
+import { IInputProps } from '@type/input';
 
 /**
  * 공통 Input 컴포넌트 입니다.

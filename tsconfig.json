@@ -20,8 +20,17 @@
     ],
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@ui/*": ["./src/ui/*"],
+      "@store/*": ["./src/store/*"],
+      "@type/*": ["./src/types/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@provider/*": ["./src/provider/*"],
+      "@seo/*": ["./src/seo/*"],
+      "@app/*": ["./src/app/*"],
+      "@constant/*": ["./src/constant/*"]
     }
   },
   "include": [

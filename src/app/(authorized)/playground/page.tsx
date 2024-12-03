@@ -1,5 +1,5 @@
 'use client';
 
 export default function Playground() {
-  return <div></div>;
+  return <div>auth</div>;
 }
