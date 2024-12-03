@@ -5,7 +5,7 @@ export default {
   darkMode: ['class'],
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/ui/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/constant/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -79,6 +79,17 @@ export default {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+      },
+      container: {
+        padding: {
+          DEFAULT: '1rem',
+          tablet: '1.5rem',
+        },
+        screens: {
+          DEFAULT: '100%',
+          tablet: '100%',
+          desktop: '1024px',
+        },
       },
     },
   },
