@@ -5,13 +5,18 @@
 @layer base {
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
 
+  * {
+    @apply border-border;
+  }
+
   html {
     font-family: 'Pretendard Variable', system-ui, sans-serif;
   }
 
   body {
-    @apply text-slate-800;
+    @apply bg-background text-foreground text-slate-800;
   }
+
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -73,13 +78,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-}
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }
