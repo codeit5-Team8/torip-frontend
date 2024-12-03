@@ -38,9 +38,9 @@ export default function Button(props: IButtonProps) {
     'flex items-center justify-center gap-2.5 rounded-xl border border-primary font-semibold';
 
   const sizeStyles = {
-    small: 'h-9 w-20 py-2 text-sm leading-tight',
-    middle: 'h-11 w-36 py-3 text-sm leading-tight',
-    large: 'h-12 w-72 py-3 text-base leading-normal',
+    small: 'h-9 w-[5.25rem] py-2 text-sm leading-tight',
+    middle: 'h-11 w-[9.375rem] py-3 text-sm leading-tight',
+    large: 'h-12 w-[18.125rem] py-3 text-base leading-normal',
   };
 
   const variantStyles = {
