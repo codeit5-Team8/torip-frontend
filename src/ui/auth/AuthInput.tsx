@@ -3,15 +3,17 @@ import { twMerge } from 'tailwind-merge';
 import { AUTH_INPUT_LABEL_MAP, INPUT_MESSAGE } from '@constant/input';
 import { Input } from '@ui/common/Input';
 import { PasswordInput } from '@ui/common/PasswordInput';
+import { UseFormRegister } from 'react-hook-form';
 
 export interface IAuthInputProps {
   type: 'name' | 'email' | 'password' | 'passwordConfirm';
   className?: string;
   errorMessage?: string;
+  register?: UseFormRegister<Record<string, string>>;
 }
 
 const AuthInput = forwardRef<HTMLInputElement, IAuthInputProps>(
-  ({ type, className, errorMessage }, ref) => {
+  ({ type, className, errorMessage, ...rest }, ref) => {
     const placeholder = INPUT_MESSAGE.placeholder[type];
 
     return (
@@ -29,6 +31,7 @@ const AuthInput = forwardRef<HTMLInputElement, IAuthInputProps>(
             placeholder={placeholder}
             ref={ref}
             errorMessage={errorMessage}
+            {...rest}
           />
         ) : (
           <PasswordInput
@@ -36,6 +39,7 @@ const AuthInput = forwardRef<HTMLInputElement, IAuthInputProps>(
             placeholder={placeholder}
             ref={ref}
             errorMessage={errorMessage}
+            {...rest}
           />
         )}
       </div>
