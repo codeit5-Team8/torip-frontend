@@ -3,16 +3,15 @@ import { twMerge } from 'tailwind-merge';
 import { AUTH_INPUT_LABEL_MAP, INPUT_MESSAGE } from '@constant/input';
 import { Input } from '@ui/common/Input';
 import { PasswordInput } from '@ui/common/PasswordInput';
-import { TInputErrorType } from '@type/input';
 
 export interface IAuthInputProps {
   type: 'name' | 'email' | 'password' | 'passwordConfirm';
   className?: string;
-  errorType?: TInputErrorType;
+  errorMessage?: string;
 }
 
 const AuthInput = forwardRef<HTMLInputElement, IAuthInputProps>(
-  ({ type, className, errorType }, ref) => {
+  ({ type, className, errorMessage }, ref) => {
     const placeholder = INPUT_MESSAGE.placeholder[type];
 
     return (
@@ -29,14 +28,14 @@ const AuthInput = forwardRef<HTMLInputElement, IAuthInputProps>(
             type={type === 'name' ? 'text' : 'email'}
             placeholder={placeholder}
             ref={ref}
-            errorType={errorType}
+            errorMessage={errorMessage}
           />
         ) : (
           <PasswordInput
             id={type}
             placeholder={placeholder}
             ref={ref}
-            errorType={errorType}
+            errorMessage={errorMessage}
           />
         )}
       </div>

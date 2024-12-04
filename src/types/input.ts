@@ -12,5 +12,5 @@ export interface IInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'>,
     React.RefAttributes<HTMLInputElement> {
   type: 'text' | 'email';
-  errorType?: TInputErrorType;
+  errorMessage?: string;
 }
