@@ -1,3 +1,5 @@
+import { IAuthInputProps } from '@ui/auth/AuthInput';
+
 export const INPUT_CLASSNAME = {
   base: ` 
       w-full flex items-center rounded-xl border text-slate-800 font-normal placeholder:text-slate-400 bg-gray-50
@@ -29,4 +31,11 @@ export const INPUT_MESSAGE = {
     passwordNotSame: '비밀번호가 일치하지 않습니다.',
     passwordWrong: '비밀번호가 올바르지 않습니다.',
   },
+};
+
+export const AUTH_INPUT_LABEL_MAP: Record<IAuthInputProps['type'], string> = {
+  name: '이름',
+  email: '아이디',
+  password: '비밀번호',
+  passwordConfirm: '비밀번호 확인',
 };

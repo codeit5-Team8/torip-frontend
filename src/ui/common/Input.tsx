@@ -11,7 +11,6 @@ import { IInputProps } from '@type/input';
  * @param {string} label - input 필드에 대한 레이블 텍스트를 제공합니다. 선택 사항입니다.
  * @returns {JSX.Element} - type에 맞는 입력 필드를 리턴합니다.
  */
-
 const Input = forwardRef<HTMLInputElement, IInputProps>((props, ref) => {
   const { errorType, ...rest } = props;
 
