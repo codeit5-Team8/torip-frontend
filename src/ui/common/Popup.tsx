@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 'use client';
 
-import { usePopupStore } from '@store/popup.store';
+import { popupStore } from '@store/popup.store';
 import { useEffect, useRef } from 'react';
 import Button from './Button';
 
@@ -16,7 +16,7 @@ export default function Popup() {
     onConfirm,
     onCancel,
     closePopup,
-  } = usePopupStore();
+  } = popupStore();
 
   const popupRef = useRef<HTMLDivElement>(null); // 팝업 전체를 참조
 
