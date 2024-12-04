@@ -13,14 +13,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
-        },
+        primary: '#19D1CB',
+        secondary: '#000000',
         mint: {
           '50': '#F3FCFC',
           '100': '#E6F9F9',
