@@ -29,8 +29,8 @@ export default function SignUpPage() {
   const passwordValue = watch('password');
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
+    <div className="flex flex-col gap-5">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
         {/* Name */}
         <AuthInput
           type="name"
@@ -101,12 +101,12 @@ export default function SignUpPage() {
         </Button>
       </form>
 
-      <p className="mt-6 text-center text-base text-slate-800">
-        이미 회원이신가요?{' '}
-        <Link href={'/signin'} className="text-primary underline">
+      <div className="flex justify-center gap-1 text-sm text-slate-800">
+        <p>이미 회원이신가요? </p>
+        <Link href={'/signin'} className="text-mint-500 underline">
           로그인
         </Link>
-      </p>
+      </div>
     </div>
   );
 }
