@@ -7,8 +7,6 @@ import { AUTH_VALIDATION_REGEX } from '@constant/auth';
 import AuthInput from '@ui/auth/AuthInput';
 import Button from '@ui/common/Button';
 import { INPUT_MESSAGE } from '@constant/input';
-import { useLogin } from '@hooks/useLogin';
-import { useRouter } from 'next/navigation';
 
 type TLoginFormInputs = {
   email: string;
@@ -20,29 +18,10 @@ export default function SignInPage() {
     register,
     formState: { errors, isValid },
     handleSubmit,
-    setError,
-  } = useForm<TLoginFormInputs>({ mode: 'onBlur' });
-  const { loginHandler } = useLogin();
-  const router = useRouter();
+  } = useForm<TLoginFormInputs>({ mode: 'onChange' });
 
-  const onSubmit: SubmitHandler<TLoginFormInputs> = async (data) => {
-    const res = await loginHandler('credentials', { ...data, redirect: false });
-    if (res?.ok) {
-      router.push('/');
-    } else if (res) {
-      // 에러 메시지에 따라 필드별로 에러 설정
-      if (res?.error === '비밀번호가 일치하지 않습니다.') {
-        setError('password', {
-          type: 'manual',
-          message: res.error,
-        });
-      } else {
-        setError('email', {
-          type: 'manual',
-          message: res.error!,
-        });
-      }
-    }
+  const onSubmit: SubmitHandler<TLoginFormInputs> = () => {
+    // console.log(data);
   };
 
   return (
@@ -51,12 +30,11 @@ export default function SignInPage() {
         <AuthInput
           type="email"
           errorMessage={
-            errors.email?.message ||
-            (errors.email?.type === 'required'
+            errors.email?.type === 'required'
               ? INPUT_MESSAGE.error.required
               : errors.email?.type === 'pattern'
                 ? INPUT_MESSAGE.error.invalidEmail
-                : undefined)
+                : undefined
           }
           {...register('email', {
             required: true,
@@ -66,12 +44,11 @@ export default function SignInPage() {
         <AuthInput
           type="password"
           errorMessage={
-            errors.password?.message ||
-            (errors.password?.type === 'required'
+            errors.password?.type === 'required'
               ? INPUT_MESSAGE.error.required
               : errors.password?.type === 'minLength'
                 ? INPUT_MESSAGE.error.passwordTooShort
-                : undefined)
+                : undefined
           }
           {...register('password', {
             required: true,

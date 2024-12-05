@@ -3,14 +3,11 @@ import { twMerge } from 'tailwind-merge';
 
 /**
  * 공통 버튼 컴포넌트입니다.
- * @param {string} size - 버튼 크기. 'small', 'middle', 'large' 중 하나를 선택합니다.
- * @param {string} variant - 버튼 스타일. 'solid' 또는 'outlined' 중 하나를 선택합니다.
- * @param {boolean} rounded - 버튼의 모서리를 둥글게 처리할지 여부. true면 완전 둥근 버튼이 됩니다.
- * @param {boolean} fullWidth - 버튼의 너비를 부모 요소의 100%로 설정할지 여부. true면 버튼이 전체 너비를 차지합니다.
- * @param {string} className - 사용자 정의 Tailwind CSS 클래스를 추가할 수 있습니다.
- * @param {boolean} disabled - 버튼 비활성화 여부.
- * @param {Function} onClick - 버튼 클릭 시 호출할 함수.
- * @param {React.ReactNode} children - 버튼 내부에 렌더링될 콘텐츠.
+ * size - 버튼 크기. 'small', 'middle', 'large' 중 하나를 선택합니다.
+ * variant - 버튼 스타일. 'solid' 또는 'outlined' 중 하나를 선택합니다.
+ * rounded - 버튼의 모서리를 둥글게 처리할지 여부. true면 완전 둥근 버튼이 됩니다.
+ * fullWidth - 버튼의 너비를 부모 요소의 100%로 설정할지 여부. true면 버튼이 전체 너비를 차지합니다.
+ * className - 사용자 정의 Tailwind CSS 클래스를 추가할 수 있습니다.
  */
 
 interface IButtonProps extends ComponentPropsWithoutRef<'button'> {
