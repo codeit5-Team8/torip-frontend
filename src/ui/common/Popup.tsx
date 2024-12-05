@@ -70,58 +70,62 @@ export default function Popup() {
     };
   }, [isOpen]);
 
-  if (!isOpen) {
-    return null;
-  }
-
   return (
-    <div
-      className="absolute z-[9999] h-[100vh] w-full bg-black bg-opacity-50"
-      onClick={handleOverlayClick}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="popup-text"
-    >
-      <div
-        ref={popupRef} // 팝업 컨테이너 참조
-        className="absolute left-1/2 top-1/2 mx-auto my-0 w-[300px] -translate-x-1/2 -translate-y-1/2 transform cursor-default rounded-lg bg-white desktop:w-[450px]"
-        tabIndex={-1} // 키보드 포커스를 받을 수 있도록 설정
-        onKeyDown={handleKeyDown}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="box-border flex flex-col gap-6 p-6">
-          {!showCancelButton && (
-            <section className="text-right">
-              {/* TODO: X 아이콘 삽입하기 */}
-              <button
-                onClick={handleCancel}
-                aria-label="닫기"
-                className="text-xl"
-              >
-                X
-              </button>
-            </section>
-          )}
-          <main className="mx-auto my-0 text-center">
-            <p className="whitespace-pre-wrap break-words">{popupText}</p>
-          </main>
-          <footer className="mx-auto my-0 flex justify-center gap-2">
-            {showCancelButton && (
-              <Button
-                size="large"
-                variant="outlined"
-                className="w-[120px]"
-                onClick={handleCancel}
-              >
-                취소
-              </Button>
-            )}
-            <Button size="large" className="w-[120px]" onClick={handleConfirm}>
-              {confirmButtonText}
-            </Button>
-          </footer>
+    <>
+      {isOpen && (
+        <div
+          className="absolute z-[9999] h-[100vh] w-full bg-black bg-opacity-50"
+          onClick={handleOverlayClick}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="popup-text"
+        >
+          <div
+            ref={popupRef} // 팝업 컨테이너 참조
+            className="absolute left-1/2 top-1/2 mx-auto my-0 w-[300px] -translate-x-1/2 -translate-y-1/2 transform cursor-default rounded-lg bg-white desktop:w-[450px]"
+            tabIndex={-1} // 키보드 포커스를 받을 수 있도록 설정
+            onKeyDown={handleKeyDown}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="box-border flex flex-col gap-6 p-6">
+              {!showCancelButton && (
+                <section className="text-right">
+                  {/* TODO: X 아이콘 삽입하기 */}
+                  <button
+                    onClick={handleCancel}
+                    aria-label="닫기"
+                    className="text-xl"
+                  >
+                    X
+                  </button>
+                </section>
+              )}
+              <main className="mx-auto my-0 text-center">
+                <p className="whitespace-pre-wrap break-words">{popupText}</p>
+              </main>
+              <footer className="mx-auto my-0 flex justify-center gap-2">
+                {showCancelButton && (
+                  <Button
+                    size="large"
+                    variant="outlined"
+                    className="w-[120px]"
+                    onClick={handleCancel}
+                  >
+                    취소
+                  </Button>
+                )}
+                <Button
+                  size="large"
+                  className="w-[120px]"
+                  onClick={handleConfirm}
+                >
+                  {confirmButtonText}
+                </Button>
+              </footer>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
