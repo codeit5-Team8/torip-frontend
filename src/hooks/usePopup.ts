@@ -1,4 +1,4 @@
-import { usePopupStore } from '@store/popup.store';
+import { popupStore } from '@store/popup.store';
 
 interface IShowPopupOptions {
   popupText: string;
@@ -9,7 +9,7 @@ interface IShowPopupOptions {
 }
 
 export const usePopup = () => {
-  const { showPopup } = usePopupStore();
+  const { showPopup } = popupStore();
 
   const openPopup = ({
     popupText,
