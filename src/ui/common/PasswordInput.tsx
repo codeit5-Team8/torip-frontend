@@ -1,22 +1,21 @@
 import { ComponentPropsWithRef, forwardRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { INPUT_CLASSNAME, INPUT_MESSAGE } from '@constant/input';
-import { TInputErrorType } from '@type/input';
+import { INPUT_CLASSNAME } from '@constant/input';
 
 interface IPasswordInputProps
   extends Omit<ComponentPropsWithRef<'input'>, 'type'> {
-  errorType?: TInputErrorType;
+  errorMessage?: string;
 }
 
 const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
   (props, ref) => {
-    const { errorType, ...rest } = props;
+    const { errorMessage, ...rest } = props;
 
     const [isShow, setIsShow] = useState(false);
 
     const inputClassName = twMerge(
       INPUT_CLASSNAME.base,
-      errorType && INPUT_CLASSNAME.error.border,
+      errorMessage && INPUT_CLASSNAME.error.border,
     );
 
     return (
@@ -41,10 +40,8 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
           </button>
         </div>
 
-        {errorType && (
-          <p className={INPUT_CLASSNAME.error.message}>
-            {INPUT_MESSAGE.error[errorType]}
-          </p>
+        {errorMessage && (
+          <p className={INPUT_CLASSNAME.error.message}>{errorMessage}</p>
         )}
       </div>
     );

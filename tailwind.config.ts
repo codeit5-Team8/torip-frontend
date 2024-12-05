@@ -28,7 +28,7 @@ export default {
           '900': '#156565',
           '950': '#115A5A',
         },
-        warning: '#B91C1C',
+        warning: '#FF334B',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
