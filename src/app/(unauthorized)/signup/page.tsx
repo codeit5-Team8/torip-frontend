@@ -30,7 +30,7 @@ export default function SignUpPage() {
 
   return (
     <div className="flex flex-col gap-5">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
         {/* Name */}
         <AuthInput
           type="name"
@@ -101,7 +101,7 @@ export default function SignUpPage() {
         </Button>
       </form>
 
-      <div className="flex justify-center gap-1 text-sm text-slate-800">
+      <div className="flex justify-center gap-1 text-sm font-medium text-slate-800">
         <p>이미 회원이신가요? </p>
         <Link href={'/signin'} className="text-mint-500 underline">
           로그인
