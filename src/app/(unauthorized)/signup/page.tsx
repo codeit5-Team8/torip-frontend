@@ -30,7 +30,7 @@ export default function SignUpPage() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
         {/* Name */}
         <AuthInput
           type="name"
