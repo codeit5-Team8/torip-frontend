@@ -19,7 +19,7 @@ export default function SignUpPage() {
     handleSubmit,
     watch,
     formState: { errors, isValid },
-  } = useForm<ISignUpFormInputs>({ mode: 'onChange' });
+  } = useForm<ISignUpFormInputs>({ mode: 'onBlur' });
 
   const onSubmit: SubmitHandler<ISignUpFormInputs> = () => {
     // console.log('Form Data:', data);
