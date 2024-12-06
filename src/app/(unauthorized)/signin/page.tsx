@@ -18,7 +18,7 @@ export default function SignInPage() {
     register,
     formState: { errors, isValid },
     handleSubmit,
-  } = useForm<TLoginFormInputs>({ mode: 'onChange' });
+  } = useForm<TLoginFormInputs>({ mode: 'onBlur' });
 
   const onSubmit: SubmitHandler<TLoginFormInputs> = () => {
     // console.log(data);
