@@ -3,6 +3,7 @@ import './globals.css';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import QueryProvider from '@provider/QueryProvider';
 import Popup from '@ui/common/Popup';
+import Modal from '@ui/common/Modal';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,8 +19,9 @@ export default function RootLayout({
     <QueryProvider>
       <html lang="en">
         <body>
-          {children}
           <Popup />
+          <Modal />
+          {children}
           <SpeedInsights />
         </body>
       </html>
