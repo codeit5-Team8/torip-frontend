@@ -3,11 +3,11 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 'use client';
 
-import { useModalStore } from '@store/modal.store';
+import { modalStore } from '@store/modal.store';
 import { useEffect, useRef } from 'react';
 
 export default function Modal() {
-  const { isOpen, title, content, closeModal } = useModalStore();
+  const { isOpen, title, content, closeModal } = modalStore();
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -52,7 +52,7 @@ export default function Modal() {
     <>
       {isOpen && (
         <div
-          className="fixed inset-0 z-[5555] bg-black bg-opacity-50"
+          className="tablet:absolute tablet:z-[5555] tablet:h-[100vh] tablet:w-full tablet:bg-black tablet:bg-opacity-50"
           onClick={handleOverlayClick}
           role="dialog"
           aria-modal="true"
@@ -60,7 +60,7 @@ export default function Modal() {
         >
           <main
             ref={modalRef}
-            className="fixed left-1/2 top-1/2 mx-auto my-0 box-border h-[100dvh] w-[100vw] min-w-[320px] -translate-x-1/2 -translate-y-1/2 transform cursor-default overflow-auto bg-white p-6 tablet:h-[724px] tablet:w-[520px] tablet:rounded-xl"
+            className="absolute left-1/2 top-1/2 mx-auto my-0 box-border h-[100dvh] w-[100vw] min-w-[320px] -translate-x-1/2 -translate-y-1/2 transform cursor-default overflow-auto bg-white p-6 tablet:h-[724px] tablet:w-[520px] tablet:rounded-xl"
             tabIndex={-1}
             onKeyDown={handleKeyDown}
             onClick={(e) => e.stopPropagation()}
