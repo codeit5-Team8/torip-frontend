@@ -47,7 +47,6 @@ export type TAcceptTravelResponse = TResponse<TJoinTravel>;
 export type TGetTravelResponse = TResponse<TTravel>;
 
 // delete - /api/v1/torip/travel/{id}
-// TODO : delete api에서 result 타입이 빈 객체가 맞는건지 아니면 작성이 안된것인지 확인 필요
 export type TDeleteTravelResponse = TResponse<Record<string, never>>;
 
 // patch - /api/v1/torip/travel/{id}
