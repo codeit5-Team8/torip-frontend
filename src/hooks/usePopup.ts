@@ -2,7 +2,7 @@ import { popupStore } from '@store/popup.store';
 
 interface IShowPopupOptions {
   popupText: string;
-  showCancelButton: false;
+  showCancelButton: boolean;
   confirmButtonText: string;
   onConfirm?: () => void;
   onCancel?: () => void;
