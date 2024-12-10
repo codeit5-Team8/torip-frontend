@@ -68,7 +68,6 @@ export default {
       screens: {
         tablet: '640px',
         desktop: '1024px',
-        tablet_desktop: { min: '640px', max: '1023px' },
       },
       borderRadius: {
         lg: 'var(--radius)',
