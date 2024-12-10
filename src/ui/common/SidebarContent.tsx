@@ -5,7 +5,12 @@ import { useModal } from '@hooks/useModal';
 import TodoModal from './TodoModal';
 import TripModal from './TripModal';
 
-export default function SidebarContent() {
+interface ISidebarContentProps {
+  clickSidebarContent: () => void;
+}
+export default function SidebarContent({
+  clickSidebarContent,
+}: ISidebarContentProps) {
   const mockTrip = ['서울 여행', '부산 여행', '유럽 여행'];
   const { openModal } = useModal();
 
@@ -56,7 +61,7 @@ export default function SidebarContent() {
           새 할 일
         </Button>
       </section>
-      <Link href="/" className="block">
+      <Link href="/" onClick={clickSidebarContent} className="block">
         <section className="flex items-center gap-2 border-b-[1px] border-slate-200 p-6">
           <Image
             src="/asset/icon/home.png"
@@ -84,7 +89,9 @@ export default function SidebarContent() {
               className="cursor-pointer list-inside list-disc p-2"
             >
               {/* TODO : 여행 별 링크 작업 필요 */}
-              <Link href="/playground">{trip}</Link>
+              <Link href="/playground" onClick={clickSidebarContent}>
+                {trip}
+              </Link>
             </li>
           ))}
         </ul>

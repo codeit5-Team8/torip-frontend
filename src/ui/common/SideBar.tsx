@@ -3,34 +3,54 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 'use client';
 
-import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import Logo from './Logo';
 import Image from 'next/image';
 import SidebarContent from './SidebarContent';
+import { useEffect, useState } from 'react';
+import { useResize } from '@hooks/useResize';
 
 export default function SideBar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { isMobileSize } = useResize();
+
+  useEffect(() => {
+    if (isSidebarOpen && isMobileSize) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    // Cleanup: 컴포넌트 언마운트 시 초기화
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isSidebarOpen, isMobileSize]);
 
   const toggleSidebar = () => {
-    setIsOpen((prev) => !prev);
+    setIsSidebarOpen((prev) => !prev);
   };
 
   const closeSidebar = () => {
-    setIsOpen(false);
+    setIsSidebarOpen(false);
+  };
+
+  const clickSidebarContent = () => {
+    if (isMobileSize) {
+      setIsSidebarOpen(false);
+    }
   };
 
   const sidebarClassname = twMerge(
-    'tablet:z-50 tablet:block tablet:transition-width tablet:duration-300 tablet:fixed tablet:left-0 tablet:top-0 tablet:h-screen bg-white',
-    isOpen ? 'tablet:w-[280px]' : 'tablet:w-[60px]',
+    'bg-white hidden tablet:z-50 tablet:block tablet:transition-width tablet:duration-300 tablet:fixed tablet:left-0 tablet:top-0 tablet:h-screen',
+    isSidebarOpen
+      ? 'block absolute w-full h-full tablet:w-[280px]'
+      : 'tablet:w-[60px]',
   );
-
-  // TODO : 반응형 디자인 필요
-  // TODO : mobile 환경에서 Header에서 Sidebar 제어할 수 있는 방법 구상하기
 
   return (
     <>
-      {isOpen && (
+      {isSidebarOpen && (
         <div
           onClick={closeSidebar}
           className="fixed inset-0 z-40 hidden bg-black bg-opacity-50 tablet:block desktop:hidden"
@@ -38,22 +58,24 @@ export default function SideBar() {
       )}
       <div className={sidebarClassname}>
         <section
-          className={`${isOpen ? 'flex-row justify-between p-6' : 'flex-col gap-6 p-4'} flex items-center`}
+          className={`${isSidebarOpen ? 'flex-row justify-between p-6' : 'flex-col gap-6 p-4'} flex items-center`}
         >
           <Logo
-            iconOnly={isOpen ? false : true}
-            size={isOpen ? 'small' : undefined}
+            iconOnly={isSidebarOpen ? false : true}
+            size={isSidebarOpen ? 'small' : undefined}
           />
           <button className="inline" onClick={toggleSidebar}>
             <Image
-              src={`/asset/icon/${isOpen ? 'fold' : 'expand'}.png`}
-              alt={`${isOpen ? '사이드바 닫기' : '사이드바 열기'}`}
+              src={`/asset/icon/${isSidebarOpen ? 'fold' : 'expand'}.png`}
+              alt={`${isSidebarOpen ? '사이드바 닫기' : '사이드바 열기'}`}
               width={24}
               height={24}
             />
           </button>
         </section>
-        {isOpen && <SidebarContent />}
+        {isSidebarOpen && (
+          <SidebarContent clickSidebarContent={clickSidebarContent} />
+        )}
       </div>
     </>
   );
