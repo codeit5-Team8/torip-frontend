@@ -1,28 +1,12 @@
 import axios from 'axios';
 
+// Axios 인스턴스 생성
 export const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   timeout: 10000,
 });
 
-axios.interceptors.request.use(
-  function (config) {
-    return config;
-  },
-  function (error) {
-    return Promise.reject(error);
-  },
-);
-
-axios.interceptors.response.use(
-  function (response) {
-    return response;
-  },
-  function (error) {
-    return Promise.reject(error);
-  },
-);
-
+// 요청 함수
 export function get<T>(...args: Parameters<typeof instance.get>) {
   return instance.get<T>(...args);
 }

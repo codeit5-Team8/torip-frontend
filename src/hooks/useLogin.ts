@@ -9,7 +9,7 @@ import {
 type TLoginWay = 'kakao' | 'credentials';
 
 export const useLogin = () => {
-  const { status } = useSession();
+  const { status, data } = useSession();
 
   const logOutHandler = (options?: SignOutParams) => {
     signOut(options);
@@ -22,5 +22,6 @@ export const useLogin = () => {
     logOutHandler,
     loginHandler,
     status,
+    data,
   };
 };

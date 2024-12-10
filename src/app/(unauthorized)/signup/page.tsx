@@ -5,6 +5,7 @@ import AuthInput from '@ui/auth/AuthInput';
 import Button from '@ui/common/Button';
 import { AUTH_VALIDATION_REGEX } from '@constant/auth';
 import Link from 'next/link';
+import { useLogin } from '@hooks/useLogin';
 
 interface ISignUpFormInputs {
   name: string;
@@ -20,9 +21,18 @@ export default function SignUpPage() {
     watch,
     formState: { errors, isValid },
   } = useForm<ISignUpFormInputs>({ mode: 'onBlur' });
+  const { loginHandler } = useLogin();
 
-  const onSubmit: SubmitHandler<ISignUpFormInputs> = () => {
-    // console.log('Form Data:', data);
+  const onSubmit: SubmitHandler<ISignUpFormInputs> = async (data) => {
+    // const requestData: TPostRegisterRequest = {
+    //   username: data.name,
+    //   email: data.email,
+    //   password: data.password,
+    // };
+    loginHandler('credentials', {
+      ...data,
+      redirect: false,
+    });
   };
 
   // passwordconfirm 이랑 비교하기위해 watch 사용
