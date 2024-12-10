@@ -11,8 +11,7 @@ interface ITaskCardProps {
   tasks: TTask[];
 }
 
-export default function TaskCard(props: ITaskCardProps) {
-  const { status, tasks } = props;
+export default function TaskCard({ status, tasks }: ITaskCardProps) {
   return (
     <div
       className={twMerge(

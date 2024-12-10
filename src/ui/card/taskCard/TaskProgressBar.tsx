@@ -3,9 +3,8 @@ import { Progress } from '@components/ui/progress';
 interface ITaskProgressBar {
   progress: number; // 할 일 완료도
 }
-export default function TodoProgressBar(props: ITaskProgressBar) {
-  const { progress } = props;
 
+export default function TodoProgressBar({ progress }: ITaskProgressBar) {
   return (
     <div className="item-center gap-2 rounded-full border border-slate-100 bg-white px-2 py-[.125rem]">
       <Progress

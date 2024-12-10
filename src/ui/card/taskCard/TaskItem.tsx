@@ -10,18 +10,16 @@ import ButtonIconGroup from '@ui/common/ButtonIconGroup';
 type TTaskItemProps = Omit<TTask, 'travelId'>;
 
 // TODO: 디자인 시안에 맞춰 props 데이터 수정 필요
-function TaskItem(props: TTaskItemProps) {
-  const {
-    taskId,
-    taskTitle,
-    travelStatus,
-    scope,
-    completionDate,
-    taskDDay,
-    filePath,
-    assignees,
-  } = props;
-
+function TaskItem({
+  taskId,
+  taskTitle,
+  travelStatus,
+  scope,
+  completionDate,
+  taskDDay,
+  filePath,
+  assignees,
+}: TTaskItemProps) {
   const handleFileClick = () => {
     // TODO: 파일 다운로드 모달
   };

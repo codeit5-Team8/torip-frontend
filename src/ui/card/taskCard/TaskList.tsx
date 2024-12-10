@@ -5,8 +5,7 @@ interface ITaskListProps {
   tasks: TTask[];
 }
 
-export default function TaskList(props: ITaskListProps) {
-  const { tasks } = props;
+export default function TaskList({ tasks }: ITaskListProps) {
   return (
     <ul className="scroll flex flex-1 flex-col gap-2 overflow-y-auto">
       {tasks.map((task) => (
