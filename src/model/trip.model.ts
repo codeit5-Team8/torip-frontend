@@ -5,7 +5,7 @@ type TUserResponse = {
   email: string;
 };
 
-type TTrip = {
+export type TTrip = {
   id: number;
   name: string;
   startDate: string;
@@ -16,7 +16,7 @@ type TTrip = {
   updatedAt: string;
 };
 
-type TJoinTrip = {
+export type TJoinTrip = {
   travelName: string;
   invitee: TUserResponse;
   status: 'Accepted' | 'Pending' | 'Rejected';
