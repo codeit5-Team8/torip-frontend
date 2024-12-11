@@ -85,6 +85,9 @@ export default {
           desktop: '1024px',
         },
       },
+      transitionProperty: {
+        width: 'width',
+      },
     },
   },
   plugins: [tailwindcssAnimate],
