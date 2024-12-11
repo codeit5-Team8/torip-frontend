@@ -1,8 +1,8 @@
-export const removeHtmlTags = (text: string) => {
+export const removeHtmlTags = (text: string = '') => {
   return text.replace(/<[^>]*>?/gm, '');
 };
 
-export const removeSpaces = (text: string) => {
+export const removeSpaces = (text: string = '') => {
   return text.replace(/\s+/g, '');
 };
 
