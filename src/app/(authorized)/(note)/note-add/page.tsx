@@ -28,7 +28,7 @@ export default function Page() {
 
   useEffect(() => {
     // draft 가져오기
-    const draft = window.localStorage.getItem(LOCAL_STORAGE_NOTE_DRAFT_KEY);
+    const draft = localStorage.getItem(LOCAL_STORAGE_NOTE_DRAFT_KEY);
     if (draft) {
       setDraft(draft);
     }
