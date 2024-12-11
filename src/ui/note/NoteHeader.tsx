@@ -37,8 +37,8 @@ export default function NoteHeader({ handleSaveDraft }: INoteHeaderProps) {
           onClick={handlePopup}
           type="button"
           disabled={
-            !isEmptyText({ value: watch('title'), hasHtml: false }) &&
-            !isEmptyText({ value: watch('content'), hasHtml: true })
+            isEmptyText({ value: watch('title'), hasHtml: false }) &&
+            isEmptyText({ value: watch('content'), hasHtml: true })
           }
         >
           임시저장
@@ -48,8 +48,8 @@ export default function NoteHeader({ handleSaveDraft }: INoteHeaderProps) {
           variant="solid"
           className="cursor-pointer border-slate-400 bg-slate-400 px-4 py-2 text-white hover:border-primary hover:bg-primary hover:text-white sm:px-6 sm:py-3"
           disabled={
-            !isEmptyText({ value: watch('title'), hasHtml: false }) &&
-            !isEmptyText({ value: watch('content'), hasHtml: true })
+            isEmptyText({ value: watch('title'), hasHtml: false }) &&
+            isEmptyText({ value: watch('content'), hasHtml: true })
           }
           type="submit"
         >

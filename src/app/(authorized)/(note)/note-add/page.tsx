@@ -9,7 +9,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { LOCAL_STORAGE_NOTE_DRAFT_KEY } from '@constant/note';
 import { Editor } from '@toast-ui/react-editor';
 import { TNoteFormInput } from '@type/note';
-import { removeFrontAndBackSpaces, saveToLocalStorage } from 'src/util/note';
+import { saveToLocalStorage } from 'src/util/note';
 
 export default function Page() {
   const methods = useForm<TNoteFormInput>({
@@ -33,7 +33,7 @@ export default function Page() {
 
   const handleSubmit = () => {
     // TODO 전송하기 api 연동
-    const title = removeFrontAndBackSpaces(methods.getValues('title'));
+    const title = methods.getValues('title').trim();
     const content = editorRef.current?.getInstance().getHTML();
     alert({ title, content });
 
@@ -43,7 +43,7 @@ export default function Page() {
   };
 
   const handleSaveDraft = () => {
-    const title = removeFrontAndBackSpaces(methods.getValues('title'));
+    const title = methods.getValues('title').trim();
     const content = methods.getValues('content');
     saveToLocalStorage(LOCAL_STORAGE_NOTE_DRAFT_KEY, { title, content });
     setDraft(JSON.stringify({ title, content }));

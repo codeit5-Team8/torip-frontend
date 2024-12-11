@@ -2,12 +2,8 @@ export const removeHtmlTags = (text: string) => {
   return text.replace(/<[^>]*>?/gm, '');
 };
 
-export const removeFrontAndBackSpaces = (text: string) => {
-  return text.replace(/^\s+|\s+$/g, '');
-};
-
 export const removeSpaces = (text: string) => {
-  return text.replace(/\s+/g, ' ');
+  return text.replace(/\s+/g, '');
 };
 
 export const isEmptyText = ({
@@ -16,8 +12,11 @@ export const isEmptyText = ({
 }: {
   value: string;
   hasHtml: boolean;
-}) => {
-  return hasHtml ? removeSpaces(removeHtmlTags(value)) : removeSpaces(value);
+}): boolean => {
+  const valueWithoutSpaces = hasHtml
+    ? removeHtmlTags(removeSpaces(value))
+    : removeSpaces(value);
+  return valueWithoutSpaces === '';
 };
 
 export const saveToLocalStorage = <T>(key: string, value: T) => {
