@@ -1,8 +1,23 @@
-// next-auth.d.ts
-import 'next-auth';
+// types/next-auth.d.ts
+
+import { DefaultSession } from 'next-auth';
 
 declare module 'next-auth' {
-  interface ISession {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  interface Session {
+    user: {
+      id: number;
+      name: string | null;
+      email: string | null;
+      accessToken?: string;
+      refreshToken?: string;
+    } & DefaultSession['user'];
+  }
+
+  interface IUser {
+    id: number;
+    name: string;
+    email: string;
     accessToken?: string;
     refreshToken?: string;
   }
