@@ -1,6 +1,6 @@
 'use client';
 
-import { EDITOR_TOOLBAR } from '@constant/note';
+import { EDITOR_TOOLBAR, NOTE_PLACEHOLDER } from '@constant/note';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
 import React, { useEffect } from 'react';
@@ -35,7 +35,7 @@ export default function NoteEditor({ editorRef }: INoteEditorProps) {
           ref={editorRef}
           toolbarItems={EDITOR_TOOLBAR}
           onChange={handleEditorChange}
-          placeholder="노트의 내용을 입력해주세요"
+          placeholder={NOTE_PLACEHOLDER.content}
           hideModeSwitch={true}
           usageStatistics={false}
           className="text-base font-normal leading-normal text-slate-400"
