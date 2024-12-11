@@ -1,11 +1,14 @@
 'use client';
 
-import { Editor } from '@toast-ui/react-editor';
-import { TNoteFormInput } from '@type/note';
+import { useEffect, useRef, useState } from 'react';
+import NoteDraft from '@ui/note/NoteDraft';
 import NoteForm from '@ui/note/NoteForm';
 import NoteInfo from '@ui/note/NoteInfo';
-import { useRef } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
+import { LOCAL_STORAGE_NOTE_DRAFT_KEY } from '@constant/note';
+import { Editor } from '@toast-ui/react-editor';
+import { TNoteFormInput } from '@type/note';
+import { removeFrontAndBackSpaces } from 'src/util/note';
 
 export default function Page() {
   const methods = useForm<TNoteFormInput>({
@@ -17,9 +20,56 @@ export default function Page() {
 
   const editorRef = useRef<Editor | null>(null);
 
+  const [draft, setDraft] = useState<string | null>(null);
+
+  useEffect(() => {
+    // draft 가져오기
+    const draft = window.localStorage.getItem(LOCAL_STORAGE_NOTE_DRAFT_KEY);
+    if (draft) {
+      setDraft(draft);
+    }
+  }, []);
+
+  const handleSubmit = () => {
+    // TODO 전송하기 api 연동
+    const title = removeFrontAndBackSpaces(methods.getValues('title'));
+    const content = editorRef.current?.getInstance().getHTML();
+    alert({ title, content });
+
+    // form 초기화
+    methods.reset();
+    editorRef.current?.getInstance().setHTML('');
+  };
+
+  const handleLoadDraft = () => {
+    if (draft) {
+      // draft 가져오기
+      const parsedDraft = JSON.parse(draft);
+      const title = parsedDraft.title;
+      const content = parsedDraft.content;
+      methods.setValue('title', title);
+      methods.setValue('content', content);
+      editorRef.current?.getInstance().setHTML(content);
+      // draft 제거
+      localStorage.removeItem(LOCAL_STORAGE_NOTE_DRAFT_KEY);
+      setDraft(null);
+    }
+  };
+
+  const handleDeleteDraft = () => {
+    localStorage.removeItem(LOCAL_STORAGE_NOTE_DRAFT_KEY);
+    setDraft(null);
+  };
+
   return (
     <FormProvider {...methods}>
-      <form>
+      <form onSubmit={methods.handleSubmit(handleSubmit)}>
+        {draft && (
+          <NoteDraft
+            handleLoadDraft={handleLoadDraft}
+            handleDeleteDraft={handleDeleteDraft}
+          />
+        )}
         <NoteInfo />
         <NoteForm editorRef={editorRef} />
       </form>
