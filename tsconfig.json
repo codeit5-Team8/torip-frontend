@@ -22,7 +22,7 @@
     "paths": {
       "@components/*": ["components/*"],
       "@lib/*": ["./src/lib/*"],
-      "@utils/*": ["./src/utils/*"],
+      "@util/*": ["./src/util/*"],
       "@ui/*": ["./src/ui/*"],
       "@common/*": ["./src/ui/common/*"],
       "@store/*": ["./src/store/*"],
@@ -43,5 +43,5 @@
     ".next/types/**/*.ts",
     "next.config.mjs"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "./cypress.config.ts", "cypress", "**/*.cy.tsx"]
 }
