@@ -10,7 +10,7 @@ export const NOTE_PLACEHOLDER = {
 };
 
 export const NOTE_POPUP_MESSAGE = {
-  refreshDraft: '이전에 임시 저장한 내용은 사라집니다. 새로 저장하시겠어요?',
-  saveDraft: '임시 저장 하시겠어요?',
-  loadDraft: '현재 작성 중인 내용은 사라집니다.',
+  refreshDraft: '이전에 임시 저장한 내용은 사라집니다.\n임시 저장 하시겠어요?',
+  saveDraft: '현재 작성 중인 내용이 임시 저장됩니다.',
+  loadDraft: '현재 작성 중인 내용은 사라집니다.\n 노트를 불러오시겠어요?',
 };
