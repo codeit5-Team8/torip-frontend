@@ -7,6 +7,8 @@ interface IMyUser {
   id: number;
   email: string;
   name: string;
+  accessToken?: string;
+  refreshToken?: string;
 }
 
 export const authOptions = {
@@ -72,6 +74,8 @@ export const authOptions = {
         token.id = user.id;
         token.email = user.email;
         token.name = user.name;
+        token.accessToken = user.accessToken as string;
+        token.refreshToken = user.refreshToken as string;
       }
       return token;
     },
@@ -81,6 +85,8 @@ export const authOptions = {
         session.user.id = token.id as number;
         session.user.email = token.email as string;
         session.user.name = token.name as string;
+        session.accessToken = token.accessToken as string;
+        session.refreshToken = token.refreshToken as string;
       }
       return session;
     },

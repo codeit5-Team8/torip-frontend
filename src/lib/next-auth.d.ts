@@ -9,9 +9,9 @@ declare module 'next-auth' {
       id: number;
       name: string | null;
       email: string | null;
-      accessToken?: string;
-      refreshToken?: string;
     } & DefaultSession['user'];
+    accessToken?: string;
+    refreshToken?: string;
   }
 
   interface IUser {
