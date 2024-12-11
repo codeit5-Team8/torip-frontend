@@ -4,6 +4,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { isEmptyText } from '@util/note';
 import { usePopup } from '@hooks/usePopup';
 import NoteHeader from '@ui/note/NoteHeader';
+import { NOTE_POPUP_MESSAGE } from '@constant/note';
 
 // 외부 함수 모킹
 jest.mock('src/util/note', () => ({
@@ -44,7 +45,7 @@ describe('NoteHeader', () => {
 
     // openPopup이 올바르게 호출되었는지 확인
     expect(openPopupMock).toHaveBeenCalledWith({
-      popupText: '이전에 임시 저장한 내용은 사라집니다.',
+      popupText: NOTE_POPUP_MESSAGE.saveDraft,
       showCancelButton: true,
       confirmButtonText: '확인',
       onConfirm: mockHandleSaveDraft, // onConfirm 콜백으로 mockHandleSaveDraft가 설정됨

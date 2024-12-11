@@ -1,5 +1,6 @@
 'use client';
 
+import { NOTE_POPUP_MESSAGE } from '@constant/note';
 import { usePopup } from '@hooks/usePopup';
 import Button from '@ui/common/Button';
 
@@ -16,7 +17,7 @@ export default function NoteDraft({
 
   const handleLoadDraftPopup = () => {
     openPopup({
-      popupText: '현재 작성 중인 내용은 사라집니다.',
+      popupText: NOTE_POPUP_MESSAGE.loadDraft,
       showCancelButton: true,
       confirmButtonText: '확인',
       onConfirm: handleLoadDraft,

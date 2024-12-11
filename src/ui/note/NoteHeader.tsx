@@ -5,6 +5,7 @@ import { TNoteFormInput } from '@type/note';
 import Button from '@ui/common/Button';
 import { usePopup } from '@hooks/usePopup';
 import { isEmptyText } from '@util/note';
+import { NOTE_POPUP_MESSAGE } from '@constant/note';
 
 interface INoteHeaderProps {
   handleSaveDraft: () => void;
@@ -16,7 +17,7 @@ export default function NoteHeader({ handleSaveDraft }: INoteHeaderProps) {
 
   const handlePopup = () => {
     openPopup({
-      popupText: '이전에 임시 저장한 내용은 사라집니다.',
+      popupText: NOTE_POPUP_MESSAGE.saveDraft,
       showCancelButton: true,
       confirmButtonText: '확인',
       onConfirm: handleSaveDraft,
