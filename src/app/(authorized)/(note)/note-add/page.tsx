@@ -3,6 +3,7 @@
 import { Editor } from '@toast-ui/react-editor';
 import { TNoteFormInput } from '@type/note';
 import NoteForm from '@ui/note/NoteForm';
+import NoteInfo from '@ui/note/NoteInfo';
 import { useRef } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 
@@ -19,6 +20,7 @@ export default function Page() {
   return (
     <FormProvider {...methods}>
       <form>
+        <NoteInfo />
         <NoteForm editorRef={editorRef} />
       </form>
     </FormProvider>
