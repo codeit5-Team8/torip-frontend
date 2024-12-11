@@ -5,7 +5,7 @@ type TUserResponse = {
   email: string;
 };
 
-type TTravel = {
+type TTrip = {
   id: number;
   name: string;
   startDate: string;
@@ -16,7 +16,7 @@ type TTravel = {
   updatedAt: string;
 };
 
-type TJoinTravel = {
+type TJoinTrip = {
   travelName: string;
   invitee: TUserResponse;
   status: 'Accepted' | 'Pending' | 'Rejected';
@@ -25,54 +25,54 @@ type TJoinTravel = {
 };
 
 // post - /api/v1/torip/travel
-export type TPostTravelRequest = {
+export type TPostTripRequest = {
   name: string;
   startDate: string;
   endDate: string;
 };
 
-export type TPostTravelResponse = TResponse<TTravel>;
+export type TPostTripResponse = TResponse<TTrip>;
 
 // get - /api/v1/torip/{id}/request
 
-export type TJoinTravelListResponse = TResponse<TJoinTravel[]>;
+export type TJoinTripListResponse = TResponse<TJoinTrip[]>;
 
 // post - /api/v1/torip/{id}/request
-export type TJoinTravelResponse = TResponse<TJoinTravel>;
+export type TJoinTripResponse = TResponse<TJoinTrip>;
 
 // post - /api/v1/torip/request/{id}/accept
-export type TAcceptTravelResponse = TResponse<TJoinTravel>;
+export type TAcceptTripResponse = TResponse<TJoinTrip>;
 
 // get - /api/v1/torip/travel/{id}
-export type TGetTravelResponse = TResponse<TTravel>;
+export type TGetTripResponse = TResponse<TTrip>;
 
 // delete - /api/v1/torip/travel/{id}
-export type TDeleteTravelResponse = TResponse<Record<string, never>>;
+export type TDeleteTripResponse = TResponse<Record<string, never>>;
 
 // patch - /api/v1/torip/travel/{id}
-export type TPatchTravelRequest = {
+export type TPatchTripRequest = {
   name: string;
   startDate: string;
   endDate: string;
 };
 
-export type TPatchTravelResponse = TResponse<TTravel>;
+export type TPatchTripResponse = TResponse<TTrip>;
 
 // get - /api/v1/torip/travel/{id}/members
-export type TGetTravelMembersResponse = TResponse<TUserResponse[]>;
+export type TGetTripMembersResponse = TResponse<TUserResponse[]>;
 
 // get - /api/v1/torip/travel/list
 /**
  
 @property {number}
 */
-export type TGetTravelListProps = {
+export type TGetTripListProps = {
   lastSeenId: number;
 };
 
-type TGetTravelList = {
+type TGetTripList = {
   lastSeenId: number;
-  content: TTravel[];
+  content: TTrip[];
 };
 
-export type TGetTravelListResponse = TResponse<TGetTravelList>;
+export type TGetTripListResponse = TResponse<TGetTripList>;
