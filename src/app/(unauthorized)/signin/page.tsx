@@ -7,6 +7,8 @@ import { AUTH_VALIDATION_REGEX } from '@constant/auth';
 import AuthInput from '@ui/auth/AuthInput';
 import Button from '@ui/common/Button';
 import { INPUT_MESSAGE } from '@constant/input';
+import { useLogin } from '@hooks/useLogin';
+import { useRouter } from 'next/navigation';
 
 type TLoginFormInputs = {
   email: string;
@@ -19,9 +21,14 @@ export default function SignInPage() {
     formState: { errors, isValid },
     handleSubmit,
   } = useForm<TLoginFormInputs>({ mode: 'onBlur' });
+  const { loginHandler } = useLogin();
+  const router = useRouter();
 
-  const onSubmit: SubmitHandler<TLoginFormInputs> = () => {
-    // console.log(data);
+  const onSubmit: SubmitHandler<TLoginFormInputs> = async (data) => {
+    const res = await loginHandler('credentials', { ...data, redirect: false });
+    if (res?.ok) {
+      router.push('/');
+    }
   };
 
   return (

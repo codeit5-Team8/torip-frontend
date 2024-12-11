@@ -5,6 +5,9 @@ import AuthInput from '@ui/auth/AuthInput';
 import Button from '@ui/common/Button';
 import { AUTH_VALIDATION_REGEX } from '@constant/auth';
 import Link from 'next/link';
+import { useLogin } from '@hooks/useLogin';
+import { useRouter } from 'next/navigation';
+import { getEmailExists } from '@lib/api/service/auth.api';
 
 interface ISignUpFormInputs {
   name: string;
@@ -20,12 +23,29 @@ export default function SignUpPage() {
     watch,
     formState: { errors, isValid },
   } = useForm<ISignUpFormInputs>({ mode: 'onBlur' });
+  const { loginHandler } = useLogin();
+  const router = useRouter();
 
-  const onSubmit: SubmitHandler<ISignUpFormInputs> = () => {
-    // console.log('Form Data:', data);
+  // 이메일 중복 체크 함수
+  const checkEmailExists = async (email: string): Promise<boolean | string> => {
+    const response = await getEmailExists(email);
+    if (response.result.exists) {
+      return '이미 사용 중인 이메일입니다.';
+    }
+    return true;
   };
 
-  // passwordconfirm 이랑 비교하기위해 watch 사용
+  const onSubmit: SubmitHandler<ISignUpFormInputs> = async (data) => {
+    const res = await loginHandler('credentials', {
+      ...data,
+      redirect: false,
+    });
+    if (res?.ok) {
+      router.push('/');
+    }
+  };
+
+  // passwordconfirm 비교를 위해 watch 사용
   const passwordValue = watch('password');
 
   return (
@@ -62,6 +82,7 @@ export default function SignUpPage() {
               value: 2,
               message: '이메일은 최소 2자 이상이어야 합니다.',
             },
+            validate: checkEmailExists,
           })}
         />
         {/* Password */}
@@ -76,7 +97,7 @@ export default function SignUpPage() {
             },
           })}
         />
-        {/* Passwordcheck */}
+        {/* Password Confirm */}
         <AuthInput
           type="passwordConfirm"
           errorMessage={
@@ -89,7 +110,6 @@ export default function SignUpPage() {
           })}
         />
         {/* Submit Button */}
-        {/* 비활성화 일때 bg-slate-400 , 기본 bg-primary */}
         <Button
           className={`h-12 w-full border-none text-base font-semibold ${
             isValid ? 'bg-primary' : 'bg-slate-400'
