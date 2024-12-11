@@ -3,12 +3,13 @@
 import { useEffect, useRef, useState } from 'react';
 import NoteDraft from '@ui/note/NoteDraft';
 import NoteForm from '@ui/note/NoteForm';
+import NoteHeader from '@ui/note/NoteHeader';
 import NoteInfo from '@ui/note/NoteInfo';
 import { useForm, FormProvider } from 'react-hook-form';
 import { LOCAL_STORAGE_NOTE_DRAFT_KEY } from '@constant/note';
 import { Editor } from '@toast-ui/react-editor';
 import { TNoteFormInput } from '@type/note';
-import { removeFrontAndBackSpaces } from 'src/util/note';
+import { removeFrontAndBackSpaces, saveToLocalStorage } from 'src/util/note';
 
 export default function Page() {
   const methods = useForm<TNoteFormInput>({
@@ -41,6 +42,13 @@ export default function Page() {
     editorRef.current?.getInstance().setHTML('');
   };
 
+  const handleSaveDraft = () => {
+    const title = removeFrontAndBackSpaces(methods.getValues('title'));
+    const content = methods.getValues('content');
+    saveToLocalStorage(LOCAL_STORAGE_NOTE_DRAFT_KEY, { title, content });
+    setDraft(JSON.stringify({ title, content }));
+  };
+
   const handleLoadDraft = () => {
     if (draft) {
       // draft 가져오기
@@ -64,6 +72,7 @@ export default function Page() {
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(handleSubmit)}>
+        <NoteHeader handleSaveDraft={handleSaveDraft} />
         {draft && (
           <NoteDraft
             handleLoadDraft={handleLoadDraft}
