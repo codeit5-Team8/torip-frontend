@@ -5,19 +5,22 @@ import { TNoteFormInput } from '@type/note';
 import Button from '@ui/common/Button';
 import { usePopup } from '@hooks/usePopup';
 import { isEmptyText } from '@util/note';
-import { NOTE_POPUP_MESSAGE } from '@constant/note';
 
 interface INoteHeaderProps {
   handleSaveDraft: () => void;
+  popupText: string;
 }
 
-export default function NoteHeader({ handleSaveDraft }: INoteHeaderProps) {
+export default function NoteHeader({
+  handleSaveDraft,
+  popupText,
+}: INoteHeaderProps) {
   const { watch } = useFormContext<TNoteFormInput>();
   const { openPopup } = usePopup();
 
   const handlePopup = () => {
     openPopup({
-      popupText: NOTE_POPUP_MESSAGE.saveDraft,
+      popupText,
       showCancelButton: true,
       confirmButtonText: '확인',
       onConfirm: handleSaveDraft,

@@ -6,7 +6,10 @@ import NoteForm from '@ui/note/NoteForm';
 import NoteHeader from '@ui/note/NoteHeader';
 import NoteInfo from '@ui/note/NoteInfo';
 import { useForm, FormProvider } from 'react-hook-form';
-import { LOCAL_STORAGE_NOTE_DRAFT_KEY } from '@constant/note';
+import {
+  LOCAL_STORAGE_NOTE_DRAFT_KEY,
+  NOTE_POPUP_MESSAGE,
+} from '@constant/note';
 import { Editor } from '@toast-ui/react-editor';
 import { TNoteFormInput } from '@type/note';
 import { saveToLocalStorage } from '@util/note';
@@ -72,7 +75,14 @@ export default function Page() {
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(handleSubmit)}>
-        <NoteHeader handleSaveDraft={handleSaveDraft} />
+        <NoteHeader
+          handleSaveDraft={handleSaveDraft}
+          popupText={
+            draft
+              ? NOTE_POPUP_MESSAGE.refreshDraft
+              : NOTE_POPUP_MESSAGE.saveDraft
+          }
+        />
         {draft && (
           <NoteDraft
             handleLoadDraft={handleLoadDraft}
