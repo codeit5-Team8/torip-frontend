@@ -3,8 +3,8 @@
 import { useFormContext } from 'react-hook-form';
 import { TNoteFormInput } from '@type/note';
 import Button from '@ui/common/Button';
+import { usePopup } from '@hooks/usePopup';
 import { isEmptyText } from '@util/note';
-import { usePopupStore } from '@store/popup.store';
 
 interface INoteHeaderProps {
   handleSaveDraft: () => void;
@@ -16,10 +16,10 @@ export default function NoteHeader({
   popupText,
 }: INoteHeaderProps) {
   const { watch } = useFormContext<TNoteFormInput>();
-  const { showPopup } = usePopupStore();
+  const { openPopup } = usePopup();
 
   const handlePopup = () => {
-    showPopup({
+    openPopup({
       popupText,
       showCancelButton: true,
       confirmButtonText: '확인',
