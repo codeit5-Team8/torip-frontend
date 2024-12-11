@@ -37,7 +37,7 @@ export default function NoteHeader({
         <Button
           size="middle"
           variant="outlined"
-          className="cursor-pointer border-white bg-white px-4 py-2 text-primary hover:text-mint-700 sm:px-6 sm:py-3"
+          className="border-white bg-white px-4 py-2 text-primary hover:text-mint-700 sm:px-6 sm:py-3"
           onClick={handlePopup}
           type="button"
           disabled={
@@ -50,7 +50,7 @@ export default function NoteHeader({
         <Button
           size="middle"
           variant="solid"
-          className="cursor-pointer border-slate-400 bg-slate-400 px-4 py-2 text-white hover:border-primary hover:bg-primary hover:text-white sm:px-6 sm:py-3"
+          className="border-slate-400 bg-slate-400 px-4 py-2 text-white hover:border-primary hover:bg-primary hover:text-white sm:px-6 sm:py-3"
           disabled={
             isEmptyText({ value: watch('title'), hasHtml: false }) &&
             isEmptyText({ value: watch('content'), hasHtml: true })

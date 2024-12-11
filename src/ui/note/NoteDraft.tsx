@@ -35,11 +35,7 @@ export default function NoteDraft({
 
   return (
     <section className="mb-4 flex h-14 items-center rounded-[28px] bg-slate-50 px-4 py-[18px]">
-      <button
-        className="mr-5 cursor-pointer"
-        onClick={handleDeleteDraftPopup}
-        type="button"
-      >
+      <button className="mr-5" onClick={handleDeleteDraftPopup} type="button">
         X
       </button>
       {/* TODO 아이콘  */}
@@ -51,7 +47,6 @@ export default function NoteDraft({
         rounded={true}
         onClick={handleLoadDraftPopup}
         type="button"
-        className="cursor-pointer"
       >
         불러오기
       </Button>
