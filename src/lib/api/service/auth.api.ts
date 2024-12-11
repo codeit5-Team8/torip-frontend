@@ -14,6 +14,7 @@ export const postRegister = async (data: TPostRegisterRequest) => {
     '/api/v1/torip/auth/register',
     data,
   );
+
   return response.data;
 };
 
@@ -27,15 +28,16 @@ export const postRefreshToken = async (data: TPostRefreshTokenRequest) => {
 
 export const postLogin = async (data: TPostLoginRequest) => {
   const response = await post<TResponse<TTokenResponse>>(
-    '/api/v1/torip/auth/ogin',
+    '/api/v1/torip/auth/login',
     data,
   );
+
   return response.data;
 };
 
 export const getEmailExists = async (data: TGetEmailExistsRequest) => {
   const response = await get<TResponse<TGetEmailExistsResponse>>(
-    `/api/v1/torip/auth/register/username/exists?username=${data}`,
+    `/api/v1/torip/auth/register/username/exists?email=${data}`,
   );
   return response.data;
 };
