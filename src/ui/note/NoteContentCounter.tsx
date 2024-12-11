@@ -1,5 +1,5 @@
+import { removeHtmlTags, removeSpaces } from '@util/note';
 import { useFormContext } from 'react-hook-form';
-import { removeHtmlTags, removeSpaces } from 'src/util/note';
 
 export default function NoteContentCounter() {
   const { watch } = useFormContext();

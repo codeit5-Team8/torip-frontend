@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form';
 import { TNoteFormInput } from '@type/note';
 import Button from '@ui/common/Button';
 import { usePopup } from '@hooks/usePopup';
-import { isEmptyText } from 'src/util/note';
+import { isEmptyText } from '@util/note';
 
 interface INoteHeaderProps {
   handleSaveDraft: () => void;

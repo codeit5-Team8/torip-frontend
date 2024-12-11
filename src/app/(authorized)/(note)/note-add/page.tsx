@@ -9,7 +9,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { LOCAL_STORAGE_NOTE_DRAFT_KEY } from '@constant/note';
 import { Editor } from '@toast-ui/react-editor';
 import { TNoteFormInput } from '@type/note';
-import { saveToLocalStorage } from 'src/util/note';
+import { saveToLocalStorage } from '@util/note';
 
 export default function Page() {
   const methods = useForm<TNoteFormInput>({
