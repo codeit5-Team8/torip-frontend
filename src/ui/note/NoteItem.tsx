@@ -1,7 +1,7 @@
 'use client';
 
 import { TNote } from '@model/note.model';
-import NoteTodoInfo from './NoteTodoInfo';
+import NoteTaskInfo from './NoteTaskInfo';
 import Divider from '@ui/note/Divider';
 import DropdownMenu from '@ui/common/DropdownMenu';
 
@@ -36,7 +36,7 @@ export default function NoteItem({ note }: INoteItemProps) {
 
       <Divider className="my-3" />
 
-      <NoteTodoInfo title="투두 제목" />
+      <NoteTaskInfo title="투두 제목" />
     </div>
   );
 }

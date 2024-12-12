@@ -1,11 +1,11 @@
 import { HTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-interface INoteTodoInfoProps extends HTMLAttributes<HTMLDivElement> {
+interface INoteTaskInfoProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
 }
 
-export default function NoteTodoInfo({ title, className }: INoteTodoInfoProps) {
+export default function NoteTaskInfo({ title, className }: INoteTaskInfoProps) {
   const classNames = twMerge('flex items-center gap-[6px]', className);
   return (
     <div className={classNames}>

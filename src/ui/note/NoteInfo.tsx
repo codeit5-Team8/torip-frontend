@@ -1,10 +1,10 @@
-import NoteTodoInfo from './NoteTodoInfo';
+import NoteTaskInfo from './NoteTaskInfo';
 
 export default function NoteInfo() {
   return (
     <section className="flex flex-col gap-3">
       <NoteTripInfo />
-      <NoteTodoInfo title="할 일 제목" />
+      <NoteTaskInfo title="할 일 제목" />
     </section>
   );
 }

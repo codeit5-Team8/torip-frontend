@@ -7,5 +7,5 @@ export const ROUTE_TITLE_MAP: Record<string, string> = {
   '/note-add': '노트 작성',
   '/note-edit/:noteId': '노트 수정',
   '/note-all-trip/:tripId': '여행 별 노트 모아보기',
-  '/note-all-todo/:todoId': '할일 별 노트 모아보기',
+  '/note-all-task/:taskId': '할일 별 노트 모아보기',
 };
