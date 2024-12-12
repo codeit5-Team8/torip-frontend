@@ -42,7 +42,7 @@ export default function SideBar() {
   };
 
   const sidebarClassname = twMerge(
-    'bg-white hidden tablet:z-50 tablet:block tablet:transition-width tablet:duration-300 tablet:fixed tablet:left-0 tablet:top-0 tablet:h-screen',
+    'bg-white hidden tablet:z-50 md:block tablet:transition-width tablet:duration-300 tablet:fixed tablet:left-0 tablet:top-0 tablet:h-screen',
     isSidebarOpen
       ? 'block absolute w-full h-full tablet:w-[280px]'
       : 'tablet:w-[60px]',
