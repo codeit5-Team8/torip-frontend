@@ -4,6 +4,7 @@ import TripCard from '@ui/card/tripCard/TripCard';
 import Button from '@ui/common/Button';
 import NavTitle from '@ui/common/NavTitle';
 import Subtitle from '@ui/common/Subtitle';
+import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -29,7 +30,35 @@ export default function Home() {
           {/* task data 필요 */}
           {/* <TaskList tasks={''} /> */}
         </div>
-        <div className="h-[250px] rounded-xl bg-cyan-300 bg-[url('/asset/image/progressBg.png')]"></div>
+        <div className="flex h-[250px] rounded-xl bg-cyan-300 bg-[url('/asset/image/progressBg.png')] px-6 py-4">
+          <div className="flex flex-1 flex-col gap-4">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#0F172A]">
+              <Image
+                src={`/asset/icon/progress.png`}
+                alt="progress"
+                width={17}
+                height={17}
+              />
+            </div>
+            <div className="flex flex-col gap-1 text-white">
+              <h4 className="text-lg font-semibold leading-7">내 진행 상황</h4>
+              <p className="flex items-center gap-1 text-3xl font-bold leading-9 text-white">
+                74
+                <span className="text-base font-semibold leading-normal">
+                  %
+                </span>
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-1 items-center justify-center">
+            <Image
+              src={`/asset/image/testcircle.png`}
+              alt="progress"
+              width={166}
+              height={166}
+            />
+          </div>
+        </div>
       </div>
       {/* 각 여행 별 할일 컨테이너 */}
       {/* 유저가 포함되어있는 여행들 불러오는 것 필요 */}

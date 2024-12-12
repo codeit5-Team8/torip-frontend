@@ -33,7 +33,6 @@ export default function Subtitle({
         <Image
           src={`/asset/icon/${icon}.png`}
           alt="subtitleIcon"
-          className="text-white"
           width={24}
           height={24}
         />
