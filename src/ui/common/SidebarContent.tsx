@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import Button from './Button';
 import Link from 'next/link';
-import { useModal } from '@hooks/useModal';
 import TodoModal from './TodoModal';
 import TripModal from './TripModal';
+import { useModalStore } from '@store/modal.store';
 
 interface ISidebarContentProps {
   clickSidebarContent: () => void;
@@ -12,17 +12,17 @@ export default function SidebarContent({
   clickSidebarContent,
 }: ISidebarContentProps) {
   const mockTrip = ['서울 여행', '부산 여행', '유럽 여행'];
-  const { openModal } = useModal();
+  const { showModal } = useModalStore();
 
   const handleAddTodo = () => {
-    openModal({
+    showModal({
       title: '할 일 생성',
       content: <TodoModal />,
     });
   };
 
   const handleAddTrip = () => {
-    openModal({
+    showModal({
       title: '여행 생성',
       content: <TripModal />,
     });
