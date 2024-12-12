@@ -3,9 +3,9 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 'use client';
 
-import { popupStore } from '@store/popup.store';
 import { useEffect, useRef } from 'react';
 import Button from './Button';
+import { usePopupStore } from '@store/popup.store';
 
 export default function Popup() {
   const {
@@ -16,7 +16,7 @@ export default function Popup() {
     onConfirm,
     onCancel,
     closePopup,
-  } = popupStore();
+  } = usePopupStore();
 
   const popupRef = useRef<HTMLDivElement>(null); // 팝업 전체를 참조
 
@@ -74,7 +74,7 @@ export default function Popup() {
     <>
       {isOpen && (
         <div
-          className="absolute z-[9999] h-[100vh] w-full bg-black bg-opacity-50"
+          className="fixed inset-0 z-[9999] bg-black bg-opacity-50"
           onClick={handleOverlayClick}
           role="dialog"
           aria-modal="true"
@@ -82,7 +82,7 @@ export default function Popup() {
         >
           <div
             ref={popupRef} // 팝업 컨테이너 참조
-            className="absolute left-1/2 top-1/2 mx-auto my-0 w-[300px] -translate-x-1/2 -translate-y-1/2 transform cursor-default rounded-lg bg-white desktop:w-[450px]"
+            className="fixed left-1/2 top-1/2 mx-auto my-0 w-[300px] -translate-x-1/2 -translate-y-1/2 transform cursor-default rounded-lg bg-white desktop:w-[450px]"
             tabIndex={-1} // 키보드 포커스를 받을 수 있도록 설정
             onKeyDown={handleKeyDown}
             onClick={(e) => e.stopPropagation()}

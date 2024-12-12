@@ -11,7 +11,7 @@ interface IModalStore extends IModalState {
   closeModal: () => void;
 }
 
-export const modalStore = create<IModalStore>((set) => ({
+export const useModalStore = create<IModalStore>((set) => ({
   isOpen: false,
   title: '',
   content: '',
