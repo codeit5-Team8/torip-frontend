@@ -16,3 +16,5 @@ export const NOTE_POPUP_MESSAGE = {
   editNote: '노트 수정 페이지로 이동합니다.',
   deleteNote: '노트를 삭제하시겠어요?\n 삭제된 노트는 복구할 수 없습니다.',
 };
+
+export const NOTE_LIST_EMPTY_MESSAGE = '아직 등록된 노트가 없어요.';

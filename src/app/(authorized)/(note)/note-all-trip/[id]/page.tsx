@@ -1,12 +1,16 @@
 import { TNote } from '@model/note.model';
 import NoteAllTripInfo from '@ui/note/NoteAllTripInfo';
 import NoteList from '@ui/note/NoteList';
+import NoteListEmpty from '@ui/note/NoteListEmpty';
 
 export default function Page() {
+  const notes = mockNotes;
+
   return (
     <div className="flex flex-col gap-4">
       <NoteAllTripInfo />
-      <NoteList notes={mockNotes} />
+
+      {notes.length > 0 ? <NoteList notes={notes} /> : <NoteListEmpty />}
     </div>
   );
 }
