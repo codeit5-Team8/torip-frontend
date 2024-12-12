@@ -1,6 +1,9 @@
+'use client';
+
 import { TNote } from '@model/note.model';
 import NoteTodoInfo from './NoteTodoInfo';
 import Divider from '@ui/note/Divider';
+import DropdownMenu from '@ui/common/DropdownMenu';
 
 interface INoteItemProps {
   note: TNote;
@@ -14,7 +17,19 @@ export default function NoteItem({ note }: INoteItemProps) {
         <span className="text-sm font-medium leading-tight text-slate-800">
           {note.createdBy}
         </span>
-        <span className="ml-auto">케밥</span>
+        <span className="ml-auto">
+          <DropdownMenu
+            items={[
+              /* eslint-disable no-console */
+              { label: '수정하기', onClick: () => console.log('Edit clicked') },
+              {
+                label: '삭제하기',
+                onClick: () => console.log('Delete clicked'),
+              },
+              /* eslint-disable no-console */
+            ]}
+          />
+        </span>
       </div>
 
       <p>{note.noteTitle}</p>
