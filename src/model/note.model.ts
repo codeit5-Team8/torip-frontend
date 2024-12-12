@@ -16,8 +16,8 @@ export type TGetNotesProps = {
 export type TNote = {
   // 추가 정의 필요
   noteId: number;
-  travelTitle: string;
-  travelStatus: 'BEFORE_TRAVEL' | 'DURING_TRAVEL' | 'AFTER_TRAVEL';
+  tripTitle: string;
+  tripStatus: 'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP';
   noteTitle: string;
   noteContent: string;
   createdBy: string;
