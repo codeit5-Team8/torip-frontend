@@ -26,9 +26,6 @@ function TaskItem({
   const handleDocClick = () => {
     // TODO: 노트 모아보기로 이동
   };
-  const handleKebabClick = () => {
-    // TODO: 드롭다운 메뉴
-  };
 
   return (
     <li className="flex items-center justify-between gap-2">
@@ -37,7 +34,6 @@ function TaskItem({
       <ButtonIconGroup
         onFileClick={handleFileClick}
         onDocClick={handleDocClick}
-        onKebabClick={handleKebabClick}
       />
     </li>
   );
