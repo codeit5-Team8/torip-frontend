@@ -3,11 +3,11 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 'use client';
 
-import { modalStore } from '@store/modal.store';
+import { useModalStore } from '@store/modal.store';
 import { useEffect, useRef } from 'react';
 
 export default function Modal() {
-  const { isOpen, title, content, closeModal } = modalStore();
+  const { isOpen, title, content, closeModal } = useModalStore();
 
   const modalRef = useRef<HTMLDivElement>(null);
 
