@@ -7,13 +7,15 @@ interface IMainLayoutProps {
 
 export default function MainLayout({ children }: IMainLayoutProps) {
   return (
-    <div className="item-center bg-slate-100">
+    <>
       <SideBar />
-      <main className="container ml-0 md:ml-[3.75rem] xl:ml-0">
-        <Header />
-        {/* Contents 영역 */}
-        {children}
-      </main>
-    </div>
+      <div className="item-center">
+        <main className="container ml-0 max-[1440px]:ml-0 md:ml-[3.75rem]">
+          <Header />
+          {/* Contents 영역 */}
+          {children}
+        </main>
+      </div>
+    </>
   );
 }

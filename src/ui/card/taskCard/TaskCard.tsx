@@ -1,8 +1,8 @@
 import { twMerge } from 'tailwind-merge';
-import TodoList from './TaskList';
 import TodoProgressBar from './TaskProgressBar';
 import { TTask } from '@model/task.model';
 import { TRIP_STATUS } from '@constant/Task';
+import TaskList from './TaskList';
 
 type TTripStatusKey = keyof typeof TRIP_STATUS;
 
@@ -29,7 +29,7 @@ export default function TaskCard({ status, tasks }: ITaskCardProps) {
         <TodoProgressBar progress={80} />
       </div>
       {/* todo list */}
-      <TodoList tasks={tasks} />
+      <TaskList tasks={tasks} />
     </div>
   );
 }

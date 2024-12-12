@@ -18,7 +18,7 @@ export default function NavTitle({ className }: { className?: string }) {
   const pageTitle = ROUTE_TITLE_MAP[pathname];
 
   const baseStyles =
-    'text-slate-900 text-base font-semibold py-4 leading-normal tablet:text-lg tablet:leading-7';
+    'text-slate-900 text-base font-semibold leading-normal tablet:text-lg tablet:leading-7';
 
   return <h1 className={twMerge(baseStyles, className)}>{pageTitle}</h1>;
 }
