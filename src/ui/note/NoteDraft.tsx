@@ -1,7 +1,8 @@
 'use client';
 
 import { NOTE_POPUP_MESSAGE } from '@constant/note';
-import { usePopup } from '@hooks/usePopup';
+import { usePopupStore } from '@store/popup.store';
+
 import Button from '@ui/common/Button';
 
 interface INoteDraftProps {
@@ -13,10 +14,10 @@ export default function NoteDraft({
   handleLoadDraft,
   handleDeleteDraft,
 }: INoteDraftProps) {
-  const { openPopup } = usePopup();
+  const { showPopup } = usePopupStore();
 
   const handleLoadDraftPopup = () => {
-    openPopup({
+    showPopup({
       popupText: NOTE_POPUP_MESSAGE.loadDraft,
       showCancelButton: true,
       confirmButtonText: '확인',
@@ -25,7 +26,7 @@ export default function NoteDraft({
   };
 
   const handleDeleteDraftPopup = () => {
-    openPopup({
+    showPopup({
       popupText: '임시저장한 노트를 삭제합니다.',
       showCancelButton: true,
       confirmButtonText: '확인',
