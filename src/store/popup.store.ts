@@ -14,7 +14,7 @@ interface IPopupStore extends IShowPopupState {
   closePopup: () => void;
 }
 
-export const popupStore = create<IPopupStore>((set) => ({
+export const usePopupStore = create<IPopupStore>((set) => ({
   isOpen: false,
   popupText: '',
   showCancelButton: true,
