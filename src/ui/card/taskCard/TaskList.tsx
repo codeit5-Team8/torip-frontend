@@ -1,5 +1,5 @@
 import { TTask } from '@model/task.model';
-import TodoItem from './TaskItem';
+import TaskItem from './TaskItem';
 
 interface ITaskListProps {
   tasks: TTask[];
@@ -9,7 +9,7 @@ export default function TaskList({ tasks }: ITaskListProps) {
   return (
     <ul className="scroll flex flex-1 flex-col gap-2 overflow-y-auto">
       {tasks.map((task) => (
-        <TodoItem
+        <TaskItem
           key={task.taskId}
           taskId={task.taskId}
           taskTitle={task.taskTitle}
