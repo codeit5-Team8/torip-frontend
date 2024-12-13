@@ -3,7 +3,7 @@ import Image from 'next/image';
 // progress 퍼센테이지 불러오는 것에 따라 props 변경 필요
 export default function MyProgressBox() {
   return (
-    <div className="flex h-[250px] rounded-xl bg-cyan-300 bg-[url('/asset/image/progressBg.png')] px-6 py-4">
+    <div className="flex h-[250px] rounded-xl bg-cyan-300 bg-[url('/asset/image/progressBg.png')] px-4 py-4 tablet:px-6">
       <div className="flex flex-1 flex-col gap-4">
         <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#0F172A]">
           <Image

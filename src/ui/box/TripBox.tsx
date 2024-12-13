@@ -54,7 +54,7 @@ const mockTasks: TTask[] = [
 // 할일 추가 버튼 onclick 추가하기
 export default function TripBox({ id, name }: ITripCardProps) {
   return (
-    <div className="rounded-xl bg-white px-6 pb-6">
+    <div className="rounded-xl bg-white px-4 pb-6 tablet:px-6">
       <div className="flex justify-between pt-4">
         <Subtitle title={name} icon="whiteflag" iconBg="bg-blue-500" link="#" />
         <Button className="border-none bg-white text-sm font-medium text-slate-800 hover:bg-slate-100 active:border-none active:bg-slate-100">
