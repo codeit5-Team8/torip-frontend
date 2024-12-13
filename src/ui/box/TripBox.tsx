@@ -1,13 +1,16 @@
 import Subtitle from '@ui/common/Subtitle';
-import FilterButton from '@ui/common/FilterButton';
-import TaskCarousel from '@ui/carousel/TaskCarousel';
 import { TTask } from '@model/task.model';
-import ShowAllTasksButton from '@ui/trip/tripTask/ShowAllTasksButton';
-import AddTaskButton from '@ui/trip/tripTask/AddTaskButton';
+import Button from '@ui/common/Button';
+import Image from 'next/image';
+import TaskCard from '@ui/card/taskCard/TaskCard';
+import FilterButton from '@ui/common/FilterButton';
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-// TODO: API 연동 후 제거 예정
-const tasks: TTask[] = [
+interface ITripCardProps {
+  id: number;
+  name: string;
+}
+
+const mockTasks: TTask[] = [
   {
     travelId: 1,
     taskId: 101,
@@ -47,25 +50,31 @@ const tasks: TTask[] = [
   },
 ];
 
-interface ITripCardProps {
-  id: number;
-  name: string;
-}
-
 // task를 어떻게 어디서 불러오느냐에 따라 props 변경하기
 // 할일 추가 버튼 onclick 추가하기
 export default function TripBox({ id, name }: ITripCardProps) {
   return (
-    <div className="rounded-xl bg-white pb-6 pl-4 tablet:pl-6 desktop:px-6">
-      <div className="flex items-center justify-between pt-4">
+    <div className="rounded-xl bg-white px-4 pb-6 tablet:px-6">
+      <div className="flex justify-between pt-4">
         <Subtitle title={name} icon="whiteflag" iconBg="bg-blue-500" link="#" />
-        <AddTaskButton />
+        <Button className="border-none bg-white text-sm font-medium text-slate-800 hover:bg-slate-100 active:border-none active:bg-slate-100">
+          <Image
+            src="/asset/icon/plusblack.png"
+            alt="할 일 추가 버튼"
+            width={16}
+            height={16}
+          />
+          할일 추가
+        </Button>
       </div>
-      <div className="my-5 flex items-center justify-between">
+      <div className="my-5">
         <FilterButton />
-        <ShowAllTasksButton />
       </div>
-      <TaskCarousel tasks={tasks} height="304px" />
+      <div className="mt-4 flex gap-[22px]">
+        <TaskCard key={id} status="ready" tasks={mockTasks} />
+        <TaskCard key={id} status="ongoing" tasks={mockTasks} />
+        <TaskCard key={id} status="done" tasks={mockTasks} />
+      </div>
     </div>
   );
 }

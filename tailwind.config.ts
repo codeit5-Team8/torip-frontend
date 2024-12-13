@@ -67,7 +67,7 @@ export default {
       },
       screens: {
         tablet: '640px',
-        desktop: '1024px',
+        desktop: '1280px',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -82,7 +82,7 @@ export default {
         screens: {
           DEFAULT: '100%',
           tablet: '100%',
-          desktop: '1024px',
+          desktop: '1280px',
         },
       },
       transitionProperty: {
