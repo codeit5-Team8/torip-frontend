@@ -9,25 +9,22 @@ type TTripStatusKey = keyof typeof TRIP_STATUS;
 interface ITaskCardProps {
   status: TTripStatusKey;
   tasks: TTask[];
-  width?: string;
-  height?: string;
+  classNames?: string;
 }
 
 export default function TaskCard({
   status,
   tasks,
-  width = 'w-96', // 기본값 설정
-  height = 'h-80', // 기본값 설정
+  classNames,
 }: ITaskCardProps) {
   return (
     <div
       className={twMerge(
         'flex flex-col gap-4 rounded-3xl p-6',
-        width,
-        height,
         status === 'ready' && 'bg-teal-50',
         status === 'ongoing' && 'bg-[#FFFDE8]',
         status === 'done' && 'bg-[#ECF3FF]',
+        classNames,
       )}
     >
       <div className="flex flex-col gap-2.5">
