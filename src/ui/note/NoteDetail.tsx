@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { Viewer } from '@toast-ui/react-editor';
-import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import { TNote } from '@model/note.model';
+import NoteIframe from './NoteIframe';
+import NoteViewer from './NoteViewer';
 
-export default function NoteDetail({ noteContent }: TNote) {
+export default function NoteDetail({ noteTitle, noteContent }: TNote) {
   const [iframeSrc, setIframeSrc] = useState<string>('');
 
   const checkIframeSupport = async (url: string) => {
@@ -39,7 +39,7 @@ export default function NoteDetail({ noteContent }: TNote) {
   };
 
   const handleLinkClick = useCallback(async (url: string) => {
-    setIframeSrc(''); // Reset iframe
+    setIframeSrc('');
 
     const embedUrl = convertToEmbedUrl(url);
     if (embedUrl) {
@@ -51,7 +51,7 @@ export default function NoteDetail({ noteContent }: TNote) {
     if (iframeSupported) {
       setIframeSrc(url);
     } else {
-      window.open(url, '_blank'); // 새 탭에서 열기
+      window.open(url, '_blank');
     }
   }, []);
 
@@ -61,7 +61,8 @@ export default function NoteDetail({ noteContent }: TNote) {
         return;
       }
       if (event.data && typeof event.data === 'string') {
-        handleLinkClick(event.data);
+        const url = event.data;
+        handleLinkClick(url);
       }
     };
 
@@ -69,30 +70,25 @@ export default function NoteDetail({ noteContent }: TNote) {
     return () => window.removeEventListener('message', handleMessage);
   }, [handleLinkClick]);
 
+  const transformContent = (content: string): string => {
+    const regex = /<a href="(.*?)"[^>]*>(.*?)<\/a>/g;
+    return content.replace(regex, (match, url, text) => {
+      return `<button style="cursor: pointer;" onclick="window.postMessage('${url}', '*');">${text}</button>`;
+    });
+  };
+
   if (!noteContent) {
     return null;
   }
 
   return (
-    <div className="grid grid-cols-2 bg-white">
-      <div className="h-full bg-rose-100">
-        {iframeSrc && (
-          <iframe
-            src={iframeSrc}
-            title="Note Iframe"
-            width="100%"
-            height="100%"
-            style={{ border: 'none' }}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            onError={() => {
-              setIframeSrc('');
-              window.open(iframeSrc, '_blank');
-            }}
-          />
-        )}
-      </div>
-      <Viewer initialValue={noteContent} />
+    <div className="grid overflow-hidden bg-white sm:grid-cols-none sm:grid-rows-[460px_1fr] md:grid-cols-[40%_60%]">
+      <NoteIframe iframeSrc={iframeSrc} />
+
+      <NoteViewer
+        noteTitle={noteTitle}
+        noteContent={transformContent(noteContent)}
+      />
     </div>
   );
 }
