@@ -1,5 +1,5 @@
 import Header from '@ui/common/Header';
-import SideBar from '@ui/common/SideBar';
+import SideBar from '@ui/SideBar/SideBar';
 
 interface IMainLayoutProps {
   children: React.ReactNode;
