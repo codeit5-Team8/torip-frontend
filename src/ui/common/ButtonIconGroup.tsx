@@ -20,6 +20,7 @@ interface IButtonIconGroupProps {
   onDocClick: () => void;
   className?: string;
 }
+
 export default function ButtonIconGroup({
   onFileClick,
   onDocClick,
