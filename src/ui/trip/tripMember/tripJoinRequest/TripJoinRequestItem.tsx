@@ -17,16 +17,20 @@ function TripJoinRequestItem({
   onReject,
 }: ITripJoinRequestItemProps) {
   return (
-    <li className="flex items-center justify-between gap-[0.375rem] bg-slate-200">
+    <li className="flex items-center justify-between border-b border-slate-200 py-1 last:border-0">
       <div className="text-sm font-normal leading-tight">
         {invitee.username}
       </div>
       <div className="flex items-center gap-16">
-        <div className="text-sm font-normal leading-tight">{createdAt}</div>
+        <div className="hidden text-sm font-normal leading-tight tablet:block">
+          {createdAt}
+        </div>
 
         <div className="flex gap-[0.375rem]">
-          <Button onClick={onAccept}>승인</Button>
-          <Button variant="outlined" onClick={onReject}>
+          <Button size="xsmall" onClick={onAccept}>
+            승인
+          </Button>
+          <Button variant="outlined" size="xsmall" onClick={onReject}>
             거절
           </Button>
         </div>
