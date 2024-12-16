@@ -4,8 +4,13 @@ import { useModalStore } from '@store/modal.store';
 import DropdownMenu from '@ui/common/DropdownMenu';
 import TripMember from './tripMember/TripMemberModal';
 import { twMerge } from 'tailwind-merge';
+import { TTrip } from '@model/trip.model';
 
-export default function TripInfo() {
+interface ITripInfoProps {
+  tripInfo: TTrip;
+}
+
+export default function TripInfo({ tripInfo }: ITripInfoProps) {
   const { showModal } = useModalStore();
 
   const handleShowTripMember = () => {
@@ -31,8 +36,9 @@ export default function TripInfo() {
       )}
     >
       <div className="relative z-10 flex flex-col gap-3 py-4 text-white">
-        <h3 className="text-lg font-semibold leading-7">한국 여행</h3>
+        <h3 className="text-lg font-semibold leading-7">{tripInfo.name}</h3>
         <div className="text-[2rem] font-black leading-none text-white">
+          {/* TODO: D-Day */}
           D-14
         </div>
       </div>
