@@ -74,9 +74,15 @@
 
 /* Custom CSS */
 @layer components {
+  /* 중앙 정렬 */
   .item-center {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  /* 대시보드 박스 style */
+  .section-box {
+    @apply rounded-xl border border-slate-100 bg-white px-6 py-4;
   }
 }
