@@ -14,7 +14,6 @@ export const postRegister = async (data: TPostRegisterRequest) => {
     '/api/v1/torip/auth/register',
     data,
   );
-
   return response.data;
 };
 
