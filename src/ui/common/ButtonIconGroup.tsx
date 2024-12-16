@@ -53,7 +53,7 @@ export default function ButtonIconGroup({
           /* eslint-disable no-console */
         ]}
       >
-        {/* 케밥 아이콘 부분 */}:
+        {/* 케밥 아이콘 부분 */} :
       </DropdownMenu>
     </div>
   );
