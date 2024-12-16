@@ -11,7 +11,7 @@ import { twMerge } from 'tailwind-merge';
  */
 
 interface IButtonProps extends ComponentPropsWithoutRef<'button'> {
-  size?: 'small' | 'middle' | 'large';
+  size?: 'xsmall' | 'small' | 'middle' | 'large';
   variant?: 'solid' | 'outlined';
   rounded?: boolean;
   fullWidth?: boolean;
@@ -35,6 +35,7 @@ export default function Button(props: IButtonProps) {
     'flex items-center justify-center gap-2.5 rounded-xl border border-primary font-semibold';
 
   const sizeStyles = {
+    xsmall: 'h-8 w-16 rounded-[0.5rem] py-[0.375rem] text-sm leading-tight',
     small: 'h-9 w-[5.25rem] py-2 text-sm leading-tight',
     middle: 'h-11 w-[9.375rem] py-3 text-sm leading-tight',
     large: 'h-12 w-[18.125rem] py-3 text-base leading-normal',
