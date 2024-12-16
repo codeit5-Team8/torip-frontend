@@ -52,6 +52,7 @@ export default function ButtonIconGroup({
           { label: '삭제하기', onClick: () => console.log('Delete clicked') },
           /* eslint-disable no-console */
         ]}
+      >
         {/* 케밥 아이콘 부분 */} :
       </DropdownMenu>
     </div>
