@@ -80,3 +80,98 @@
     align-items: center;
   }
 }
+
+/* NoteViewer 전용 스타일 */
+.note-viewer {
+  font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial',
+    '나눔바른고딕', 'Nanum Barun Gothic', '맑은고딕', 'Malgun고딕', sans-serif;
+  color: #222;
+  font-size: 13px;
+}
+
+.note-viewer h1,
+.note-viewer h2,
+.note-viewer h3,
+.note-viewer h4,
+.note-viewer h5,
+.note-viewer h6 {
+  font-weight: bold;
+  color: #222;
+}
+
+.note-viewer h1 {
+  font-size: 24px;
+  line-height: 28px;
+  border-bottom: 3px double #999;
+  margin: 52px 0 15px 0;
+  padding-bottom: 7px;
+}
+
+.note-viewer h2 {
+  font-size: 22px;
+  line-height: 23px;
+  border-bottom: 1px solid #dbdbdb;
+  margin: 20px 0 13px 0;
+  padding-bottom: 7px;
+}
+
+.note-viewer h3 {
+  font-size: 20px;
+  line-height: 22px;
+  margin: 18px 0 10px 0;
+}
+
+.note-viewer h4 {
+  font-size: 18px;
+  line-height: 20px;
+  margin: 16px 0 8px 0;
+}
+
+.note-viewer h5 {
+  font-size: 16px;
+  line-height: 18px;
+  margin: 14px 0 6px 0;
+}
+
+.note-viewer h6 {
+  font-size: 14px;
+  line-height: 16px;
+  margin: 12px 0 4px 0;
+}
+
+.note-viewer strong {
+  font-weight: bold;
+}
+
+.note-viewer i,
+.note-viewer cite,
+.note-viewer em,
+.note-viewer var,
+.note-viewer address,
+.note-viewer dfn {
+  font-style: italic;
+}
+
+.note-viewer ul,
+.note-viewer ol {
+  padding-left: 24px;
+  margin: 6px 0 10px;
+  color: #222;
+}
+
+.note-viewer ul {
+  list-style-type: disc; /* unordered list */
+}
+
+.note-viewer ol {
+  list-style-type: decimal; /* ordered list */
+}
+
+.note-viewer button {
+  text-decoration: underline;
+  color: #4b96e6;
+}
+
+.note-viewer button:hover {
+  color: #1f70de;
+}
