@@ -1,4 +1,5 @@
 import { withSentryConfig } from '@sentry/nextjs';
+
 const nextConfig = {
   /* config options here */
 };

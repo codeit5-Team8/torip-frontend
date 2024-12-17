@@ -20,10 +20,28 @@
     ],
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@util/*": ["./src/util/*"],
+      "@ui/*": ["./src/ui/*"],
+      "@common/*": ["./src/ui/common/*"],
+      "@store/*": ["./src/store/*"],
+      "@type/*": ["./src/types/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@provider/*": ["./src/provider/*"],
+      "@seo/*": ["./src/seo/*"],
+      "@app/*": ["./src/app/*"],
+      "@constant/*": ["./src/constant/*"],
+      "@model/*": ["./src/model/*"],
+      "@service/*": ["./src/lib/api/service/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "next.config.mjs"
+  ],
+  "exclude": ["node_modules", "./cypress.config.ts", "cypress", "**/*.cy.tsx"]
 }

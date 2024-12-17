@@ -1,0 +1,19 @@
+name: End-to-end tests
+on:
+  pull_request_target:
+    types: [opened]
+    branches:
+      - 'main'
+jobs:
+  cypress-run:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          build: npm run build
+          start: npm start
+          wait-on: 'http://localhost:3000'
