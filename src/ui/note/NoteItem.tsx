@@ -60,7 +60,9 @@ export default function NoteItem({ note }: INoteItemProps) {
                   onClick: handleDeletePopup,
                 },
               ]}
-            />
+            >
+              <span>메뉴 열기</span>
+            </DropdownMenu>
           </span>
         </div>
 
