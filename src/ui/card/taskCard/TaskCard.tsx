@@ -20,7 +20,7 @@ export default function TaskCard({
   return (
     <div
       className={twMerge(
-        'flex flex-col gap-4 rounded-3xl p-6',
+        'flex h-full flex-col gap-4 rounded-3xl p-6',
         status === 'ready' && 'bg-teal-50',
         status === 'ongoing' && 'bg-[#FFFDE8]',
         status === 'done' && 'bg-[#ECF3FF]',
