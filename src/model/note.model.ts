@@ -24,6 +24,7 @@ export type TNote = {
   createdAt: string;
   modifiedBy: string;
   modifiedAt: string;
+  taskTitle: string;
 };
 
 export type TNotes = {
