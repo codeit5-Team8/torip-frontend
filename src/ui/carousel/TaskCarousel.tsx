@@ -21,6 +21,14 @@ export default function TaskCarousel({
 }: ITaskCarouselProps) {
   SwiperCore.use([]);
 
+  const groupedTasks = tasks.reduce(
+    (acc, task) => {
+      acc[task.travelStatus] = [...(acc[task.travelStatus] || []), task];
+      return acc;
+    },
+    {} as Record<TTask['travelStatus'], TTask[]>,
+  );
+
   return (
     <div className="swiper-container">
       <Swiper
@@ -52,13 +60,13 @@ export default function TaskCarousel({
         style={{ height: height ? `${height}` : 'auto' }}
       >
         <SwiperSlide className="h-full">
-          <TaskCard status="ready" tasks={tasks} />
+          <TaskCard status="ready" tasks={groupedTasks['BEFORE_TRAVEL']} />
         </SwiperSlide>
         <SwiperSlide>
-          <TaskCard status="ongoing" tasks={tasks} />
+          <TaskCard status="ongoing" tasks={groupedTasks['DURING_TRAVEL']} />
         </SwiperSlide>
         <SwiperSlide>
-          <TaskCard status="done" tasks={tasks} />
+          <TaskCard status="done" tasks={groupedTasks['AFTER_TRAVEL']} />
         </SwiperSlide>
       </Swiper>
     </div>
