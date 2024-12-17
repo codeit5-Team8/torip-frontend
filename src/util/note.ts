@@ -1,3 +1,5 @@
+import { parseISO, format } from 'date-fns';
+
 export const removeHtmlTags = (text: string = '') => {
   return text.replace(/<[^>]*>?/gm, '');
 };
@@ -21,4 +23,9 @@ export const isEmptyText = ({
 
 export const saveToLocalStorage = <T>(key: string, value: T) => {
   localStorage.setItem(key, JSON.stringify(value));
+};
+
+export const formatIsoDateToYYYYMMDD = (isoDate: string) => {
+  const date = parseISO(isoDate);
+  return format(date, 'yyyy.MM.dd');
 };
