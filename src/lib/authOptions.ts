@@ -34,30 +34,48 @@ export const authOptions: NextAuthOptions = {
         credentials: Record<'name' | 'email' | 'password', string> | undefined,
       ) {
         if (!credentials) {
-          return null;
+          throw new Error('No credentials provided.');
         }
         const { name, email, password } = credentials;
 
         // 회원가입
         if (name) {
-          const { result: token, success } = await postRegister({
+          const {
+            result: token,
+            success,
+            message,
+          } = await postRegister({
             username: name,
             email: email,
             password: password,
           });
+
           if (success) {
             return { id: '1', name, email, ...token };
+          } else {
+            const error = new Error('Signup failed.');
+            (error as Error).message = message; //서버 msg 넣기
+            throw error;
           }
         }
+
         // 로그인
-        const { result: token, success } = await postLogin({
+        const {
+          result: token,
+          success,
+          message,
+        } = await postLogin({
           email: email,
           password: password,
         });
+
         if (success) {
           return { id: '1', name, email, ...token };
         } else {
-          return null;
+          // 커스텀 에러 객체 생성
+          const error = new Error('Login failed.');
+          (error as Error).message = message; //서버 msg 넣기
+          throw error;
         }
       },
     }),

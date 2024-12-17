@@ -20,6 +20,7 @@ export default function SignInPage() {
     register,
     formState: { errors, isValid },
     handleSubmit,
+    setError,
   } = useForm<TLoginFormInputs>({ mode: 'onBlur' });
   const { loginHandler } = useLogin();
   const router = useRouter();
@@ -28,6 +29,19 @@ export default function SignInPage() {
     const res = await loginHandler('credentials', { ...data, redirect: false });
     if (res?.ok) {
       router.push('/');
+    } else if (res) {
+      // 에러 메시지에 따라 필드별로 에러 설정
+      if (res?.error === '비밀번호가 일치하지 않습니다.') {
+        setError('password', {
+          type: 'manual',
+          message: res.error,
+        });
+      } else {
+        setError('email', {
+          type: 'manual',
+          message: res.error!,
+        });
+      }
     }
   };
 
@@ -37,11 +51,12 @@ export default function SignInPage() {
         <AuthInput
           type="email"
           errorMessage={
-            errors.email?.type === 'required'
+            errors.email?.message ||
+            (errors.email?.type === 'required'
               ? INPUT_MESSAGE.error.required
               : errors.email?.type === 'pattern'
                 ? INPUT_MESSAGE.error.invalidEmail
-                : undefined
+                : undefined)
           }
           {...register('email', {
             required: true,
@@ -51,11 +66,12 @@ export default function SignInPage() {
         <AuthInput
           type="password"
           errorMessage={
-            errors.password?.type === 'required'
+            errors.password?.message ||
+            (errors.password?.type === 'required'
               ? INPUT_MESSAGE.error.required
               : errors.password?.type === 'minLength'
                 ? INPUT_MESSAGE.error.passwordTooShort
-                : undefined
+                : undefined)
           }
           {...register('password', {
             required: true,
