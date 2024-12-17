@@ -1,7 +1,6 @@
 import NavTitle from '@ui/common/NavTitle';
 import TripNotesButton from '@ui/trip/TripNotesButton';
 import TripInfo from '@ui/trip/TripInfo';
-import TripTask from '@ui/trip/TripTask';
 
 // TODO: API 연동시 제거 예정
 const tripInfo = {
@@ -25,15 +24,12 @@ const tripInfo = {
 
 export default function Trip() {
   return (
-    <div className="flex min-h-full flex-1 flex-col gap-[1.625rem]">
+    <div className="flex min-h-full flex-1 flex-col gap-[1.625rem] py-6">
       <NavTitle />
       {/* 여행 상세 정보 */}
       <TripInfo tripInfo={tripInfo} />
       {/* 노트 모아보기 */}
       <TripNotesButton />
-      <div className="1000px"></div>
-      {/* 여행 할 일 */}
-      <TripTask />
     </div>
   );
 }
