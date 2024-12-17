@@ -1,11 +1,11 @@
-import Subtitle from '@ui/common/Subtitle';
-import FilterButton from '@ui/common/FilterButton';
-import TaskCarousel from '@ui/carousel/TaskCarousel';
-import { TTask } from '@model/task.model';
-import ShowAllTasksButton from '@ui/trip/tripTask/ShowAllTasksButton';
-import AddTaskButton from '@ui/trip/tripTask/AddTaskButton';
+'use client';
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { TTask } from '@model/task.model';
+import TaskCarousel from '@ui/carousel/TaskCarousel';
+import FilterButton from '@ui/common/FilterButton';
+import ShowAllTasksButton from './tripTask/ShowAllTasksButton';
+import AddTaskButton from './tripTask/AddTaskButton';
+
 // TODO: API 연동 후 제거 예정
 const tasks: TTask[] = [
   {
@@ -47,25 +47,18 @@ const tasks: TTask[] = [
   },
 ];
 
-interface ITripCardProps {
-  id: number;
-  name: string;
-}
-
-// task를 어떻게 어디서 불러오느냐에 따라 props 변경하기
-// 할일 추가 버튼 onclick 추가하기
-export default function TripBox({ id, name }: ITripCardProps) {
+export default function TripTask() {
   return (
-    <div className="rounded-xl bg-white pb-6 pl-4 tablet:pl-6 desktop:px-6">
-      <div className="flex items-center justify-between pt-4">
-        <Subtitle title={name} icon="whiteflag" iconBg="bg-blue-500" link="#" />
-        <AddTaskButton />
-      </div>
-      <div className="my-5 flex items-center justify-between">
-        <FilterButton />
+    <div className="section-box flex flex-col gap-5">
+      <div className="flex items-center justify-between">
+        <h4 className="text-lg font-semibold leading-7 text-slate-800">Todo</h4>
         <ShowAllTasksButton />
       </div>
-      <TaskCarousel tasks={tasks} height="304px" />
+      <div className="flex items-center justify-between">
+        <FilterButton />
+        <AddTaskButton />
+      </div>
+      <TaskCarousel tasks={tasks} height="500px" />
     </div>
   );
 }
