@@ -1,17 +1,14 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { postLogin, postRegister } from './api/service/auth.api';
-import { Session } from 'next-auth';
+import { NextAuthOptions, Session, User } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 
-interface IMyUser {
-  id: number;
-  email: string;
-  name: string;
+interface IMyUser extends User {
   accessToken?: string;
   refreshToken?: string;
 }
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET, // NextAuth 비밀키
   providers: [
     CredentialsProvider({
@@ -71,7 +68,7 @@ export const authOptions = {
   callbacks: {
     async jwt({ token, user }: { token: JWT; user: IMyUser }) {
       if (user) {
-        token.id = user.id;
+        token.id = Number(user.id);
         token.email = user.email;
         token.name = user.name;
         token.accessToken = user.accessToken as string;
@@ -90,25 +87,5 @@ export const authOptions = {
       }
       return session;
     },
-
-    // // Redirect 콜백: 로그인 후 리디렉션할 URL을 지정
-    // redirect: async ({ url, baseUrl }: { url: string; baseUrl: string }) => {
-    //   if (url.startsWith('/')) {
-    //     return `${baseUrl}${url}`;
-    //   }
-    //   if (url) {
-    //     const { search, origin } = new URL(url);
-    //     const callbackUrl = new URLSearchParams(search).get('callbackUrl');
-    //     if (callbackUrl) {
-    //       return callbackUrl.startsWith('/')
-    //         ? `${baseUrl}${callbackUrl}`
-    //         : callbackUrl;
-    //     }
-    //     if (origin === baseUrl) {
-    //       return url;
-    //     }
-    //   }
-    //   return baseUrl;
-    // },
   },
 };
