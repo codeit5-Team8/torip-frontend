@@ -5,7 +5,10 @@ import { TNote } from '@model/note.model';
 import NoteIframe from './NoteIframe';
 import NoteViewer from './NoteViewer';
 
-export default function NoteDetail({ noteTitle, noteContent }: TNote) {
+export default function NoteDetail({ noteContent, ...noteRest }: TNote) {
+  // TODO tripTitle api 통신
+  const tripTitle = 'sample';
+
   const [iframeSrc, setIframeSrc] = useState<string>('');
 
   const checkIframeSupport = async (url: string) => {
@@ -82,12 +85,13 @@ export default function NoteDetail({ noteTitle, noteContent }: TNote) {
   }
 
   return (
-    <div className="grid overflow-hidden bg-white sm:grid-cols-none sm:grid-rows-[460px_1fr] md:grid-cols-[40%_60%]">
+    // TODO 태블릿 이상 에서 헤더가 없어지면 수정 md:max-h-screen
+    <div className="flex max-h-[calc(100vh-40px)] flex-col overflow-hidden bg-white md:flex-row">
       <NoteIframe iframeSrc={iframeSrc} />
-
       <NoteViewer
-        noteTitle={noteTitle}
+        {...noteRest}
         noteContent={transformContent(noteContent)}
+        tripTitle={tripTitle}
       />
     </div>
   );

@@ -1,6 +1,8 @@
-import { useRouter } from 'next/navigation';
+'use client';
+
 import React, { PropsWithChildren } from 'react';
 import ReactDOM from 'react-dom';
+import NoteBackdrop from './NoteBackDrop';
 
 interface INoteDrawerProps {
   selectors: string;
@@ -10,7 +12,6 @@ export default function NoteDrawer({
   children,
   selectors,
 }: PropsWithChildren<INoteDrawerProps>) {
-  const router = useRouter();
   const element = document.querySelector(selectors);
   if (element === null) {
     throw new Error(
@@ -19,26 +20,10 @@ export default function NoteDrawer({
   }
 
   return ReactDOM.createPortal(
-    <div className="fixed z-[1] grid h-screen w-screen grid-cols-2 overflow-auto">
-      <Backdrop onClick={router.back} />
+    <div className="fixed z-[1] block h-screen w-screen overflow-auto sm:grid sm:grid-cols-[25%_75%]">
+      <NoteBackdrop />
       {children}
     </div>,
     element,
-  );
-}
-
-function Backdrop({ onClick }: { onClick?: () => void }) {
-  return (
-    <div
-      role="button"
-      tabIndex={0}
-      className="h-screen bg-black bg-opacity-50"
-      onClick={onClick}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' && onClick) {
-          onClick();
-        }
-      }}
-    />
   );
 }
