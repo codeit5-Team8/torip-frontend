@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import QueryProvider from '@provider/QueryProvider';
+import Popup from '@ui/common/Popup';
+import Modal from '@ui/common/Modal';
+import SessionWrapper from '@provider/SessionWrapper';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -13,15 +17,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <head>
-        <title>Next.js</title>
-      </head>
-
-      <body>
-        {children}
-        <SpeedInsights />
-      </body>
-    </html>
+    <QueryProvider>
+      <SessionWrapper>
+        <html lang="en">
+          <body>
+            <Popup />
+            <Modal />
+            {children}
+            <SpeedInsights />
+          </body>
+        </html>
+      </SessionWrapper>
+    </QueryProvider>
   );
 }
