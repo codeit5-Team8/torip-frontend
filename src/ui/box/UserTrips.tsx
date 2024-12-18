@@ -1,4 +1,4 @@
-import { useGetUserTripList } from '@hooks/useGetUserTripList';
+import { useGetUserTripList } from '@hooks/trip/useGetUserTripList';
 import TripBox from './TripBox';
 
 export default function UserTrips() {

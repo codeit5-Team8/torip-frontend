@@ -4,7 +4,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, ChartData } from 'chart.js';
 import Image from 'next/image';
 import React, { useRef, useEffect, useState } from 'react';
-import { useGetProgress } from '@hooks/useGetProgress';
+import { useGetProgress } from '@hooks/task/useGetProgress';
 import {
   createProgressData,
   progressChartOptions,
