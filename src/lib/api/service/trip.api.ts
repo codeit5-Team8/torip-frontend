@@ -74,7 +74,7 @@ export const getTripMembers = async (id: number) => {
 
 // const response = await getTravelList({lastSeenId: 3});
 export const getTripList = async (query: TGetTripListProps) => {
-  const response = await get<TGetTripListResponse>(`api/v1/torip/travel/list`, {
+  const response = await get<TGetTripListResponse>(`api/v1/torip/trip/list`, {
     params: query,
   });
 
