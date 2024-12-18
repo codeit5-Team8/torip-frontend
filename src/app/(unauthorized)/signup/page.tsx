@@ -5,7 +5,7 @@ import AuthInput from '@ui/auth/AuthInput';
 import Button from '@ui/common/Button';
 import { AUTH_VALIDATION_REGEX } from '@constant/auth';
 import Link from 'next/link';
-import { useLogin } from '@hooks/useLogin';
+import { useLogin } from '@hooks/auth/useLogin';
 import { useRouter } from 'next/navigation';
 import { getEmailExists } from '@lib/api/service/auth.api';
 

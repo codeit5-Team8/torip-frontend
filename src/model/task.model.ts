@@ -1,8 +1,8 @@
 export type TGetTaskRequest = {
-  travelId: string;
-  seq: string;
-  tripStatus?: 'BEFORE_TRAVEL' | 'DURING_TRAVEL' | 'AFTER_TRAVEL';
-  scope?: 'PUBLIC' | 'PRIVATE';
+  tripId: number;
+  taskSeq: number;
+  taskStatus?: 'BEFORE_TRAVEL' | 'DURING_TRAVEL' | 'AFTER_TRAVEL';
+  taskScope?: 'PUBLIC' | 'PRIVATE';
   all: boolean;
 };
 

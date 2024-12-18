@@ -1,4 +1,5 @@
 'use client';
+
 import Button from '@ui/common/Button';
 import Subtitle from '@ui/common/Subtitle';
 import Image from 'next/image';

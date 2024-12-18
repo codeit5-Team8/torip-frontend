@@ -14,8 +14,18 @@ import { get, post, put, del } from '../axios';
 import { TResponse } from '@model/model';
 
 export const getTask = async (data: TGetTaskRequest) => {
+  const { tripId, taskSeq, taskStatus, taskScope, all } = data;
+
+  const queryString = new URLSearchParams({
+    tripId: tripId.toString(),
+    taskSeq: taskSeq.toString(),
+    ...(taskStatus ? { taskStatus } : {}),
+    ...(taskScope ? { taskScope } : {}),
+    all: all.toString(),
+  }).toString();
+
   const response = await get<TResponse<TGetTaskResponse>>(
-    `/api/v1/torip/task?travelId=${data.travelId}&seq=${data.seq}`,
+    `/api/v1/torip/task?${queryString}`,
   );
   return response.data;
 };

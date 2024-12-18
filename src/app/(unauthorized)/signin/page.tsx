@@ -7,7 +7,7 @@ import { AUTH_VALIDATION_REGEX } from '@constant/auth';
 import AuthInput from '@ui/auth/AuthInput';
 import Button from '@ui/common/Button';
 import { INPUT_MESSAGE } from '@constant/input';
-import { useLogin } from '@hooks/useLogin';
+import { useLogin } from '@hooks/auth/useLogin';
 import { useRouter } from 'next/navigation';
 
 type TLoginFormInputs = {
