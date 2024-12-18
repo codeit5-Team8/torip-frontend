@@ -1,7 +1,40 @@
-import Image from 'next/image';
+'use client';
 
-// progress 퍼센테이지 불러오는 것에 따라 props 변경 필요
+import { Doughnut } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, ChartData } from 'chart.js';
+import Image from 'next/image';
+import React, { useRef, useEffect, useState } from 'react';
+import { useGetProgress } from '@hooks/useGetProgress';
+import {
+  createProgressData,
+  progressChartOptions,
+} from '@app/progressChartConfig';
+
+ChartJS.register(ArcElement);
+
 export default function MyProgressBox() {
+  const { data } = useGetProgress();
+  const progress = data?.progress || 0;
+  const chartRef = useRef<ChartJS<'doughnut', number[], unknown> | null>(null);
+  const [chartData, setChartData] = useState<null | ChartData<
+    'doughnut',
+    number[],
+    unknown
+  >>(null);
+
+  useEffect(() => {
+    if (chartRef.current) {
+      const chart = chartRef.current;
+      const ctx = chart.ctx;
+      const chartArea = chart.chartArea;
+
+      if (ctx && chartArea) {
+        const data = createProgressData(progress, ctx, chartArea);
+        setChartData(data);
+      }
+    }
+  }, [progress, chartRef]);
+
   return (
     <div className="flex h-[250px] rounded-xl bg-cyan-300 bg-[url('/asset/image/progressBg.png')] px-4 py-4 tablet:px-6">
       <div className="flex flex-1 flex-col gap-4">
@@ -16,20 +49,20 @@ export default function MyProgressBox() {
         <div className="flex flex-col gap-1 text-white">
           <h4 className="text-lg font-semibold leading-7">내 진행 상황</h4>
           <p className="flex items-center gap-1 text-3xl font-bold leading-9 text-white">
-            {/* 임시값 */}
-            74
+            {progress}
             <span className="text-base font-semibold leading-normal">%</span>
           </p>
         </div>
       </div>
+
       <div className="flex flex-1 items-center justify-center">
-        {/* 임시 프로그래스바 이미지 */}
-        <Image
-          src={`/asset/image/testcircle.png`}
-          alt="progress"
-          width={166}
-          height={166}
-        />
+        <div className="h-[166px] w-[166px]">
+          <Doughnut
+            data={chartData || createProgressData(progress)}
+            options={progressChartOptions}
+            ref={chartRef}
+          />
+        </div>
       </div>
     </div>
   );
