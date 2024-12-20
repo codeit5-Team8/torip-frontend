@@ -7,12 +7,18 @@ import { twMerge } from 'tailwind-merge';
 import { TTrip } from '@model/trip.model';
 import { useGetTrip } from '@hooks/trip/useGetTrip';
 import Skeleton from '@ui/common/Skeleton';
+import { calculateDDday } from '@util/\bcalculateDDay';
 
 type TTripInfoProps = Pick<TTrip, 'id'>;
 
 export default function TripInfo({ id }: TTripInfoProps) {
   const { data: tripInfo, isLoading } = useGetTrip(id);
   const { showModal } = useModalStore();
+
+  const dDay =
+    tripInfo && tripInfo?.success
+      ? calculateDDday(tripInfo.result.startDate)
+      : 'D-0';
 
   const handleShowTripMember = () => {
     showModal({
@@ -53,10 +59,7 @@ export default function TripInfo({ id }: TTripInfoProps) {
             ? tripInfo?.result.name
             : tripInfo?.message}
         </h3>
-        <div className="text-[2rem] font-black leading-none">
-          {/* TODO: D-Day */}
-          D-14
-        </div>
+        <div className="text-[2rem] font-black leading-none">{dDay}</div>
       </div>
       <div className="absolute right-4 top-4">
         <DropdownMenu
