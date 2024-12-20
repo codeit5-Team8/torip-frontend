@@ -6,6 +6,10 @@ import TripMember from './tripMember/TripMemberModal';
 import { twMerge } from 'tailwind-merge';
 import { TTrip } from '@model/trip.model';
 import { useGetTrip } from '@hooks/trip/useGetTrip';
+import { useDeleteTrip } from '@hooks/trip/useDeleteTrip';
+import { usePopupStore } from '@store/popup.store';
+import { useRouter } from 'next/navigation';
+import { TRIP_POPUP_MESSAGE } from '@constant/trip';
 import Skeleton from '@ui/common/Skeleton';
 import { calculateDDday } from '@util/\bcalculateDDay';
 
@@ -13,7 +17,12 @@ type TTripInfoProps = Pick<TTrip, 'id'>;
 
 export default function TripInfo({ id }: TTripInfoProps) {
   const { data: tripInfo, isLoading } = useGetTrip(id);
+  const deleteTrip = useDeleteTrip();
+
   const { showModal } = useModalStore();
+  const { showPopup } = usePopupStore();
+
+  const router = useRouter();
 
   const dDay =
     tripInfo && tripInfo?.success
@@ -24,6 +33,25 @@ export default function TripInfo({ id }: TTripInfoProps) {
     showModal({
       title: '멤버 관리',
       content: <TripMember />,
+    });
+  };
+
+  const handleEditTrip = () => {
+    // TODO: 여행 수정하기
+  };
+
+  const handleDeleteTrip = () => {
+    showPopup({
+      popupText: TRIP_POPUP_MESSAGE.deleteTrip,
+      showCancelButton: true,
+      confirmButtonText: '확인',
+      onConfirm: () => {
+        deleteTrip.mutate(id, {
+          onSuccess: () => {
+            router.push('/');
+          },
+        });
+      },
     });
   };
 
@@ -68,8 +96,8 @@ export default function TripInfo({ id }: TTripInfoProps) {
             /* eslint-disable no-console */
             { label: '공유하기', onClick: () => console.log('Edit clicked') },
             { label: '멤버관리', onClick: handleShowTripMember },
-            { label: '수정하기', onClick: () => console.log('Share clicked') },
-            { label: '삭제하기', onClick: () => console.log('Share clicked') },
+            { label: '수정하기', onClick: handleEditTrip },
+            { label: '삭제하기', onClick: handleDeleteTrip },
             /* eslint-disable no-console */
           ]}
           className="bg-transparent font-black"
