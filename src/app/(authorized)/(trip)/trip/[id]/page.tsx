@@ -30,7 +30,7 @@ export default function Trip({ params }: { params: { id: string } }) {
       {/* 여행 상세 정보 */}
       <TripInfo tripInfo={tripInfo} />
       {/* 노트 모아보기 */}
-      <TripNotesButton />
+      <TripNotesButton id={Number(id)} />
       {/* 여행 할 일 */}
       <TripTask id={Number(id)} />
     </>
