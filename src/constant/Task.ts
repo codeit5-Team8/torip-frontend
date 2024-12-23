@@ -16,3 +16,8 @@ export const FILTER_MAPPING: Record<string, TTaskScope | null> = {
 
 // 데이터가 없을 경우 표시하는 메시지
 export const EMPTY_TASK_MESSAGE = '아직 할 일이 없어요.';
+
+// 할 일 popup 메세지
+export const TASK_POPUP_MESSAGE = {
+  deleteTask: '할 일을 삭제하시겠어요? \n 삭제된 할 일은 복구할 수 없습니다.',
+};

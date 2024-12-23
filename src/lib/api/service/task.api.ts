@@ -53,9 +53,9 @@ export const getTaskDetail = async (data: TGetTaskDetailRequest) => {
   return response.data;
 };
 
-export const deleteTask = async (data: TDeleteTaskRequest) => {
+export const deleteTask = async (taskId: TDeleteTaskRequest) => {
   const response = await del<TResponse<TDeleteTaskResponse>>(
-    `/api/v1/torip/task?taskId=${data.taskId}`,
+    `/api/v1/torip/task/${taskId}`,
   );
   return response.data;
 };
