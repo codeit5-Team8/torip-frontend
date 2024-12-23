@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 import { TRIP_POPUP_MESSAGE } from '@constant/trip';
 import Skeleton from '@ui/common/Skeleton';
 import { calculateDDday } from '@util/\bcalculateDDay';
+import toast, { Toaster } from 'react-hot-toast';
 
 type TTripInfoProps = Pick<TTrip, 'id'>;
 
@@ -28,6 +29,20 @@ export default function TripInfo({ id }: TTripInfoProps) {
     tripInfo && tripInfo?.success
       ? calculateDDday(tripInfo.result.startDate)
       : 'D-0';
+
+  const handleCopyInviteLink = async () => {
+    try {
+      const url = window.location.href;
+      await navigator.clipboard.writeText(url);
+      toast.success(TRIP_POPUP_MESSAGE.copyInviteLink, {
+        iconTheme: { primary: '#28D7D2', secondary: '#ffffff' },
+      });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to copy URL: ', err);
+      toast.error(TRIP_POPUP_MESSAGE.copyInviteLinkError);
+    }
+  };
 
   const handleShowTripMember = () => {
     showModal({
@@ -92,19 +107,17 @@ export default function TripInfo({ id }: TTripInfoProps) {
       <div className="absolute right-4 top-4">
         <DropdownMenu
           items={[
-            // TODO: 기능 추가 필요
-            /* eslint-disable no-console */
-            { label: '공유하기', onClick: () => console.log('Edit clicked') },
+            { label: '공유하기', onClick: handleCopyInviteLink },
             { label: '멤버관리', onClick: handleShowTripMember },
             { label: '수정하기', onClick: handleEditTrip },
             { label: '삭제하기', onClick: handleDeleteTrip },
-            /* eslint-disable no-console */
           ]}
           className="bg-transparent font-black"
         >
           {/* 케밥 아이콘 부분 */} :
         </DropdownMenu>
       </div>
+      <Toaster />
     </section>
   );
 }
