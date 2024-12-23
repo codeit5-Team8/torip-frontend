@@ -1,44 +1,15 @@
 'use client';
 
+import { TTrip } from '@model/trip.model';
 import TripMemberSection from '../TripMemberSection';
 import TripJoinRequestItem from './TripJoinRequestItem';
 import { usePopupStore } from '@store/popup.store';
+import { useGetJoinTripList } from '@hooks/trip/useGetJoinTripList';
 
-// TODO: API 연결 시 제거 예정
-const joinRequestList = [
-  {
-    travelName: '여행',
-    invitee: {
-      username: '홍길동',
-      email: 'email@email.com',
-    },
-    status: 'Accepted',
-    createdAt: '2024.12.11',
-    updatedAt: '2024.12.11',
-  },
-  {
-    travelName: '여행',
-    invitee: {
-      username: '홍길동',
-      email: 'email@email.com',
-    },
-    status: 'Accepted',
-    createdAt: '2024.12.11',
-    updatedAt: '2024.12.11',
-  },
-  {
-    travelName: '여행',
-    invitee: {
-      username: '홍길동',
-      email: 'email@email.com',
-    },
-    status: 'Accepted',
-    createdAt: '2024.12.11',
-    updatedAt: '2024.12.11',
-  },
-];
+type TTripMember = Pick<TTrip, 'id'>;
 
-export default function TripJoinRequestList() {
+export default function TripJoinRequestList({ id }: TTripMember) {
+  const { data: joinTripList } = useGetJoinTripList(id);
   const { showPopup } = usePopupStore();
 
   const onConfirm = () => {
@@ -80,17 +51,16 @@ export default function TripJoinRequestList() {
 
   return (
     <TripMemberSection title="여행 멤버 승인">
-      <ul className="flex flex-col overflow-y-auto">
-        {joinRequestList &&
-          joinRequestList.map((item, index) => (
-            <TripJoinRequestItem
-              key={index}
-              invitee={item.invitee}
-              createdAt={item.createdAt}
-              onAccept={handleAcceptClick}
-              onReject={handleRejectClick}
-            />
-          ))}
+      <ul className="flex flex-col">
+        {joinTripList?.result.map((item, index) => (
+          <TripJoinRequestItem
+            key={index}
+            invitee={item.invitee}
+            createdAt={item.createdAt}
+            onAccept={handleAcceptClick}
+            onReject={handleRejectClick}
+          />
+        ))}
       </ul>
     </TripMemberSection>
   );

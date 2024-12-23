@@ -10,7 +10,7 @@ export default function TripMemberModal({ id }: TTripMember) {
       {/* 참여 중인 멤버 */}
       <TripParticipant id={id} />
       {/* 참여 수락/거절 */}
-      <TripJoinRequest />
+      <TripJoinRequest id={id} />
     </div>
   );
 }
