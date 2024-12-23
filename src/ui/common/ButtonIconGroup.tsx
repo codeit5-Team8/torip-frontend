@@ -1,5 +1,6 @@
 import { twMerge } from 'tailwind-merge';
 import DropdownMenu from './DropdownMenu';
+import Link from 'next/link';
 
 /**
  * 할일 옆에 나오는 아이콘 그룹 컴포넌트입니다.
@@ -9,21 +10,28 @@ import DropdownMenu from './DropdownMenu';
  * - 문서 버튼: 문서 관련 작업을 수행합니다.
  * - 케밥 버튼: 추가 옵션을 표시합니다.
  *
- * @component
- *
- * @param {function} onFileClick - 파일 버튼 클릭 시 호출되는 핸들러
- * @param {function} onDocClick - 문서 버튼 클릭 시 호출되는 핸들러
- *
+ * taskId - 할일 id
+ * hasFilePath - 파일 존재 여부
+ * onFileClick - 파일 버튼 클릭 시 호출되는 핸들러
+ * onEditTaskClick - 할일 수정 이벤트 핸들러
+ * onDeleteTaskClick - 할일 삭제 이벤트 핸들러
+ * className - 사용자 정의 스타일링
  */
 interface IButtonIconGroupProps {
+  taskId: number;
+  hasFilePath: boolean;
   onFileClick: () => void;
-  onDocClick: () => void;
+  onEditTaskClick: () => void;
+  onDeleteTaskClick: () => void;
   className?: string;
 }
 
 export default function ButtonIconGroup({
+  taskId,
+  hasFilePath,
   onFileClick,
-  onDocClick,
+  onEditTaskClick,
+  onDeleteTaskClick,
   className,
 }: IButtonIconGroupProps) {
   const buttonStyle =
@@ -31,26 +39,25 @@ export default function ButtonIconGroup({
 
   return (
     <div className={twMerge('flex gap-2', className)}>
-      <button
-        className={twMerge(buttonStyle, 'text-slate-500')}
-        onClick={onFileClick}
-      >
-        {/* 파일 아이콘 부분 */}
-      </button>
-      <button
-        className={twMerge(buttonStyle, 'text-primary')}
-        onClick={onDocClick}
-      >
-        {/* 문서 아이콘 부분 */}
-      </button>
+      {hasFilePath && (
+        <button
+          className={twMerge(buttonStyle, 'text-slate-500')}
+          onClick={onFileClick}
+        >
+          {/* 파일 아이콘 부분 */}
+        </button>
+      )}
+      <Link href={`/note-all-task/${taskId}`}>
+        <button className={twMerge(buttonStyle, 'text-primary')}>
+          {/* 문서 아이콘 부분 */}
+        </button>
+      </Link>
       {/* 케밥 메뉴 */}
       <DropdownMenu
         items={[
           // TODO: 기능 추가 필요
-          /* eslint-disable no-console */
-          { label: '수정하기', onClick: () => console.log('Edit clicked') },
-          { label: '삭제하기', onClick: () => console.log('Delete clicked') },
-          /* eslint-disable no-console */
+          { label: '수정하기', onClick: onEditTaskClick },
+          { label: '삭제하기', onClick: onDeleteTaskClick },
         ]}
       >
         {/* 케밥 아이콘 부분 */} :
