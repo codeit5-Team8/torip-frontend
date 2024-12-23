@@ -8,6 +8,8 @@ import { TTrip } from '@model/trip.model';
 import { useState } from 'react';
 import { TTaskScope } from '@model/task.model';
 import { FILTER_MAPPING } from '@constant/task';
+import { useModalStore } from '@store/modal.store';
+import TodoModal from '@ui/common/TodoModal';
 
 type TTripTaskProps = Pick<TTrip, 'id'>;
 
@@ -22,6 +24,15 @@ export default function TripTask({ id }: TTripTaskProps) {
   };
   const { data } = useGetTasks(params);
 
+  const { showModal } = useModalStore();
+
+  const handleAddTaskClick = () => {
+    showModal({
+      title: '할 일 생성',
+      content: <TodoModal />,
+    });
+  };
+
   const handleTaskFilterClick = (filter: string) => {
     const scope = FILTER_MAPPING[filter];
     setTaskScope(scope);
@@ -34,7 +45,7 @@ export default function TripTask({ id }: TTripTaskProps) {
       </div>
       <div className="flex items-center justify-between">
         <FilterButton onClick={handleTaskFilterClick} />
-        <AddTaskButton />
+        <AddTaskButton onClick={handleAddTaskClick} />
       </div>
       <TaskCarousel
         tripId={id}
