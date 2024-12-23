@@ -4,7 +4,7 @@ export type TPostRegisterRequest = {
   password: string;
 };
 
-export type TPostRefreshTokenRequest = string;
+export type TPostRefreshTokenRequest = { refreshToken: string };
 
 export type TPostLoginRequest = Omit<TPostRegisterRequest, 'username'>;
 

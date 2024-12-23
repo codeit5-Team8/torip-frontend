@@ -1,9 +1,9 @@
+import { tasksQueryKeys } from '@constant/queryKeyFactory';
 import { useQuery } from '@tanstack/react-query';
-import { progressQueryKeys } from '@constant/queryKeyFactory';
 
 export const useGetProgress = () => {
   return useQuery({
-    ...progressQueryKeys.progress(),
+    ...tasksQueryKeys.progress(),
     select: (data) => {
       const result = data?.result;
 

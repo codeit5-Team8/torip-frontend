@@ -21,6 +21,11 @@ export const postRefreshToken = async (data: TPostRefreshTokenRequest) => {
   const response = await post<TResponse<TTokenResponse>>(
     '/api/v1/torip/auth/refresh',
     data,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
   );
   return response.data;
 };

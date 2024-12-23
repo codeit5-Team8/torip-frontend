@@ -1,17 +1,24 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { postLogin, postRegister } from './api/service/auth.api';
 import { NextAuthOptions, Session, User } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
+import dayjs from 'dayjs';
+import {
+  postLogin,
+  postRefreshToken,
+  postRegister,
+} from './api/service/auth.api';
 
 interface IMyUser extends User {
   accessToken?: string;
   refreshToken?: string;
+  expiredAt?: string;
 }
 
 export const authOptions: NextAuthOptions = {
-  secret: process.env.NEXTAUTH_SECRET, // NextAuth 비밀키
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
+      // 기존 CredentialsProvider 설정 유지
       name: 'credentials',
       credentials: {
         name: {
@@ -33,6 +40,7 @@ export const authOptions: NextAuthOptions = {
       async authorize(
         credentials: Record<'name' | 'email' | 'password', string> | undefined,
       ) {
+        // 기존 authorize 함수 내용 유지
         if (!credentials) {
           throw new Error('No credentials provided.');
         }
@@ -54,7 +62,7 @@ export const authOptions: NextAuthOptions = {
             return { id: '1', name, email, ...token };
           } else {
             const error = new Error('Signup failed.');
-            (error as Error).message = message; //서버 msg 넣기
+            (error as Error).message = message;
             throw error;
           }
         }
@@ -72,9 +80,8 @@ export const authOptions: NextAuthOptions = {
         if (success) {
           return { id: '1', name, email, ...token };
         } else {
-          // 커스텀 에러 객체 생성
           const error = new Error('Login failed.');
-          (error as Error).message = message; //서버 msg 넣기
+          (error as Error).message = message;
           throw error;
         }
       },
@@ -84,24 +91,66 @@ export const authOptions: NextAuthOptions = {
     signIn: '/signin',
   },
   callbacks: {
-    async jwt({ token, user }: { token: JWT; user: IMyUser }) {
+    async jwt({ token, user }: { token: JWT; user?: IMyUser }) {
       if (user) {
         token.id = Number(user.id);
         token.email = user.email;
         token.name = user.name;
-        token.accessToken = user.accessToken as string;
-        token.refreshToken = user.refreshToken as string;
+        token.accessToken = user.accessToken;
+        token.refreshToken = user.refreshToken;
+        token.expiredAt = user.expiredAt;
       }
-      return token;
+
+      if (
+        token.expiredAt &&
+        dayjs(token.expiredAt as string).isAfter(dayjs())
+      ) {
+        return token;
+      }
+
+      const response = await postRefreshToken({
+        refreshToken: token.refreshToken as string,
+      });
+
+      if (response.success && response.result) {
+        return {
+          ...token,
+          accessToken: response.result.accessToken,
+          refreshToken: response.result.refreshToken,
+          expiredAt: response.result.expiredAt,
+        };
+      } else {
+        return {
+          id: token.id,
+          email: token.email,
+          name: token.name,
+          accessToken: undefined,
+          refreshToken: undefined,
+          expiredAt: undefined,
+        };
+      }
     },
 
     async session({ session, token }: { session: Session; token: JWT }) {
-      if (session.user) {
+      if (token.accessToken) {
         session.user.id = token.id as number;
         session.user.email = token.email as string;
         session.user.name = token.name as string;
         session.accessToken = token.accessToken as string;
         session.refreshToken = token.refreshToken as string;
+        session.expiredAt = token.expiredAt as string;
+      } else {
+        session = {
+          ...session,
+          user: {
+            id: 0,
+            name: null,
+            email: null,
+          },
+          accessToken: undefined,
+          refreshToken: undefined,
+          expiredAt: undefined,
+        };
       }
       return session;
     },
