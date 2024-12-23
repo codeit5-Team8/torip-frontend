@@ -1,6 +1,6 @@
 import { twMerge } from 'tailwind-merge';
 import { EMPTY_TASK_MESSAGE, TRIP_STATUS } from '@constant/task';
-import TodoProgressBar from './TaskProgressBar';
+import TaskProgressBar from './TaskProgressBar';
 import { TGetTaskResponse } from '@model/task.model';
 import TaskList from './TaskList';
 import EmptyMessage from '@ui/common/EmptyMessage';
@@ -16,9 +16,15 @@ interface ITaskCardProps {
 
 export default function TaskCard({
   status,
+  tripId,
   tasks,
   classNames,
 }: ITaskCardProps) {
+  const totalTasks = tasks?.length || 0;
+  const completedTasks =
+    tasks?.filter((task) => task.taskCompletionDate)?.length || 0;
+  const progress = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+
   return (
     <div
       className={twMerge(
@@ -32,8 +38,7 @@ export default function TaskCard({
       <div className="flex flex-col gap-2.5">
         {/* 여행 상태 */}
         <div className="text-lg font-bold leading-7">{TRIP_STATUS[status]}</div>
-        {/* todo 프로그래스 바 */}
-        <TodoProgressBar progress={80} />
+        <TaskProgressBar progress={progress} />
       </div>
       {/* todo list */}
       {tasks ? (
