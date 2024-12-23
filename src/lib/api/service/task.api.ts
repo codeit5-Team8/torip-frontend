@@ -24,7 +24,7 @@ export const getTask = async (data: TGetTaskRequest) => {
     all: all.toString(),
   }).toString();
 
-  const response = await get<TResponse<TGetTaskResponse>>(
+  const response = await get<TResponse<TGetTaskResponse[]>>(
     `/api/v1/torip/task?${queryString}`,
   );
   return response.data;
