@@ -10,9 +10,6 @@ export const tasksQueryKeys = createQueryKeys('tasks', {
     queryKey: ['tasksList'],
     queryFn: () => getTask(props),
   }),
-});
-
-export const progressQueryKeys = createQueryKeys('progress', {
   progress: () => ({
     queryKey: ['taskProgress'],
     queryFn: () => getTaskProgress(),
