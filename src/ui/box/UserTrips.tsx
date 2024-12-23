@@ -8,7 +8,11 @@ export default function UserTrips() {
 
   // 디자인 변경필요
   if (data?.content.length === 0) {
-    return <div>등록한 여행이 없어요.</div>;
+    return (
+      <div className="flex h-[200px] w-full items-center justify-center rounded-xl bg-white text-slate-500 tablet:h-[771px] desktop:h-[651px]">
+        등록한 여행이 없어요
+      </div>
+    );
   }
 
   // 디자인 변경필요

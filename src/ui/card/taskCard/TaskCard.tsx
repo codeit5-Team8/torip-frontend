@@ -1,5 +1,5 @@
 import { twMerge } from 'tailwind-merge';
-import { EMPTY_TASK_MESSAGE, TRIP_STATUS } from '@constant/task';
+import { EMPTY_TASK_MESSAGE, TRIP_STATUS } from '@constant/Task';
 import TaskProgressBar from './TaskProgressBar';
 import { TGetTaskResponse } from '@model/task.model';
 import TaskList from './TaskList';

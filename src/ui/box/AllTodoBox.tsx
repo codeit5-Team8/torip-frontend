@@ -34,7 +34,11 @@ export default function AllTodoBox() {
         </Button>
       </div>
       {/* task data 필요 */}
-      {/* <TaskList tasks={''} /> */}
+      {/* {tasks ? (
+        <TaskList tripId={tripId} tasks={tasks} />
+      ) : (
+        <EmptyMessage message={EMPTY_TASK_MESSAGE} />
+      )} */}
     </div>
   );
 }

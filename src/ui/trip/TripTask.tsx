@@ -7,7 +7,7 @@ import { useGetTasks } from '@hooks/task/useGetTasks';
 import { TTrip } from '@model/trip.model';
 import { useState } from 'react';
 import { TTaskScope } from '@model/task.model';
-import { FILTER_MAPPING } from '@constant/task';
+import { FILTER_MAPPING } from '@constant/Task';
 import { useModalStore } from '@store/modal.store';
 import TodoModal from '@ui/common/TodoModal';
 
