@@ -7,7 +7,12 @@ import { TGetTripListProps } from '@model/trip.model';
 export const tasksQueryKeys = createQueryKeys('tasks', {
   list: (props: TGetTaskRequest) => ({
     // 동적 props 추가 필요
-    queryKey: ['tasksList'],
+    queryKey: [
+      'tasksList',
+      props.tripId,
+      props.taskScope && props.taskScope,
+      props.taskStatus && props.taskStatus,
+    ],
     queryFn: () => getTask(props),
   }),
 });

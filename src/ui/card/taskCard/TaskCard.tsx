@@ -1,7 +1,7 @@
 import { twMerge } from 'tailwind-merge';
+import { EMPTY_TASK_MESSAGE, TRIP_STATUS } from '@constant/task';
 import TodoProgressBar from './TaskProgressBar';
-import { TTask } from '@model/task.model';
-import { EMPTY_TASK_MESSAGE, TRIP_STATUS } from '@constant/Task';
+import { TGetTaskResponse } from '@model/task.model';
 import TaskList from './TaskList';
 import EmptyMessage from '@ui/common/EmptyMessage';
 
@@ -9,7 +9,8 @@ type TTripStatusKey = keyof typeof TRIP_STATUS;
 
 interface ITaskCardProps {
   status: TTripStatusKey;
-  tasks: TTask[] | null;
+  tripId: number;
+  tasks: TGetTaskResponse[] | null;
   classNames?: string;
 }
 
@@ -36,7 +37,7 @@ export default function TaskCard({
       </div>
       {/* todo list */}
       {tasks ? (
-        <TaskList tasks={tasks} />
+        <TaskList tripId={tripId} tasks={tasks} />
       ) : (
         <EmptyMessage message={EMPTY_TASK_MESSAGE} />
       )}

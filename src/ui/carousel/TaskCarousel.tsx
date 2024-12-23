@@ -1,4 +1,4 @@
-import { TTask } from '@model/task.model';
+import { TGetTaskResponse, TTaskStatus } from '@model/task.model';
 import TaskCard from '@ui/card/taskCard/TaskCard';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
@@ -9,12 +9,14 @@ import 'swiper/css/navigation';
 import { twMerge } from 'tailwind-merge';
 
 interface ITaskCarouselProps {
-  tasks: TTask[]; // 할 일 데이터
+  tripId: number; // 여행 ID
+  tasks: TGetTaskResponse[]; // 할 일 데이터
   height?: string; // 캐러셀 height 값 지정
   className?: string; // 캐러셀 스타일 지정
 }
 
 export default function TaskCarousel({
+  tripId,
   tasks,
   height,
   className,
@@ -23,10 +25,10 @@ export default function TaskCarousel({
 
   const groupedTasks = tasks.reduce(
     (acc, task) => {
-      acc[task.travelStatus] = [...(acc[task.travelStatus] || []), task];
+      acc[task.taskStatus] = [...(acc[task.taskStatus] || []), task];
       return acc;
     },
-    {} as Record<TTask['travelStatus'], TTask[]>,
+    {} as Record<TTaskStatus, TGetTaskResponse[]>,
   );
 
   return (
@@ -60,13 +62,25 @@ export default function TaskCarousel({
         style={{ height: height ? `${height}` : 'auto' }}
       >
         <SwiperSlide className="h-full">
-          <TaskCard status="ready" tasks={groupedTasks['BEFORE_TRAVEL']} />
+          <TaskCard
+            status="ready"
+            tripId={tripId}
+            tasks={groupedTasks['BEFORE_TRIP']}
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <TaskCard status="ongoing" tasks={groupedTasks['DURING_TRAVEL']} />
+          <TaskCard
+            status="ongoing"
+            tripId={tripId}
+            tasks={groupedTasks['DURING_TRIP']}
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <TaskCard status="done" tasks={groupedTasks['AFTER_TRAVEL']} />
+          <TaskCard
+            status="done"
+            tripId={tripId}
+            tasks={groupedTasks['AFTER_TRIP']}
+          />
         </SwiperSlide>
       </Swiper>
     </div>

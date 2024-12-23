@@ -3,23 +3,29 @@
 'use client';
 
 import { memo } from 'react';
-import { TTask } from '@model/task.model';
+import { TGetTaskResponse } from '@model/task.model';
 import CheckBox from '@ui/common/CheckBox';
 import ButtonIconGroup from '@ui/common/ButtonIconGroup';
 
-type TTaskItemProps = Omit<TTask, 'travelId'>;
+interface ITaskItemProps
+  extends Omit<
+    TGetTaskResponse,
+    'tripName' | 'createdBy' | 'createdAt' | 'modifiedBy' | 'modifiedAt'
+  > {
+  tripId: number;
+}
 
-// TODO: 디자인 시안에 맞춰 props 데이터 수정 필요
 function TaskItem({
+  tripId,
   taskId,
   taskTitle,
-  travelStatus,
-  scope,
-  completionDate,
+  taskStatus,
+  taskScope,
+  taskCompletionDate,
   taskDDay,
-  filePath,
-  assignees,
-}: TTaskItemProps) {
+  taskFilePath,
+  taskAssignees,
+}: ITaskItemProps) {
   const handleFileClick = () => {
     // TODO: 파일 다운로드 모달
   };
