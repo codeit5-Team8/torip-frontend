@@ -5,6 +5,9 @@ import TaskCarousel from '@ui/carousel/TaskCarousel';
 import ShowAllTasksButton from '@ui/trip/tripTask/ShowAllTasksButton';
 import AddTaskButton from '@ui/trip/tripTask/AddTaskButton';
 import { TGetTaskResponse } from '@model/task.model';
+import { useRouter } from 'next/navigation';
+import { useModalStore } from '@store/modal.store';
+import TodoModal from '@ui/common/TodoModal';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // TODO: API 연동 후 제거 예정
@@ -86,15 +89,34 @@ interface ITripCardProps {
 // task를 어떻게 어디서 불러오느냐에 따라 props 변경하기
 // 할일 추가 버튼 onclick 추가하기
 export default function TripBox({ id, name }: ITripCardProps) {
+  const navigate = useRouter();
+  const { showModal } = useModalStore();
+
+  const handleAddTaskClick = () => {
+    showModal({
+      title: '할 일 생성',
+      content: <TodoModal />,
+    });
+  };
+  const handleMoveTrip = () => {
+    navigate.push(`/trip/${id}`);
+  };
   return (
-    <div className="w-full rounded-xl bg-white pb-6 pl-4 tablet:pl-6 desktop:px-6">
-      <div className="flex items-center justify-between pt-4">
-        <Subtitle title={name} icon="whiteflag" iconBg="bg-blue-500" link="#" />
-        <AddTaskButton />
-      </div>
-      <div className="my-5 flex items-center justify-between">
-        <FilterButton />
-        <ShowAllTasksButton />
+    <div className="flex w-full flex-col gap-4 rounded-xl bg-white py-6 pl-4 tablet:pl-6 desktop:px-6">
+      <div className="flex flex-col justify-between gap-5 pr-4 tablet:pr-6 desktop:pr-0">
+        <div className="flex justify-between">
+          <Subtitle
+            title={name}
+            icon="whiteflag"
+            iconBg="bg-blue-500"
+            link="#"
+          />
+          <ShowAllTasksButton onClick={handleMoveTrip} />
+        </div>
+        <div className="flex items-center justify-between">
+          <FilterButton />
+          <AddTaskButton onClick={handleAddTaskClick} />
+        </div>
       </div>
       <TaskCarousel tripId={id} tasks={tasks} height="304px" />
     </div>

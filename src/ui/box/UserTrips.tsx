@@ -38,7 +38,7 @@ export default function UserTrips() {
   }
 
   return (
-    <div className="flex w-full flex-1">
+    <div className="flex w-full">
       {data?.content.map((trip) => (
         <TripBox key={trip.id} id={trip.id} name={trip.name} />
       ))}
