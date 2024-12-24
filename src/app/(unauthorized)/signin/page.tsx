@@ -115,7 +115,11 @@ export default function SignInPage() {
             Torip이 처음이신가요?
           </div>
           <Link
-            href="/signup"
+            href={
+              redirectTo
+                ? `/signup?redirectTo=${encodeURIComponent(redirectTo)}`
+                : '/signup'
+            }
             className="text-sm font-medium leading-tight text-mint-500 underline"
           >
             회원가입
