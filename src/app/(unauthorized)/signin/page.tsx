@@ -8,7 +8,7 @@ import AuthInput from '@ui/auth/AuthInput';
 import Button from '@ui/common/Button';
 import { INPUT_MESSAGE } from '@constant/input';
 import { useLogin } from '@hooks/auth/useLogin';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 type TLoginFormInputs = {
   email: string;
@@ -24,11 +24,17 @@ export default function SignInPage() {
   } = useForm<TLoginFormInputs>({ mode: 'onBlur' });
   const { loginHandler } = useLogin();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get('redirectTo');
 
   const onSubmit: SubmitHandler<TLoginFormInputs> = async (data) => {
     const res = await loginHandler('credentials', { ...data, redirect: false });
     if (res?.ok) {
-      router.push('/');
+      if (redirectTo) {
+        router.push(redirectTo);
+      } else {
+        router.push('/');
+      }
     } else if (res) {
       // 에러 메시지에 따라 필드별로 에러 설정
       if (res?.error === '비밀번호가 일치하지 않습니다.') {

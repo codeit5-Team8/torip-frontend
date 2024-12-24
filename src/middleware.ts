@@ -4,9 +4,16 @@ import { NextRequest, NextResponse } from 'next/server';
 export default async function middleware(req: NextRequest) {
   const secret = process.env.NEXTAUTH_SECRET;
   const token = await getToken({ req, secret });
+  const { pathname } = req.nextUrl;
 
   if (!token) {
-    return NextResponse.redirect(new URL('/signin', req.url));
+    const redirectUrl = new URL('/signin', req.url);
+
+    if (pathname.startsWith('/trip')) {
+      redirectUrl.searchParams.set('redirectTo', req.nextUrl.toString());
+    }
+
+    return NextResponse.redirect(redirectUrl);
   }
 
   return NextResponse.next();
