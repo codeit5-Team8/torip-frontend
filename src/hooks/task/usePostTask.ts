@@ -1,11 +1,18 @@
 import { postAddTask } from '@lib/api/service/task.api';
 import { TTask } from '@model/task.model';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const usePostTask = () => {
+  const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: async (data: TTask) => {
-      return await postAddTask(data);
+      const result = await postAddTask(data);
+      return result;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['tasksList'],
+      });
     },
     onError: (error) => {
       // eslint-disable-next-line no-console
