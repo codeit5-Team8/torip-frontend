@@ -1,5 +1,9 @@
 import { getTask, getTaskProgress } from '@lib/api/service/task.api';
-import { getTrip } from '@lib/api/service/trip.api';
+import {
+  getJoinTripList,
+  getTrip,
+  getTripMembers,
+} from '@lib/api/service/trip.api';
 import { getTripList } from '@lib/api/service/trip.api';
 import { createQueryKeys } from '@lukemorales/query-key-factory';
 import { TGetTaskRequest } from '@model/task.model';
@@ -30,5 +34,13 @@ export const tripQueryKeys = createQueryKeys('trip', {
   detail: (id: number) => ({
     queryKey: [id],
     queryFn: () => getTrip(id),
+  }),
+  members: (id: number) => ({
+    queryKey: [id],
+    queryFn: () => getTripMembers(id),
+  }),
+  joinList: (id: number) => ({
+    queryKey: ['member', id],
+    queryFn: () => getJoinTripList(id),
   }),
 });
