@@ -1,96 +1,61 @@
 'use client';
 
+import { TTrip } from '@model/trip.model';
 import TripMemberSection from '../TripMemberSection';
 import TripJoinRequestItem from './TripJoinRequestItem';
 import { usePopupStore } from '@store/popup.store';
+import { useGetJoinTripList } from '@hooks/trip/useGetJoinTripList';
+import { usePostAcceptTrip } from '@hooks/trip/usePostAcceptTrip';
+import { usePostRejectTrip } from '@hooks/trip/usePostRejectTrip';
+import { TRIP_POPUP_MESSAGE } from '@constant/trip';
 
-// TODO: API 연결 시 제거 예정
-const joinRequestList = [
-  {
-    travelName: '여행',
-    invitee: {
-      username: '홍길동',
-      email: 'email@email.com',
-    },
-    status: 'Accepted',
-    createdAt: '2024.12.11',
-    updatedAt: '2024.12.11',
-  },
-  {
-    travelName: '여행',
-    invitee: {
-      username: '홍길동',
-      email: 'email@email.com',
-    },
-    status: 'Accepted',
-    createdAt: '2024.12.11',
-    updatedAt: '2024.12.11',
-  },
-  {
-    travelName: '여행',
-    invitee: {
-      username: '홍길동',
-      email: 'email@email.com',
-    },
-    status: 'Accepted',
-    createdAt: '2024.12.11',
-    updatedAt: '2024.12.11',
-  },
-];
+type TTripMember = Pick<TTrip, 'id'>;
 
-export default function TripJoinRequestList() {
+export default function TripJoinRequestList({ id }: TTripMember) {
+  const { data: joinTripList } = useGetJoinTripList(id);
+  const acceptTrip = usePostAcceptTrip();
+  const rejectTrip = usePostRejectTrip();
+
   const { showPopup } = usePopupStore();
 
-  const onConfirm = () => {
-    alert('Confirm');
+  const onAcceptConfirm = () => {
+    acceptTrip.mutate(id);
   };
 
-  const onCancel = () => {
-    alert('Cancel');
-  };
-
-  const handleAcceptPopup = () => {
-    showPopup({
-      popupText: '여행 초대를 수락하시겠어요?',
-      showCancelButton: true,
-      confirmButtonText: '확인',
-      onConfirm,
-      onCancel,
-    });
-  };
-
-  const handleRejectPopup = () => {
-    showPopup({
-      popupText: '여행 초대를 거절하시겠어요?',
-      showCancelButton: true,
-      confirmButtonText: '확인',
-      onConfirm,
-      onCancel,
-    });
+  const onRejectConfirm = () => {
+    rejectTrip.mutate(id);
   };
 
   const handleAcceptClick = () => {
-    // TODO: 참가 승인
-    handleAcceptPopup();
+    showPopup({
+      popupText: TRIP_POPUP_MESSAGE.acceptInvite,
+      showCancelButton: true,
+      confirmButtonText: '확인',
+      onConfirm: onAcceptConfirm,
+    });
   };
+
   const handleRejectClick = () => {
-    // TODO: 참가 승인
-    handleRejectPopup();
+    showPopup({
+      popupText: TRIP_POPUP_MESSAGE.rejectInvite,
+      showCancelButton: true,
+      confirmButtonText: '확인',
+      onConfirm: onRejectConfirm,
+    });
   };
 
   return (
     <TripMemberSection title="여행 멤버 승인">
-      <ul className="flex flex-col overflow-y-auto">
-        {joinRequestList &&
-          joinRequestList.map((item, index) => (
-            <TripJoinRequestItem
-              key={index}
-              invitee={item.invitee}
-              createdAt={item.createdAt}
-              onAccept={handleAcceptClick}
-              onReject={handleRejectClick}
-            />
-          ))}
+      <ul className="flex flex-col">
+        {joinTripList?.result.map((item, index) => (
+          <TripJoinRequestItem
+            key={index}
+            invitee={item.invitee}
+            createdAt={item.createdAt}
+            onAccept={handleAcceptClick}
+            onReject={handleRejectClick}
+          />
+        ))}
       </ul>
     </TripMemberSection>
   );
