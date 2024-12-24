@@ -1,23 +1,44 @@
-import { useGetUserTripList } from '@hooks/trip/useGetUserTripList';
 import TripBox from './TripBox';
 
 export default function UserTrips() {
-  const { data } = useGetUserTripList({
-    lastSeenId: 0,
-  });
+  // const { data } = useGetUserTripList({
+  //   lastSeenId: 0,
+  // });
+  // 임시 데이터
+  const data = {
+    content: [
+      {
+        id: 1,
+        name: '제주도 여행',
+        startDate: '2021-10-01',
+        endDate: '2021-10-05',
+        owner: {
+          id: 1,
+          username: 'test',
+          email: 'test@test.com',
+        },
+        createdAt: '2024-12-24T02:23:42.944Z',
+        lastUpdatedUser: {
+          id: 1,
+          username: 'test',
+          email: 'test@test.com',
+        },
+        updatedAt: '2024-12-24T02:23:42.944Z',
+      },
+    ],
+  };
 
-  // 디자인 변경필요
+  // 여행 없을 때 UI
   if (data?.content.length === 0) {
     return (
-      <div className="flex h-[200px] w-full items-center justify-center rounded-xl bg-white text-slate-500 tablet:h-[771px] desktop:h-[651px]">
+      <div className="flex flex-1 items-center justify-center rounded-xl bg-white text-slate-500">
         등록한 여행이 없어요
       </div>
     );
   }
 
-  // 디자인 변경필요
   return (
-    <div>
+    <div className="flex w-full flex-1">
       {data?.content.map((trip) => (
         <TripBox key={trip.id} id={trip.id} name={trip.name} />
       ))}

@@ -1,9 +1,10 @@
 import { twMerge } from 'tailwind-merge';
-import { EMPTY_TASK_MESSAGE, TRIP_STATUS } from '@constant/Task';
+
 import TaskProgressBar from './TaskProgressBar';
 import { TGetTaskResponse } from '@model/task.model';
 import TaskList from './TaskList';
 import EmptyMessage from '@ui/common/EmptyMessage';
+import { EMPTY_TASK_MESSAGE, TRIP_STATUS } from '@constant/task';
 
 type TTripStatusKey = keyof typeof TRIP_STATUS;
 

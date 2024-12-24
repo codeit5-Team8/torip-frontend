@@ -27,7 +27,7 @@ export default function DropdownMenu({
       <DropdownMenuTrigger asChild>
         <button
           className={twMerge(
-            'relative flex min-h-6 min-w-6 items-center justify-center rounded-full bg-white text-slate-400',
+            'relative flex min-h-6 min-w-6 items-center justify-center rounded-full bg-white text-slate-400 outline-none',
             className,
           )}
         >
