@@ -1,7 +1,6 @@
 import { TResponse } from './model';
 
 type TUserResponse = {
-  id: number;
   username: string;
   email: string;
 };
