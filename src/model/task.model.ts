@@ -34,6 +34,7 @@ export type TGetTaskResponse = {
 
 export type TTask = {
   tripId: number;
+  taskId?: number;
   taskTitle: string;
   taskFilePath?: string;
   taskStatus: TTaskStatus;
