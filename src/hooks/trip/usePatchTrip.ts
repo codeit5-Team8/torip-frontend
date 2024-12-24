@@ -17,7 +17,7 @@ export const usePostTrip = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['tripsList'],
+        queryKey: ['tripList'],
       });
     },
     onError: (error) => {
