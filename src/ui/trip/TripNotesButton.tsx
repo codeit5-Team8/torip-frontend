@@ -1,12 +1,14 @@
+import { TTrip } from '@model/trip.model';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function TripNotesButton() {
+type TTripNotesButton = Pick<TTrip, 'id'>;
+
+export default function TripNotesButton({ id }: TTripNotesButton) {
   return (
     <section className="section-box bg-mint-100 p-0">
-      {/* TODO 여행별 노트 페이지로 동적 라우팅 */}
       <Link
-        href={'/note-all-trip'}
+        href={`/note-all-trip/${id}`}
         className="flex w-full items-center justify-between px-6 py-4 text-lg font-bold leading-7"
       >
         <span>
