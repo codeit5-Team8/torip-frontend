@@ -33,18 +33,19 @@ export type TGetTaskResponse = {
 };
 
 export type TTask = {
-  travelId: number;
-  taskId: number;
+  tripId: number;
   taskTitle: string;
+  taskFilePath?: string;
   taskStatus: TTaskStatus;
-  taskScope: TTaskScope;
-  completionDate: string;
   taskDDay?: string;
-  filePath?: string;
-  assignees?: string[];
+  taskScope: TTaskScope;
+  taskCompletionDate: string;
+  taskAssignees?: string[];
 };
 
-export type TGetTaskDetailRequest = Pick<TTask, 'taskId'>;
+export type TGetTaskDetailRequest = {
+  taskId: number;
+};
 
 export type TGetTaskDetailResponse = {
   travelName: string;
