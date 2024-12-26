@@ -13,7 +13,7 @@ import {
 ChartJS.register(ArcElement);
 
 export default function MyProgressBox() {
-  const { data } = useGetProgress();
+  const { data, isLoading: isProgressLoading } = useGetProgress();
   const progress = data?.progress || 0;
   const chartRef = useRef<ChartJS<'doughnut', number[], unknown> | null>(null);
   const [chartData, setChartData] = useState<null | ChartData<
@@ -35,8 +35,32 @@ export default function MyProgressBox() {
     }
   }, [progress, chartRef]);
 
+  if (isProgressLoading) {
+    return (
+      <div className="flex h-[250px] rounded-xl bg-[#28D7D2] bg-[url('/asset/image/progressBg.png')] px-4 py-4 tablet:px-6">
+        <div className="flex flex-1 flex-col gap-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#0F172A]"></div>
+          <div className="flex flex-col gap-1 text-white">
+            <h4 className="text-lg font-semibold leading-7">내 진행 상황</h4>
+            <div className="flex items-center gap-1">
+              <p className="flex items-center gap-1 text-3xl font-bold leading-9 text-white">
+                0
+                <span className="text-base font-semibold leading-normal">
+                  %
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        {/* <div className="flex flex-1 items-center justify-center">
+          <Skeleton className="h-[166px] w-[166px]" isCircle />
+        </div> */}
+      </div>
+    );
+  }
+
   return (
-    <div className="flex h-[250px] rounded-xl bg-cyan-300 bg-[url('/asset/image/progressBg.png')] px-4 py-4 tablet:px-6">
+    <div className="flex h-[250px] rounded-xl bg-[#28D7D2] bg-[url('/asset/image/progressBg.png')] px-4 py-4 tablet:px-6">
       <div className="flex flex-1 flex-col gap-4">
         <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#0F172A]">
           <Image
