@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import DateRangePicker from './DateRangePicker';
-import TripName from './MainTitle';
 import Button from '@ui/common/Button';
 import { TPatchTripRequest, TPostTripRequest } from '@model/trip.model';
+import MainTitle from './MainTitle';
 
 interface ITripModalProps {
   id?: number;
@@ -41,7 +41,7 @@ export default function TripModal({
 
   return (
     <main className="mt-6">
-      <TripName tripName={tripName} setTripName={setTripName} />
+      <MainTitle tripName={tripName} setTripName={setTripName} />
       <DateRangePicker
         startDate={startDate}
         setStartDate={setStartDate}
