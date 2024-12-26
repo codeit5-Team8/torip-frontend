@@ -1,3 +1,4 @@
+import { getNoteAllTrip } from '@lib/api/service/note.api';
 import { getTask, getTaskProgress } from '@lib/api/service/task.api';
 import {
   getJoinTripList,
@@ -6,6 +7,7 @@ import {
 } from '@lib/api/service/trip.api';
 import { getTripList } from '@lib/api/service/trip.api';
 import { createQueryKeys } from '@lukemorales/query-key-factory';
+import { TGetNoteAllTripProps } from '@model/note.model';
 import { TGetTaskRequest } from '@model/task.model';
 import { TGetTripListProps } from '@model/trip.model';
 
@@ -43,5 +45,12 @@ export const tripQueryKeys = createQueryKeys('trip', {
   joinList: (id: number) => ({
     queryKey: ['member', id],
     queryFn: () => getJoinTripList(id),
+  }),
+});
+
+export const noteQueryKeys = createQueryKeys('trip', {
+  noteAllTrip: (query: TGetNoteAllTripProps) => ({
+    queryKey: ['tripList'],
+    queryFn: () => getNoteAllTrip(query),
   }),
 });

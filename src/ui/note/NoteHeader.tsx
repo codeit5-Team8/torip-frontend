@@ -5,6 +5,7 @@ import { TNoteFormInput } from '@type/note';
 import Button from '@ui/common/Button';
 import { isEmptyText } from '@util/note';
 import { usePopupStore } from '@store/popup.store';
+import NavTitle from '@ui/common/NavTitle';
 
 interface INoteHeaderProps {
   handleSaveDraft: () => void;
@@ -29,9 +30,7 @@ export default function NoteHeader({
 
   return (
     <section className="mb-4 flex h-9 items-center justify-between gap-2 sm:h-11">
-      <div className="text-base font-semibold leading-normal text-slate-900 dark:text-white sm:text-lg sm:leading-7">
-        노트 작성
-      </div>
+      <NavTitle />
 
       <div className="flex w-[176px] gap-2 sm:w-[206px]">
         <Button

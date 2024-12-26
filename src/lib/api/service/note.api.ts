@@ -1,15 +1,13 @@
 import {
-  TGetNotesProps,
+  TGetNoteAllTripProps,
+  TNoteAllTripResponse,
   TNoteRequest,
   TNoteResponse,
-  TNotesResponse,
 } from 'src/model/note.model';
 import { del, get, post, put } from '../axios';
 
-// 노트 목록 조회
-// const response = await getNotes({ key: 'TRAVEL', id: 1, seq: 0 });
-export const getNotes = async (query: TGetNotesProps) => {
-  const response = await get<TNotesResponse>('/api/v1/torip/note', {
+export const getNoteAllTrip = async (query: TGetNoteAllTripProps) => {
+  const response = await get<TNoteAllTripResponse>('/api/v1/torip/trip/note', {
     params: query,
   });
   return response.data;
