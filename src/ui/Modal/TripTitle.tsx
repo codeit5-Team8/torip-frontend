@@ -1,10 +1,10 @@
 import { Input } from '@ui/common/Input';
 
-interface IMainTitle {
+interface ITripTitle {
   tripName: string;
   setTripName: React.Dispatch<React.SetStateAction<string>>;
 }
-export default function MainTitle({ tripName, setTripName }: IMainTitle) {
+export default function TripTitle({ tripName, setTripName }: ITripTitle) {
   const handleTripName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTripName(e.target.value);
   };
