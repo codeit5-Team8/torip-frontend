@@ -17,7 +17,7 @@ export const getTask = async (data: TGetTaskRequest) => {
   const { tripId, taskSeq, taskStatus, taskScope, all } = data;
 
   const queryString = new URLSearchParams({
-    tripId: tripId.toString(),
+    tripId: tripId ? tripId.toString() : '0',
     taskSeq: taskSeq.toString(),
     ...(taskStatus ? { taskStatus } : {}),
     ...(taskScope ? { taskScope } : {}),
