@@ -1,16 +1,26 @@
 'use client';
 
+import { EMPTY_TASK_MESSAGE } from '@constant/Task';
+import { useGetTasks } from '@hooks/task/useGetTasks';
+import TaskList from '@ui/card/taskCard/TaskList';
 import Button from '@ui/common/Button';
+import EmptyMessage from '@ui/common/EmptyMessage';
 import Subtitle from '@ui/common/Subtitle';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 //task를 어떻게 어디서 불러오느냐에 따라 props 변경하기
 export default function AllTodoBox() {
+  const params = {
+    taskSeq: 0,
+    all: true,
+  };
+  const { data: tasks } = useGetTasks(params);
   const navigate = useRouter();
   const navTodoAll = () => {
     navigate.push('/todo-all');
   };
+
   return (
     <div className="h-[250px] rounded-xl bg-white px-4 pb-6 pt-4 tablet:px-6">
       <div className="flex items-center justify-between">
@@ -34,7 +44,11 @@ export default function AllTodoBox() {
         </Button>
       </div>
       {/* task data 필요 */}
-      {/* <TaskList tasks={''} /> */}
+      {tasks && tasks?.result.length > 0 ? (
+        <TaskList tasks={tasks.result} />
+      ) : (
+        <EmptyMessage message={EMPTY_TASK_MESSAGE} />
+      )}
     </div>
   );
 }

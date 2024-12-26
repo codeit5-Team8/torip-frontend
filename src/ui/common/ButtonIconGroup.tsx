@@ -1,6 +1,7 @@
 import { twMerge } from 'tailwind-merge';
 import DropdownMenu from './DropdownMenu';
 import Link from 'next/link';
+import Image from 'next/image';
 
 /**
  * 할일 옆에 나오는 아이콘 그룹 컴포넌트입니다.
@@ -44,12 +45,22 @@ export default function ButtonIconGroup({
           className={twMerge(buttonStyle, 'text-slate-500')}
           onClick={onFileClick}
         >
-          {/* 파일 아이콘 부분 */}
+          <Image
+            src="/asset/icon/file.png"
+            width="9"
+            height="10"
+            alt="파일 아이콘"
+          />
         </button>
       )}
       <Link href={`/note-all-task/${taskId}`}>
         <button className={twMerge(buttonStyle, 'text-primary')}>
-          {/* 문서 아이콘 부분 */}
+          <Image
+            src="/asset/icon/document.png"
+            width="9"
+            height="10"
+            alt="노트 아이콘"
+          />
         </button>
       </Link>
       {/* 케밥 메뉴 */}
