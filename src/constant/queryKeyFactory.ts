@@ -12,6 +12,7 @@ export const tasksQueryKeys = createQueryKeys('tasks', {
       props.tripId,
       props.taskScope && props.taskScope,
       props.taskStatus && props.taskStatus,
+      props.taskSeq && props.taskSeq,
     ],
     queryFn: () => getTask(props),
   }),
