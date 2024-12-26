@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import NoteDraft from '@ui/note/NoteDraft';
 import NoteForm from '@ui/note/NoteForm';
 import NoteHeader from '@ui/note/NoteHeader';
-import NoteInfo from '@ui/note/NoteInfo';
 import { useForm, FormProvider } from 'react-hook-form';
 import {
   LOCAL_STORAGE_NOTE_DRAFT_KEY,
@@ -13,8 +12,19 @@ import {
 import { Editor } from '@toast-ui/react-editor';
 import { TNoteFormInput } from '@type/note';
 import { saveToLocalStorage } from '@util/note';
+import NoteTripTitle from '@ui/note/NoteTripTitle';
+import { useGetTrip } from '@hooks/trip/useGetTrip';
+import NoteTaskInfoWrapper from '@ui/note/NoteTaskInfoWrapper';
 
-export default function Page() {
+export default function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const { tripId, taskId } = searchParams;
+
+  const { data: tripInfo } = useGetTrip(Number(tripId));
+
   const methods = useForm<TNoteFormInput>({
     defaultValues: {
       title: '',
@@ -74,7 +84,7 @@ export default function Page() {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(handleSubmit)}>
+      <form onSubmit={methods.handleSubmit(handleSubmit)} className="pt-4">
         <NoteHeader
           handleSaveDraft={handleSaveDraft}
           popupText={
@@ -83,14 +93,25 @@ export default function Page() {
               : NOTE_POPUP_MESSAGE.saveDraft
           }
         />
-        {draft && (
-          <NoteDraft
-            handleLoadDraft={handleLoadDraft}
-            handleDeleteDraft={handleDeleteDraft}
-          />
-        )}
-        <NoteInfo />
-        <NoteForm editorRef={editorRef} />
+
+        <div className="rounded-md bg-white p-4">
+          {draft && (
+            <NoteDraft
+              handleLoadDraft={handleLoadDraft}
+              handleDeleteDraft={handleDeleteDraft}
+            />
+          )}
+
+          <section className="flex flex-col gap-3">
+            <NoteTripTitle tripTitle={tripInfo?.result.name ?? ''} />
+
+            {taskId && typeof taskId === 'string' && (
+              <NoteTaskInfoWrapper taskId={taskId} />
+            )}
+          </section>
+
+          <NoteForm editorRef={editorRef} />
+        </div>
       </form>
     </FormProvider>
   );
