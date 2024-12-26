@@ -2,7 +2,7 @@ import { patchTrip } from '@lib/api/service/trip.api';
 import { TPatchTripRequest } from '@model/trip.model';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const usePostTrip = () => {
+export const usePatchTrip = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: async ({
