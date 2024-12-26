@@ -1,51 +1,51 @@
-import { useGetUserTripList } from '@hooks/trip/useGetUserTripList';
+// import { useGetUserTripList } from '@hooks/trip/useGetUserTripList';
 import TripBox from './TripBox';
 
 export default function UserTrips() {
-  const { data } = useGetUserTripList({
-    lastSeenId: 0,
-  });
+  // const { data } = useGetUserTripList({
+  //   lastSeenId: 0,
+  // });
   // 임시 데이터
-  // const data = {
-  //   content: [
-  //     {
-  //       id: 1,
-  //       name: '제주도 여행',
-  //       startDate: '2021-10-01',
-  //       endDate: '2021-10-05',
-  //       owner: {
-  //         id: 1,
-  //         username: 'test',
-  //         email: 'test@test.com',
-  //       },
-  //       createdAt: '2024-12-24T02:23:42.944Z',
-  //       lastUpdatedUser: {
-  //         id: 1,
-  //         username: 'test',
-  //         email: 'test@test.com',
-  //       },
-  //       updatedAt: '2024-12-24T02:23:42.944Z',
-  //     },
-  //     {
-  //       id: 1,
-  //       name: '제주도 여행',
-  //       startDate: '2021-10-01',
-  //       endDate: '2021-10-05',
-  //       owner: {
-  //         id: 1,
-  //         username: 'test',
-  //         email: 'test@test.com',
-  //       },
-  //       createdAt: '2024-12-24T02:23:42.944Z',
-  //       lastUpdatedUser: {
-  //         id: 1,
-  //         username: 'test',
-  //         email: 'test@test.com',
-  //       },
-  //       updatedAt: '2024-12-24T02:23:42.944Z',
-  //     },
-  //   ],
-  // };
+  const data = {
+    content: [
+      {
+        id: 1,
+        name: '제주도 여행',
+        startDate: '2021-10-01',
+        endDate: '2021-10-05',
+        owner: {
+          id: 1,
+          username: 'test',
+          email: 'test@test.com',
+        },
+        createdAt: '2024-12-24T02:23:42.944Z',
+        lastUpdatedUser: {
+          id: 1,
+          username: 'test',
+          email: 'test@test.com',
+        },
+        updatedAt: '2024-12-24T02:23:42.944Z',
+      },
+      {
+        id: 1,
+        name: '제주도 여행',
+        startDate: '2021-10-01',
+        endDate: '2021-10-05',
+        owner: {
+          id: 1,
+          username: 'test',
+          email: 'test@test.com',
+        },
+        createdAt: '2024-12-24T02:23:42.944Z',
+        lastUpdatedUser: {
+          id: 1,
+          username: 'test',
+          email: 'test@test.com',
+        },
+        updatedAt: '2024-12-24T02:23:42.944Z',
+      },
+    ],
+  };
 
   // 여행 없을 때 UI
   if (data?.content.length === 0) {
