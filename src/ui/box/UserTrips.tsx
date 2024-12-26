@@ -6,47 +6,6 @@ export default function UserTrips() {
   const { data: tripList, isLoading } = useGetUserTripList({
     lastSeenId: 0,
   });
-  // 임시 데이터
-  // const data = {
-  //   content: [
-  //     {
-  //       id: 1,
-  //       name: '제주도 여행',
-  //       startDate: '2021-10-01',
-  //       endDate: '2021-10-05',
-  //       owner: {
-  //         id: 1,
-  //         username: 'test',
-  //         email: 'test@test.com',
-  //       },
-  //       createdAt: '2024-12-24T02:23:42.944Z',
-  //       lastUpdatedUser: {
-  //         id: 1,
-  //         username: 'test',
-  //         email: 'test@test.com',
-  //       },
-  //       updatedAt: '2024-12-24T02:23:42.944Z',
-  //     },
-  //     {
-  //       id: 1,
-  //       name: '제주도 여행',
-  //       startDate: '2021-10-01',
-  //       endDate: '2021-10-05',
-  //       owner: {
-  //         id: 1,
-  //         username: 'test',
-  //         email: 'test@test.com',
-  //       },
-  //       createdAt: '2024-12-24T02:23:42.944Z',
-  //       lastUpdatedUser: {
-  //         id: 1,
-  //         username: 'test',
-  //         email: 'test@test.com',
-  //       },
-  //       updatedAt: '2024-12-24T02:23:42.944Z',
-  //     },
-  //   ],
-  // };
 
   if (isLoading) {
     return (
