@@ -10,11 +10,13 @@ export default function Page({
 }: {
   params: { tripId: number };
 }) {
-  const { data } = useGetNoteAllTrip({
+  const params = {
     tripId,
     taskNoteSeq: 1,
     tripNoteSeq: 1,
-  });
+  };
+
+  const { data } = useGetNoteAllTrip(params);
 
   if (!data) {
     return null;

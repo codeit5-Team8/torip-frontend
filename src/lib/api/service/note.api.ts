@@ -6,6 +6,7 @@ import {
 } from 'src/model/note.model';
 import { del, get, post, put } from '../axios';
 
+// 여행 별 노트 목록 조회
 export const getNoteAllTrip = async (query: TGetNoteAllTripProps) => {
   const response = await get<TNoteAllTripResponse>('/api/v1/torip/trip/note', {
     params: query,
