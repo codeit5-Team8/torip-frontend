@@ -12,12 +12,15 @@ import { useRouter } from 'next/navigation';
 import { TRIP_POPUP_MESSAGE } from '@constant/trip';
 import Skeleton from '@ui/common/Skeleton';
 import { calculateDDday } from '@util/\bcalculateDDay';
+import { usePatchTrip } from '@hooks/trip/usePatchTrip';
+import TripModal from '@ui/common/TripModal';
 
 type TTripInfoProps = Pick<TTrip, 'id'>;
 
 export default function TripInfo({ id }: TTripInfoProps) {
   const { data: tripInfo, isLoading } = useGetTrip(id);
   const deleteTrip = useDeleteTrip();
+  const editTrip = usePatchTrip();
 
   const { showModal } = useModalStore();
   const { showPopup } = usePopupStore();
@@ -37,7 +40,24 @@ export default function TripInfo({ id }: TTripInfoProps) {
   };
 
   const handleEditTrip = () => {
-    // TODO: 여행 수정하기
+    if (tripInfo && tripInfo.success) {
+      showModal({
+        title: '여행 수정',
+        content: (
+          <TripModal
+            id={tripInfo.result.id}
+            name={tripInfo.result.name}
+            startDate={tripInfo.result.startDate}
+            endDate={tripInfo.result.endDate}
+            owner={tripInfo.result.owner}
+            createdAt={tripInfo.result.createdAt}
+            lastUpdatedUser={tripInfo.result.lastUpdatedUser}
+            updatedAt={tripInfo.result.updatedAt}
+            onEditTrip={(id, data) => editTrip.mutate({ id, data })}
+          />
+        ),
+      });
+    }
   };
 
   const handleDeleteTrip = () => {
