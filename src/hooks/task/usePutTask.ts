@@ -2,7 +2,7 @@ import { putEditTask } from '@lib/api/service/task.api';
 import { TTask } from '@model/task.model';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const usePostTask = () => {
+export const usePutTask = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: async (data: TTask) => {
