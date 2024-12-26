@@ -54,6 +54,7 @@ export default function TripModal({
         rounded={true}
         fullWidth={true}
         className="mt-10"
+        disabled={tripName && startDate && endDate ? false : true}
         onClick={() => {
           if (typeof onConfirm === 'function' && id) {
             (onConfirm as (id: number, data: TPatchTripRequest) => void)(id, {
