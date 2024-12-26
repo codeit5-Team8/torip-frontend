@@ -70,7 +70,7 @@ export default function NoteItem({ note }: INoteItemProps) {
 
         <Divider className="my-3" />
 
-        <NoteTaskInfo title="투두 제목" />
+        <NoteTaskInfo taskTitle="투두 제목" />
       </div>
     </Link>
   );
