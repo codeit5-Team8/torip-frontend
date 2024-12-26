@@ -14,7 +14,7 @@ import { get } from '@lib/api/axios';
 interface ITaskItemProps
   extends Omit<
     TGetTaskResponse,
-    'tripName' | 'createdBy' | 'createdAt' | 'modifiedBy' | 'modifiedAt'
+    'tripName' | 'createdAt' | 'modifiedBy' | 'modifiedAt'
   > {
   tripId: number;
 }
@@ -24,6 +24,7 @@ function TaskItem({
   taskId,
   taskTitle,
   taskStatus,
+  createdBy,
   taskScope,
   taskCompletionDate,
   taskDDay,
@@ -93,6 +94,7 @@ function TaskItem({
       <ButtonIconGroup
         taskId={taskId}
         hasFilePath={!!taskFilePath}
+        createdBy={createdBy}
         onFileClick={handleFileClick}
         onEditTaskClick={handleEditTaskClick}
         onDeleteTaskClick={handleDeleteTaskClick}

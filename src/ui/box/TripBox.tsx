@@ -22,11 +22,19 @@ const tasks: TGetTaskResponse[] = [
     taskStatus: 'BEFORE_TRIP',
     taskScope: 'PRIVATE',
     taskCompletionDate: '2024-12-15',
-    taskDDay: 'D-3',
+    taskDDay: '2024-12-12T00:00:00Z', // D-3을 ISO 형식의 날짜 문자열로 변환
     taskFilePath: '/files/ticket.pdf',
-    createdBy: 'Alice',
+    createdBy: {
+      id: 1,
+      username: 'Alice',
+      email: 'alice@example.com',
+    },
     createdAt: '2024-12-01T12:00:00Z',
-    modifiedBy: 'Alice',
+    modifiedBy: {
+      id: 1,
+      username: 'Alice',
+      email: 'alice@example.com',
+    },
     modifiedAt: '2024-12-10T12:00:00Z',
     taskAssignees: [
       { taskId: 101, userId: 1, username: 'Alice', email: 'alice@example.com' },
@@ -40,18 +48,22 @@ const tasks: TGetTaskResponse[] = [
     taskStatus: 'BEFORE_TRIP',
     taskScope: 'PUBLIC',
     taskCompletionDate: '2024-12-18',
-    taskDDay: 'D-7',
-    createdBy: 'Charlie',
+    taskDDay: '2024-12-11T00:00:00Z', // D-7을 ISO 형식의 날짜 문자열로 변환
+    createdBy: {
+      id: 3,
+      username: 'Charlie',
+      email: 'charlie@example.com',
+    },
     createdAt: '2024-12-02T12:00:00Z',
-    modifiedBy: 'Charlie',
+    modifiedBy: {
+      id: 3,
+      username: 'Charlie',
+      email: 'charlie@example.com',
+    },
     modifiedAt: '2024-12-12T12:00:00Z',
     taskAssignees: [
-      {
-        taskId: 102,
-        userId: 3,
-        username: 'Charlie',
-        email: 'charlie@example.com',
-      },
+      { taskId: 101, userId: 1, username: 'Alice', email: 'alice@example.com' },
+      { taskId: 101, userId: 2, username: 'Bob', email: 'bob@example.com' },
     ],
   },
   {
@@ -61,10 +73,18 @@ const tasks: TGetTaskResponse[] = [
     taskStatus: 'BEFORE_TRIP',
     taskScope: 'PRIVATE',
     taskCompletionDate: '2024-12-20',
-    taskDDay: 'D-5',
-    createdBy: 'Alice',
+    taskDDay: '2024-12-15T00:00:00Z', // D-5를 ISO 형식의 날짜 문자열로 변환
+    createdBy: {
+      id: 12,
+      username: 'Alice',
+      email: 'alice@example.com',
+    },
     createdAt: '2024-12-03T12:00:00Z',
-    modifiedBy: 'Alice',
+    modifiedBy: {
+      id: 12,
+      username: 'Alice',
+      email: 'alice@example.com',
+    },
     modifiedAt: '2024-12-15T12:00:00Z',
     taskAssignees: [],
   },
@@ -75,13 +95,24 @@ const tasks: TGetTaskResponse[] = [
     taskStatus: 'AFTER_TRIP',
     taskScope: 'PUBLIC',
     taskCompletionDate: '2024-12-25',
-    taskDDay: 'D+1',
+    taskDDay: '2024-12-26T00:00:00Z', // D+1을 ISO 형식의 날짜 문자열로 변환
     taskFilePath: '/files/photos.zip',
-    createdBy: 'Bob',
+    createdBy: {
+      id: 2,
+      username: 'Bob',
+      email: 'bob@example.com',
+    },
     createdAt: '2024-12-04T12:00:00Z',
-    modifiedBy: 'Bob',
+    modifiedBy: {
+      id: 2,
+      username: 'Bob',
+      email: 'bob@example.com',
+    },
     modifiedAt: '2024-12-18T12:00:00Z',
-    taskAssignees: [],
+    taskAssignees: [
+      { taskId: 101, userId: 1, username: 'Alice', email: 'alice@example.com' },
+      { taskId: 101, userId: 2, username: 'Bob', email: 'bob@example.com' },
+    ],
   },
 ];
 interface ITripCardProps {
