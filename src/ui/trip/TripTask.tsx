@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { TTaskScope } from '@model/task.model';
 import { FILTER_MAPPING } from '@constant/task';
 import { useModalStore } from '@store/modal.store';
-import TodoModal from '@ui/common/TodoModal';
+import TodoModal from '@ui/Modal/TodoModal';
 
 type TTripTaskProps = Pick<TTrip, 'id'>;
 
