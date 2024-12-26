@@ -55,11 +55,7 @@ export default function TripInfo({ id }: TTripInfoProps) {
             name={tripInfo.result.name}
             startDate={tripInfo.result.startDate}
             endDate={tripInfo.result.endDate}
-            owner={tripInfo.result.owner}
-            createdAt={tripInfo.result.createdAt}
-            lastUpdatedUser={tripInfo.result.lastUpdatedUser}
-            updatedAt={tripInfo.result.updatedAt}
-            onEditTrip={(id, data) => editTrip.mutate({ id, data })}
+            onConfirm={(id, data) => editTrip.mutate({ id, data })}
           />
         ),
       });
