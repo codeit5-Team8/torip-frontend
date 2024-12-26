@@ -1,5 +1,9 @@
 import { getNoteAllTrip } from '@lib/api/service/note.api';
-import { getTask, getTaskProgress } from '@lib/api/service/task.api';
+import {
+  getTask,
+  getTaskDetail,
+  getTaskProgress,
+} from '@lib/api/service/task.api';
 import {
   getJoinTripList,
   getTrip,
@@ -26,6 +30,10 @@ export const tasksQueryKeys = createQueryKeys('tasks', {
   progress: () => ({
     queryKey: ['taskProgress'],
     queryFn: () => getTaskProgress(),
+  }),
+  detail: (id: number) => ({
+    queryKey: [id],
+    queryFn: () => getTaskDetail(id),
   }),
 });
 
