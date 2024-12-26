@@ -14,10 +14,14 @@ import Skeleton from '@ui/common/Skeleton';
 import { calculateDDday } from '@util/\bcalculateDDay';
 import { usePatchTrip } from '@hooks/trip/usePatchTrip';
 import TripModal from '@ui/common/TripModal';
+import { useSession } from 'next-auth/react';
 
 type TTripInfoProps = Pick<TTrip, 'id'>;
 
 export default function TripInfo({ id }: TTripInfoProps) {
+  const { data: session } = useSession();
+  const { user: userInfo } = session || { user: null };
+
   const { data: tripInfo, isLoading } = useGetTrip(id);
   const deleteTrip = useDeleteTrip();
   const editTrip = usePatchTrip();
@@ -31,6 +35,8 @@ export default function TripInfo({ id }: TTripInfoProps) {
     tripInfo && tripInfo?.success
       ? calculateDDday(tripInfo.result.startDate)
       : 'D-0';
+
+  const isOwner = userInfo?.id === tripInfo?.result?.owner.id;
 
   const handleShowTripMember = () => {
     showModal({
@@ -116,8 +122,12 @@ export default function TripInfo({ id }: TTripInfoProps) {
             /* eslint-disable no-console */
             { label: '공유하기', onClick: () => console.log('Edit clicked') },
             { label: '멤버관리', onClick: handleShowTripMember },
-            { label: '수정하기', onClick: handleEditTrip },
-            { label: '삭제하기', onClick: handleDeleteTrip },
+            ...(isOwner
+              ? [
+                  { label: '수정하기', onClick: handleEditTrip },
+                  { label: '삭제하기', onClick: handleDeleteTrip },
+                ]
+              : []),
             /* eslint-disable no-console */
           ]}
           className="bg-transparent font-black"
