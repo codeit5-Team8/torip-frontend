@@ -2,7 +2,7 @@
 
 import { useModalStore } from '@store/modal.store';
 import DropdownMenu from '@ui/common/DropdownMenu';
-import TripMember from './tripMember/TripMemberModal';
+import TripMemberModal from './tripMember/TripMemberModal';
 import { twMerge } from 'tailwind-merge';
 import { TTrip } from '@model/trip.model';
 import { useGetTrip } from '@hooks/trip/useGetTrip';
@@ -32,7 +32,7 @@ export default function TripInfo({ id }: TTripInfoProps) {
   const handleShowTripMember = () => {
     showModal({
       title: '멤버 관리',
-      content: <TripMember />,
+      content: <TripMemberModal id={id} />,
     });
   };
 

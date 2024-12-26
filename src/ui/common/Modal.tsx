@@ -6,15 +6,25 @@
 import { useModalStore } from '@store/modal.store';
 import { useEffect, useRef } from 'react';
 
-export default function Modal() {
+interface IModal {
+  confirmMessage?: string;
+}
+
+export default function Modal({ confirmMessage }: IModal) {
   const { isOpen, title, content, closeModal } = useModalStore();
 
   const modalRef = useRef<HTMLDivElement>(null);
 
   const handleCloseModal = () => {
-    // TODO: Popup 컴포넌트 띄우는 작업 필요
-    if (confirm('작성된 내용이 모두 삭제됩니다. 정말 나가시겠어요?')) {
-      closeModal();
+    if (confirmMessage) {
+      // TODO: Popup 컴포넌트 띄우는 작업 필요
+      if (confirm(confirmMessage)) {
+        closeModal();
+      }
+    } else {
+      if (confirm('작성된 내용이 모두 삭제됩니다. 정말 나가시겠어요?')) {
+        closeModal();
+      }
     }
   };
 
@@ -65,13 +75,13 @@ export default function Modal() {
             onKeyDown={handleKeyDown}
             onClick={(e) => e.stopPropagation()}
           >
-            <article className="flex flex-col gap-[10px]">
+            <article className="flex h-full flex-col gap-[10px]">
               <section className="flex items-center justify-between">
                 <p className="text-lg font-bold">{title}</p>
                 {/* TODO: X 아이콘 삽입 */}
                 <button onClick={handleCloseModal}>X</button>
               </section>
-              <section className="overflow-auto">{content}</section>
+              <section className="h-full overflow-auto">{content}</section>
             </article>
           </main>
         </div>
