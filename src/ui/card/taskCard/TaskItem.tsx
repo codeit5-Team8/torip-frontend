@@ -92,6 +92,7 @@ function TaskItem({
       {/* TODO: 할 일 체크 */}
       <CheckBox>{taskTitle}</CheckBox>
       <ButtonIconGroup
+        taskAssignees={taskAssignees}
         taskId={taskId}
         hasFilePath={!!taskFilePath}
         createdBy={createdBy}
