@@ -1,3 +1,4 @@
+import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 
 export default function UserInfo() {
@@ -16,7 +17,10 @@ export default function UserInfo() {
         <p className="whitespace-normal">유저 이름</p>
         <p className="whitespace-normal">유저 이메일</p>
         {/* TODO : 로그인 정책 수립된 후 로그아웃 기능 구현 */}
-        <button className="mt-2 text-xs font-normal text-slate-400">
+        <button
+          className="mt-2 text-xs font-normal text-slate-400"
+          onClick={() => signOut({ callbackUrl: '/signin' })}
+        >
           로그아웃
         </button>
       </section>
