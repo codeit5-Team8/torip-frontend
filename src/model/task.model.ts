@@ -40,7 +40,7 @@ export type TTask = {
   taskStatus: TTaskStatus;
   taskDDay?: string;
   taskScope: TTaskScope;
-  taskCompletionDate: string;
+  taskCompletionDate?: string;
   taskAssignees?: TTaskAssignee[];
 };
 

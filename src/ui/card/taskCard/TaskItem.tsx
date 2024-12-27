@@ -10,6 +10,8 @@ import { useDeleteTask } from '@hooks/task/useDeleteTask';
 import { usePopupStore } from '@store/popup.store';
 import { TASK_POPUP_MESSAGE } from '@constant/task';
 import { get } from '@lib/api/axios';
+import { useModalStore } from '@store/modal.store';
+import TodoModal from '@ui/common/TodoModal';
 
 interface ITaskItemProps
   extends Omit<
@@ -31,8 +33,10 @@ function TaskItem({
   taskAssignees,
 }: ITaskItemProps) {
   const deleteTask = useDeleteTask();
+  const editTask = usePutTask();
 
   const { showPopup } = usePopupStore();
+  const { showModal } = useModalStore();
 
   const handleFileClick = () => {
     if (!taskFilePath) {
@@ -72,7 +76,23 @@ function TaskItem({
   };
 
   const handleEditTaskClick = () => {
-    // TODO: 할 일 수정하기
+    showModal({
+      title: '할 일 수정',
+      content: (
+        <TodoModal
+          tripId={tripId}
+          taskId={taskId}
+          taskTitle={taskTitle}
+          taskFilePath={taskFilePath}
+          taskStatus={taskStatus}
+          taskDDay={taskDDay}
+          taskScope={taskScope}
+          taskCompletionDate={taskCompletionDate}
+          taskAssignees={taskAssignees}
+          onConfirm={(data) => editTask.mutate(data)}
+        />
+      ),
+    });
   };
 
   const handleDeleteTaskClick = () => {
