@@ -5,10 +5,10 @@ import TaskList from '@ui/card/taskCard/TaskList';
 import Button from '@ui/common/Button';
 import EmptyMessage from '@ui/common/EmptyMessage';
 import Subtitle from '@ui/common/Subtitle';
-import Skeleton from '@ui/common/Skeleton';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useGetTasks } from '@hooks/task/useGetTasks';
+import { AllTodoBoxSkeleton } from '@ui/skeleton/Skeletons';
 
 export default function AllTodoBox() {
   const params = {
@@ -26,24 +26,7 @@ export default function AllTodoBox() {
   const displayedTasks = tasks?.result?.slice(0, 5) || [];
 
   if (isTasksLoading) {
-    return (
-      <div className="flex h-[250px] flex-col gap-4 rounded-xl bg-white px-4 pb-6 pt-4 tablet:px-6">
-        <div className="flex items-center justify-between">
-          <Subtitle
-            title="모든 할 일"
-            icon="everytodo"
-            iconBg="bg-primary"
-            link="/todo-all"
-          />
-        </div>
-
-        <div className="space-y-2">
-          {Array.from({ length: 3 }).map((_, index) => (
-            <Skeleton key={index} className="h-6 w-full" />
-          ))}
-        </div>
-      </div>
-    );
+    return <AllTodoBoxSkeleton />;
   }
 
   return (
