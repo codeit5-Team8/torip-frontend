@@ -1,16 +1,15 @@
 import Subtitle from '@ui/common/Subtitle';
 import FilterButton from '@ui/common/FilterButton';
 import TaskCarousel from '@ui/carousel/TaskCarousel';
-
 import ShowAllTasksButton from '@ui/trip/tripTask/ShowAllTasksButton';
 import AddTaskButton from '@ui/trip/tripTask/AddTaskButton';
 import { TTaskScope } from '@model/task.model';
 import { useRouter } from 'next/navigation';
 import { useModalStore } from '@store/modal.store';
-import TodoModal from '@ui/common/TodoModal';
 import { FILTER_MAPPING } from '@constant/Task';
 import { useState } from 'react';
 import { useGetTasks } from '@hooks/task/useGetTasks';
+import TodoModal from '@ui/Modal/TodoModal';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // TODO: API 연동 후 제거 예정
