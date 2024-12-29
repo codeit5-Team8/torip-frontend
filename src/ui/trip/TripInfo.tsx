@@ -2,7 +2,7 @@
 
 import { useModalStore } from '@store/modal.store';
 import DropdownMenu from '@ui/common/DropdownMenu';
-import TripMember from './tripMember/TripMemberModal';
+import TripMemberModal from './tripMember/TripMemberModal';
 import { twMerge } from 'tailwind-merge';
 import { TTrip } from '@model/trip.model';
 import { useGetTrip } from '@hooks/trip/useGetTrip';
@@ -12,12 +12,19 @@ import { useRouter } from 'next/navigation';
 import { TRIP_POPUP_MESSAGE } from '@constant/trip';
 import Skeleton from '@ui/common/Skeleton';
 import { calculateDDday } from '@util/\bcalculateDDay';
+import { usePatchTrip } from '@hooks/trip/usePatchTrip';
+import TripModal from '@ui/common/TripModal';
+import { useSession } from 'next-auth/react';
 
 type TTripInfoProps = Pick<TTrip, 'id'>;
 
 export default function TripInfo({ id }: TTripInfoProps) {
+  const { data: session } = useSession();
+  const { user: userInfo } = session || { user: null };
+
   const { data: tripInfo, isLoading } = useGetTrip(id);
   const deleteTrip = useDeleteTrip();
+  const editTrip = usePatchTrip();
 
   const { showModal } = useModalStore();
   const { showPopup } = usePopupStore();
@@ -29,15 +36,30 @@ export default function TripInfo({ id }: TTripInfoProps) {
       ? calculateDDday(tripInfo.result.startDate)
       : 'D-0';
 
+  const isOwner = userInfo?.id === tripInfo?.result?.owner.id;
+
   const handleShowTripMember = () => {
     showModal({
       title: '멤버 관리',
-      content: <TripMember />,
+      content: <TripMemberModal id={id} />,
     });
   };
 
   const handleEditTrip = () => {
-    // TODO: 여행 수정하기
+    if (tripInfo && tripInfo.success) {
+      showModal({
+        title: '여행 수정',
+        content: (
+          <TripModal
+            id={tripInfo.result.id}
+            name={tripInfo.result.name}
+            startDate={tripInfo.result.startDate}
+            endDate={tripInfo.result.endDate}
+            onConfirm={(id, data) => editTrip.mutate({ id, data })}
+          />
+        ),
+      });
+    }
   };
 
   const handleDeleteTrip = () => {
@@ -96,8 +118,12 @@ export default function TripInfo({ id }: TTripInfoProps) {
             /* eslint-disable no-console */
             { label: '공유하기', onClick: () => console.log('Edit clicked') },
             { label: '멤버관리', onClick: handleShowTripMember },
-            { label: '수정하기', onClick: handleEditTrip },
-            { label: '삭제하기', onClick: handleDeleteTrip },
+            ...(isOwner
+              ? [
+                  { label: '수정하기', onClick: handleEditTrip },
+                  { label: '삭제하기', onClick: handleDeleteTrip },
+                ]
+              : []),
             /* eslint-disable no-console */
           ]}
           className="bg-transparent font-black"

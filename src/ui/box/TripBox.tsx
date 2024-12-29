@@ -1,52 +1,89 @@
 import Subtitle from '@ui/common/Subtitle';
 import FilterButton from '@ui/common/FilterButton';
 import TaskCarousel from '@ui/carousel/TaskCarousel';
-import { TTask } from '@model/task.model';
+
 import ShowAllTasksButton from '@ui/trip/tripTask/ShowAllTasksButton';
 import AddTaskButton from '@ui/trip/tripTask/AddTaskButton';
+import { TTaskScope } from '@model/task.model';
+import { useRouter } from 'next/navigation';
+import { useModalStore } from '@store/modal.store';
+import TodoModal from '@ui/common/TodoModal';
+import { FILTER_MAPPING } from '@constant/Task';
+import { useState } from 'react';
+import { useGetTasks } from '@hooks/task/useGetTasks';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // TODO: API 연동 후 제거 예정
-const tasks: TTask[] = [
-  {
-    travelId: 1,
-    taskId: 101,
-    taskTitle: '비행기 티켓 예약하기',
-    travelStatus: 'BEFORE_TRAVEL',
-    scope: 'PRIVATE',
-    completionDate: '2024-12-15',
-    taskDDay: 'D-3',
-    filePath: '/files/ticket.pdf',
-    assignees: ['Alice', 'Bob'],
-  },
-  {
-    travelId: 1,
-    taskId: 102,
-    taskTitle: '호텔 예약 완료하기',
-    travelStatus: 'BEFORE_TRAVEL',
-    scope: 'PUBLIC',
-    completionDate: '2024-12-18',
-    assignees: ['Charlie'],
-  },
-  {
-    travelId: 1,
-    taskId: 103,
-    taskTitle: '관광 일정 짜기',
-    travelStatus: 'BEFORE_TRAVEL',
-    scope: 'PRIVATE',
-    completionDate: '2024-12-20',
-  },
-  {
-    travelId: 1,
-    taskId: 104,
-    taskTitle: '여행지 사진 정리',
-    travelStatus: 'AFTER_TRAVEL',
-    scope: 'PUBLIC',
-    completionDate: '2024-12-25',
-    filePath: '/files/photos.zip',
-  },
-];
-
+// const tasks: TGetTaskResponse[] = [
+//   {
+//     taskId: 101,
+//     tripName: '제주도 여행',
+//     taskTitle: '비행기 티켓 예약하기',
+//     taskStatus: 'BEFORE_TRIP',
+//     taskScope: 'PRIVATE',
+//     taskCompletionDate: '2024-12-15',
+//     taskDDay: 'D-3',
+//     taskFilePath: '/files/ticket.pdf',
+//     createdBy: 'Alice',
+//     createdAt: '2024-12-01T12:00:00Z',
+//     modifiedBy: 'Alice',
+//     modifiedAt: '2024-12-10T12:00:00Z',
+//     taskAssignees: [
+//       { taskId: 101, userId: 1, username: 'Alice', email: 'alice@example.com' },
+//       { taskId: 101, userId: 2, username: 'Bob', email: 'bob@example.com' },
+//     ],
+//   },
+//   {
+//     taskId: 102,
+//     tripName: '제주도 여행',
+//     taskTitle: '호텔 예약 완료하기',
+//     taskStatus: 'BEFORE_TRIP',
+//     taskScope: 'PUBLIC',
+//     taskCompletionDate: '2024-12-18',
+//     taskDDay: 'D-7',
+//     createdBy: 'Charlie',
+//     createdAt: '2024-12-02T12:00:00Z',
+//     modifiedBy: 'Charlie',
+//     modifiedAt: '2024-12-12T12:00:00Z',
+//     taskAssignees: [
+//       {
+//         taskId: 102,
+//         userId: 3,
+//         username: 'Charlie',
+//         email: 'charlie@example.com',
+//       },
+//     ],
+//   },
+//   {
+//     taskId: 103,
+//     tripName: '제주도 여행',
+//     taskTitle: '관광 일정 짜기',
+//     taskStatus: 'BEFORE_TRIP',
+//     taskScope: 'PRIVATE',
+//     taskCompletionDate: '2024-12-20',
+//     taskDDay: 'D-5',
+//     createdBy: 'Alice',
+//     createdAt: '2024-12-03T12:00:00Z',
+//     modifiedBy: 'Alice',
+//     modifiedAt: '2024-12-15T12:00:00Z',
+//     taskAssignees: [],
+//   },
+//   {
+//     taskId: 104,
+//     tripName: '제주도 여행',
+//     taskTitle: '여행지 사진 정리',
+//     taskStatus: 'AFTER_TRIP',
+//     taskScope: 'PUBLIC',
+//     taskCompletionDate: '2024-12-25',
+//     taskDDay: 'D+1',
+//     taskFilePath: '/files/photos.zip',
+//     createdBy: 'Bob',
+//     createdAt: '2024-12-04T12:00:00Z',
+//     modifiedBy: 'Bob',
+//     modifiedAt: '2024-12-18T12:00:00Z',
+//     taskAssignees: [],
+//   },
+// ];
 interface ITripCardProps {
   id: number;
   name: string;
@@ -55,17 +92,52 @@ interface ITripCardProps {
 // task를 어떻게 어디서 불러오느냐에 따라 props 변경하기
 // 할일 추가 버튼 onclick 추가하기
 export default function TripBox({ id, name }: ITripCardProps) {
+  const [taskScope, setTaskScope] = useState<TTaskScope | null>(null);
+  const params = {
+    tripId: id,
+    taskSeq: 0,
+    all: true,
+    ...(taskScope ? { taskScope } : {}),
+  };
+  const { data: tasks } = useGetTasks(params);
+  const navigate = useRouter();
+  const { showModal } = useModalStore();
+  const handleTaskFilterClick = (filter: string) => {
+    const scope = FILTER_MAPPING[filter];
+    setTaskScope(scope);
+  };
+
+  const handleAddTaskClick = () => {
+    showModal({
+      title: '할 일 생성',
+      content: <TodoModal />,
+    });
+  };
+  const handleMoveTrip = () => {
+    navigate.push(`/trip/${id}`);
+  };
   return (
-    <div className="rounded-xl bg-white pb-6 pl-4 tablet:pl-6 desktop:px-6">
-      <div className="flex items-center justify-between pt-4">
-        <Subtitle title={name} icon="whiteflag" iconBg="bg-blue-500" link="#" />
-        <AddTaskButton />
+    <div className="flex w-full flex-col gap-4 rounded-xl bg-white py-6 pl-4 tablet:pl-6 desktop:px-6">
+      <div className="flex flex-col justify-between gap-5 pr-4 tablet:pr-6 desktop:pr-0">
+        <div className="flex justify-between">
+          <Subtitle
+            title={name}
+            icon="whiteflag"
+            iconBg="bg-blue-500"
+            link="#"
+          />
+          <ShowAllTasksButton onClick={handleMoveTrip} />
+        </div>
+        <div className="flex items-center justify-between">
+          <FilterButton onClick={handleTaskFilterClick} />
+          <AddTaskButton onClick={handleAddTaskClick} />
+        </div>
       </div>
-      <div className="my-5 flex items-center justify-between">
-        <FilterButton />
-        <ShowAllTasksButton />
-      </div>
-      <TaskCarousel tasks={tasks} height="304px" />
+      <TaskCarousel
+        tripId={id}
+        tasks={tasks?.result ? tasks?.result : []}
+        height="304px"
+      />
     </div>
   );
 }

@@ -20,4 +20,5 @@ export const EMPTY_TASK_MESSAGE = '아직 할 일이 없어요.';
 // 할 일 popup 메세지
 export const TASK_POPUP_MESSAGE = {
   deleteTask: '할 일을 삭제하시겠어요? \n 삭제된 할 일은 복구할 수 없습니다.',
+  downLoadFile: '다운로드 하시겠습니까?',
 };

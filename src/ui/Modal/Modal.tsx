@@ -75,13 +75,13 @@ export default function Modal({ confirmMessage }: IModal) {
             onKeyDown={handleKeyDown}
             onClick={(e) => e.stopPropagation()}
           >
-            <article className="flex flex-col gap-[10px]">
+            <article className="flex h-full flex-col gap-[10px]">
               <section className="flex items-center justify-between">
                 <p className="text-lg font-bold">{title}</p>
                 {/* TODO: X 아이콘 삽입 */}
                 <button onClick={handleCloseModal}>X</button>
               </section>
-              <section className="overflow-auto">{content}</section>
+              <section className="h-full overflow-auto">{content}</section>
             </article>
           </main>
         </div>

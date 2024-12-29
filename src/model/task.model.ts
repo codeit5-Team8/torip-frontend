@@ -2,7 +2,7 @@ export type TTaskStatus = 'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP';
 export type TTaskScope = 'PUBLIC' | 'PRIVATE';
 
 export type TGetTaskRequest = {
-  tripId: number;
+  tripId?: number;
   taskSeq: number;
   taskStatus?: TTaskStatus;
   taskScope?: TTaskScope;
