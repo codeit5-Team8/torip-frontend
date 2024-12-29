@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import Button from '../common/Button';
-import TodoModal from '../common/TodoModal';
-import TripModal from '../common/TripModal';
 import { useModalStore } from '@store/modal.store';
 import UserInfo from '@ui/SideBar/UserInfo';
 import Dashboard from '@ui/SideBar/Dashboard';
 import TripList from '@ui/SideBar/TripList';
+import TodoModal from '@ui/Modal/TodoModal';
+import TripModal from '@ui/Modal/TripModal';
 
 interface ISideBarContentProps {
   clickSideBarContent: () => void;
