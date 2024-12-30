@@ -15,6 +15,10 @@ import { saveToLocalStorage } from '@util/note';
 import NoteTripTitle from '@ui/note/NoteTripTitle';
 import { useGetTrip } from '@hooks/trip/useGetTrip';
 import NoteTaskInfoWrapper from '@ui/note/NoteTaskInfoWrapper';
+import { usePostTripNote } from '@hooks/note/usePostTripNote';
+import toast, { Toaster } from 'react-hot-toast';
+import { useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 
 export default function Page({
   searchParams,
@@ -23,7 +27,9 @@ export default function Page({
 }) {
   const { tripId, taskId } = searchParams;
 
-  const { data: tripInfo } = useGetTrip(Number(tripId));
+  const tripIdNumber = Number(tripId);
+
+  const { data: tripInfo } = useGetTrip(tripIdNumber);
 
   const methods = useForm<TNoteFormInput>({
     defaultValues: {
@@ -36,6 +42,8 @@ export default function Page({
 
   const [draft, setDraft] = useState<string | null>(null);
 
+  const router = useRouter();
+
   useEffect(() => {
     // draft 가져오기
     const draft = localStorage.getItem(LOCAL_STORAGE_NOTE_DRAFT_KEY);
@@ -44,11 +52,33 @@ export default function Page({
     }
   }, []);
 
+  const queryClient = useQueryClient();
+
+  const notify = (message: string) => toast(message);
+
+  const { mutate } = usePostTripNote();
+
   const handleSubmit = () => {
-    // TODO 전송하기 api 연동
-    const title = methods.getValues('title').trim();
-    const content = editorRef.current?.getInstance().getHTML();
-    alert({ title, content });
+    const params = {
+      id: tripIdNumber,
+      noteTitle: methods.getValues('title').trim(),
+      noteContent: editorRef.current?.getInstance().getHTML(),
+    };
+
+    mutate(params, {
+      onSuccess: (result) => {
+        if (result.success === true) {
+          queryClient.invalidateQueries({
+            queryKey: ['note', 'noteAllTrip', tripId],
+          });
+          notify('노트 작성 성공');
+
+          setTimeout(() => {
+            router.push(`/note-all-trip/${tripId}`);
+          }, 1000);
+        }
+      },
+    });
 
     // form 초기화
     methods.reset();
@@ -113,6 +143,7 @@ export default function Page({
           <NoteForm editorRef={editorRef} />
         </div>
       </form>
+      <Toaster />
     </FormProvider>
   );
 }
