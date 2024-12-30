@@ -3,7 +3,7 @@ import './globals.css';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import QueryProvider from '@provider/QueryProvider';
 import Popup from '@ui/common/Popup';
-import Modal from '@ui/common/Modal';
+import Modal from '@ui/Modal/Modal';
 import SessionWrapper from '@provider/SessionWrapper';
 import Drawer from '@ui/common/Drawer';
 

@@ -2,7 +2,7 @@ import { TGetTaskResponse } from '@model/task.model';
 import TaskItem from './TaskItem';
 
 interface ITaskListProps {
-  tripId: number;
+  tripId?: number;
   tasks: TGetTaskResponse[];
 }
 
@@ -12,9 +12,10 @@ export default function TaskList({ tripId, tasks }: ITaskListProps) {
       {tasks.map((task) => (
         <TaskItem
           key={task.taskId}
-          tripId={tripId}
+          tripId={tripId ? tripId : 0}
           taskId={task.taskId}
           taskTitle={task.taskTitle}
+          createdBy={task.createdBy}
           taskStatus={task.taskStatus}
           taskScope={task.taskScope}
           taskCompletionDate={task.taskCompletionDate}

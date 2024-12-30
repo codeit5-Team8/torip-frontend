@@ -1,8 +1,10 @@
+import { TUserModel } from './user.model';
+
 export type TTaskStatus = 'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP';
 export type TTaskScope = 'PUBLIC' | 'PRIVATE';
 
 export type TGetTaskRequest = {
-  tripId: number;
+  tripId?: number;
   taskSeq: number;
   taskStatus?: TTaskStatus;
   taskScope?: TTaskScope;
@@ -25,26 +27,28 @@ export type TGetTaskResponse = {
   taskDDay: string;
   taskScope: TTaskScope;
   taskCompletionDate?: string;
-  createdBy: string;
+  createdBy: TUserModel;
   createdAt: string;
-  modifiedBy: string;
+  modifiedBy: TUserModel;
   modifiedAt: string;
   taskAssignees: TTaskAssignee[];
 };
 
 export type TTask = {
-  travelId: number;
-  taskId: number;
+  tripId: number;
+  taskId?: number;
   taskTitle: string;
+  taskFilePath?: string;
   taskStatus: TTaskStatus;
-  taskScope: TTaskScope;
-  completionDate: string;
   taskDDay?: string;
-  filePath?: string;
-  assignees?: string[];
+  taskScope: TTaskScope;
+  taskCompletionDate?: string;
+  taskAssignees?: TTaskAssignee[];
 };
 
-export type TGetTaskDetailRequest = Pick<TTask, 'taskId'>;
+export type TGetTaskDetailRequest = {
+  taskId: number;
+};
 
 export type TGetTaskDetailResponse = {
   travelName: string;

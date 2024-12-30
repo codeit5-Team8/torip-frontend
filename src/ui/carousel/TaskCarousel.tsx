@@ -34,28 +34,40 @@ export default function TaskCarousel({
   return (
     <div className="swiper-container">
       <Swiper
-        // loop={true} // 슬라이드 루프
         slidesPerView={3} // 데스크톱 기준 3개
         spaceBetween={22}
-        // 추가적인 계산이나 다른 좋은 로직으로 교체하기
+        slidesOffsetAfter={20}
+        slidesOffsetBefore={20}
         breakpoints={{
           1280: {
             slidesPerView: 3,
+            slidesOffsetAfter: 0,
+            slidesOffsetBefore: 0,
           },
           1024: {
             slidesPerView: 2.5,
+            slidesOffsetAfter: 20,
+            slidesOffsetBefore: 20,
           },
           768: {
             slidesPerView: 2,
+            slidesOffsetAfter: 20,
+            slidesOffsetBefore: 20,
           },
           640: {
             slidesPerView: 1.5,
+            slidesOffsetAfter: 20,
+            slidesOffsetBefore: 20,
           },
           520: {
             slidesPerView: 1.2,
+            slidesOffsetAfter: 0,
+            slidesOffsetBefore: 0,
           },
           0: {
             slidesPerView: 1,
+            slidesOffsetAfter: 0,
+            slidesOffsetBefore: 0,
           },
         }}
         className={twMerge(className)}

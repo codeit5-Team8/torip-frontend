@@ -13,12 +13,19 @@ import { TRIP_POPUP_MESSAGE } from '@constant/trip';
 import Skeleton from '@ui/common/Skeleton';
 import { calculateDDday } from '@util/\bcalculateDDay';
 import toast, { Toaster } from 'react-hot-toast';
+import { usePatchTrip } from '@hooks/trip/usePatchTrip';
+import TripModal from '@ui/Modal/TripModal';
+import { useSession } from 'next-auth/react';
 
 type TTripInfoProps = Pick<TTrip, 'id'>;
 
 export default function TripInfo({ id }: TTripInfoProps) {
+  const { data: session } = useSession();
+  const { user: userInfo } = session || { user: null };
+
   const { data: tripInfo, isLoading } = useGetTrip(id);
   const deleteTrip = useDeleteTrip();
+  const editTrip = usePatchTrip();
 
   const { showModal } = useModalStore();
   const { showPopup } = usePopupStore();
@@ -29,6 +36,8 @@ export default function TripInfo({ id }: TTripInfoProps) {
     tripInfo && tripInfo?.success
       ? calculateDDday(tripInfo.result.startDate)
       : 'D-0';
+
+  const isOwner = userInfo?.id === tripInfo?.result?.owner.id;
 
   const handleCopyInviteLink = async () => {
     try {
@@ -52,7 +61,20 @@ export default function TripInfo({ id }: TTripInfoProps) {
   };
 
   const handleEditTrip = () => {
-    // TODO: 여행 수정하기
+    if (tripInfo && tripInfo.success) {
+      showModal({
+        title: '여행 수정',
+        content: (
+          <TripModal
+            id={tripInfo.result.id}
+            name={tripInfo.result.name}
+            startDate={tripInfo.result.startDate}
+            endDate={tripInfo.result.endDate}
+            onConfirm={(id, data) => editTrip.mutate({ id, data })}
+          />
+        ),
+      });
+    }
   };
 
   const handleDeleteTrip = () => {
@@ -109,8 +131,12 @@ export default function TripInfo({ id }: TTripInfoProps) {
           items={[
             { label: '공유하기', onClick: handleCopyInviteLink },
             { label: '멤버관리', onClick: handleShowTripMember },
-            { label: '수정하기', onClick: handleEditTrip },
-            { label: '삭제하기', onClick: handleDeleteTrip },
+            ...(isOwner
+              ? [
+                  { label: '수정하기', onClick: handleEditTrip },
+                  { label: '삭제하기', onClick: handleDeleteTrip },
+                ]
+              : []),
           ]}
           className="bg-transparent font-black"
         >
