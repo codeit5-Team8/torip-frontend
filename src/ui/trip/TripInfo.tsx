@@ -13,7 +13,7 @@ import { TRIP_POPUP_MESSAGE } from '@constant/trip';
 import Skeleton from '@ui/common/Skeleton';
 import { calculateDDday } from '@util/\bcalculateDDay';
 import { usePatchTrip } from '@hooks/trip/usePatchTrip';
-import TripModal from '@ui/common/TripModal';
+import TripModal from '@ui/Modal/TripModal';
 import { useSession } from 'next-auth/react';
 
 type TTripInfoProps = Pick<TTrip, 'id'>;
