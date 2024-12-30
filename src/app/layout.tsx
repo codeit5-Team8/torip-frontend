@@ -6,6 +6,7 @@ import Popup from '@ui/common/Popup';
 import Modal from '@ui/Modal/Modal';
 import SessionWrapper from '@provider/SessionWrapper';
 import Drawer from '@ui/common/Drawer';
+import UIProvider from '@provider/UIProvider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -22,11 +23,13 @@ export default function RootLayout({
       <SessionWrapper>
         <html lang="en">
           <body>
-            <Popup />
-            <Modal />
-            <Drawer />
-            {children}
-            <SpeedInsights />
+            <UIProvider>
+              <Popup />
+              <Modal />
+              <Drawer />
+              {children}
+              <SpeedInsights />
+            </UIProvider>
           </body>
         </html>
       </SessionWrapper>

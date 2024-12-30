@@ -88,7 +88,7 @@ function TaskItem({
   };
 
   return (
-    <li className="flex items-center justify-between gap-2">
+    <li className="flex items-center justify-between gap-2 transition-colors duration-200 ease-in-out hover:text-primary">
       {/* TODO: 할 일 체크 */}
       <CheckBox>{taskTitle}</CheckBox>
       <ButtonIconGroup
