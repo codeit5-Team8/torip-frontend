@@ -14,15 +14,15 @@ export const getNoteAllTrip = async (query: TGetNoteAllTripProps) => {
   return response.data;
 };
 
-// 노트 수정
-export const updateNote = async (data: TNoteRequest) => {
-  const response = await put<TNoteResponse>('/api/v1/torip/note', data);
+// 여행 노트 수정
+export const updateTripNote = async (data: TNoteRequest) => {
+  const response = await put<TNoteResponse>('/api/v1/torip/trip/note', data);
   return response.data;
 };
 
-//노트 등록
-export const createNote = async (data: TNoteRequest) => {
-  const response = await post<TNoteResponse>('/api/v1/torip/note', data);
+// 여행 노트 등록
+export const postTripNote = async (data: TNoteRequest) => {
+  const response = await post<TNoteResponse>('/api/v1/torip/trip/note', data);
   return response.data;
 };
 

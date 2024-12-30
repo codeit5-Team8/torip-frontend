@@ -4,53 +4,41 @@ import { TResponse } from './model';
 
 // 노트 등록, 수정 ,삭제
 export type TNoteRequest = {
-  taskId: number;
-  noteId: number;
-  title: string;
-  content: string;
-};
-
-export type TNoteBase = {
-  noteId: number;
+  id: number;
   noteTitle: string;
   noteContent: string;
 };
 
-export type TNoteTrip = TNoteBase & {
-  //  TODO API 맞춰 수정
-  // tripNoteId: number;
-  // tripNoteTitle: string;
-  // tripNoteContent: string;
+export type TNoteTrip = {
+  noteId: number;
+  noteTitle: string;
+  noteContent: string;
+  ownerId: number; // 여행 오너
+  registrantId: number; // 노트 작성자
+  title: string; // 할 일 제목
   createdBy: string;
   createdAt: string;
   modifiedBy: string;
   modifiedAt: string;
 };
 
-export type TNoteTask = TNoteBase & {
+export type TNoteTask = TNoteTrip & {
   taskStatus: 'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP';
   taskTitle: string;
-  createdBy: string;
-  createdAt: string;
-  modifiedBy: string;
-  modifiedAt: string;
 };
 
 export type TNote = TNoteTrip | TNoteTask;
 
 // 여행 별 노트 모아보기
 export type TGetNoteAllTripProps = {
-  tripId: number;
-  // TODO API 맞춰 수정
+  id: number;
   tripNoteSeq: number;
   taskNoteSeq: number;
 };
 
 export type TNoteAllTrip = {
-  tripTitle: string;
-  tripNoteDetails: TNoteTrip[];
-  taskNoteDetails: TNoteTask[];
-  // noteDetails: TNote[]; // TODO API 맞춰 수정
+  title: string;
+  noteDetails: TNote[];
 };
 
 export type TNoteAllTripResponse = TResponse<TNoteAllTrip>;
