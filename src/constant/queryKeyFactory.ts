@@ -56,9 +56,9 @@ export const tripQueryKeys = createQueryKeys('trip', {
   }),
 });
 
-export const noteQueryKeys = createQueryKeys('trip', {
+export const noteQueryKeys = createQueryKeys('note', {
   noteAllTrip: (query: TGetNoteAllTripProps) => ({
-    queryKey: ['tripList'],
+    queryKey: [query.id],
     queryFn: () => getNoteAllTrip(query),
   }),
 });
