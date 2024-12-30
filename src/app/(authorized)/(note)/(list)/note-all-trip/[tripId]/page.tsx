@@ -11,19 +11,19 @@ export default function Page({
   params: { tripId: number };
 }) {
   const params = {
-    tripId,
-    taskNoteSeq: 1,
-    tripNoteSeq: 1,
+    id: tripId,
+    taskNoteSeq: 0,
+    tripNoteSeq: 0,
   };
 
-  const { data } = useGetNoteAllTrip(params);
+  const { data, isLoading, isFetching } = useGetNoteAllTrip(params);
 
-  if (!data) {
+  if (isLoading || isFetching || !data) {
     return null;
   }
 
   const {
-    result: { taskNoteDetails: notes, tripTitle }, // API 수정 반영
+    result: { noteDetails: notes, title: tripTitle },
   } = data;
 
   return (
