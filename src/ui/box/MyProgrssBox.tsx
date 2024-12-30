@@ -9,11 +9,12 @@ import {
   createProgressData,
   progressChartOptions,
 } from '@app/progressChartConfig';
+import { MyProgressBoxSkeleton } from '@ui/skeleton/Skeletons';
 
 ChartJS.register(ArcElement);
 
 export default function MyProgressBox() {
-  const { data } = useGetProgress();
+  const { data, isLoading: isProgressLoading } = useGetProgress();
   const progress = data?.progress || 0;
   const chartRef = useRef<ChartJS<'doughnut', number[], unknown> | null>(null);
   const [chartData, setChartData] = useState<null | ChartData<
@@ -35,8 +36,12 @@ export default function MyProgressBox() {
     }
   }, [progress, chartRef]);
 
+  if (isProgressLoading) {
+    return <MyProgressBoxSkeleton />;
+  }
+
   return (
-    <div className="flex h-[250px] rounded-xl bg-cyan-300 bg-[url('/asset/image/progressBg.png')] px-4 py-4 tablet:px-6">
+    <div className="flex h-[250px] rounded-xl bg-[#28D7D2] bg-[url('/asset/image/progressBg.png')] px-4 py-4 tablet:px-6">
       <div className="flex flex-1 flex-col gap-4">
         <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#0F172A]">
           <Image
