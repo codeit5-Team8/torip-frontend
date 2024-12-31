@@ -24,11 +24,11 @@ export default function TripList({ tripList, clickSideBarContent }: ITripList) {
         />
         <p className="text-lg font-medium">여행</p>
       </section>
-      {tripList && (
+      {tripList!.content && (
         <ul className="pb-6 pt-4">
-          {tripList.content!.map((trip, index) => (
+          {tripList!.content.map((trip) => (
             <li
-              key={index}
+              key={trip.id}
               className="cursor-pointer list-inside list-disc p-2"
             >
               <Link href={`/trip/${trip.id}`} onClick={clickSideBarContent}>
