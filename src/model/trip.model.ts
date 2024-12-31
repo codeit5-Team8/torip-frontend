@@ -18,6 +18,7 @@ export type TTrip = {
 };
 
 export type TJoinTrip = {
+  id: number;
   tripName: string;
   invitee: TUserResponse;
   status: 'Accepted' | 'Pending' | 'Rejected';

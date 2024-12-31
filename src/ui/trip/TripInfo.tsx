@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 import { TRIP_POPUP_MESSAGE } from '@constant/trip';
 import Skeleton from '@ui/common/Skeleton';
 import { calculateDDday } from '@util/\bcalculateDDay';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { usePatchTrip } from '@hooks/trip/usePatchTrip';
 import TripModal from '@ui/Modal/TripModal';
 import { useSession } from 'next-auth/react';
@@ -143,7 +143,6 @@ export default function TripInfo({ id }: TTripInfoProps) {
           {/* 케밥 아이콘 부분 */} :
         </DropdownMenu>
       </div>
-      <Toaster />
     </section>
   );
 }
