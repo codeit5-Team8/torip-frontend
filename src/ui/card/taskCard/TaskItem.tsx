@@ -10,9 +10,11 @@ import { useDeleteTask } from '@hooks/task/useDeleteTask';
 import { usePopupStore } from '@store/popup.store';
 import { TASK_POPUP_MESSAGE } from '@constant/task';
 import { get } from '@lib/api/axios';
+import { ScrollShadow } from '@nextui-org/react';
 import { useModalStore } from '@store/modal.store';
 import TodoModal from '@ui/Modal/TodoModal';
 import { usePutTask } from '@hooks/task/usePutTask';
+
 
 interface ITaskItemProps
   extends Omit<
@@ -109,19 +111,21 @@ function TaskItem({
   };
 
   return (
-    <li className="flex items-center justify-between gap-2">
-      {/* TODO: 할 일 체크 */}
-      <CheckBox>{taskTitle}</CheckBox>
-      <ButtonIconGroup
-        taskAssignees={taskAssignees}
-        taskId={taskId}
-        hasFilePath={!!taskFilePath}
-        createdBy={createdBy}
-        onFileClick={handleFileClick}
-        onEditTaskClick={handleEditTaskClick}
-        onDeleteTaskClick={handleDeleteTaskClick}
-      />
-    </li>
+    <ScrollShadow>
+      <li className="flex items-center justify-between gap-2 transition-colors duration-200 ease-in-out hover:text-primary">
+        {/* TODO: 할 일 체크 */}
+        <CheckBox>{taskTitle}</CheckBox>
+        <ButtonIconGroup
+          taskAssignees={taskAssignees}
+          taskId={taskId}
+          hasFilePath={!!taskFilePath}
+          createdBy={createdBy}
+          onFileClick={handleFileClick}
+          onEditTaskClick={handleEditTaskClick}
+          onDeleteTaskClick={handleDeleteTaskClick}
+        />
+      </li>
+    </ScrollShadow>
   );
 }
 
