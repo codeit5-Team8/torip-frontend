@@ -30,7 +30,11 @@ export default function Page({
     <div className="flex flex-col gap-4">
       <NoteAllTripInfo tripId={tripId} tripTitle={tripTitle} />
 
-      {notes?.length > 0 ? <NoteList notes={notes} /> : <NoteListEmpty />}
+      {notes?.length > 0 ? (
+        <NoteList notes={notes} tripId={tripId} />
+      ) : (
+        <NoteListEmpty />
+      )}
     </div>
   );
 }

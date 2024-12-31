@@ -9,12 +9,16 @@ import { NOTE_POPUP_MESSAGE } from '@constant/note';
 // import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useLogin } from '@hooks/auth/useLogin';
+import { useDeleteTripNote } from '@hooks/note/useDeleteTripNote';
+import { useQueryClient } from '@tanstack/react-query';
+import toast, { Toaster } from 'react-hot-toast';
 
 interface INoteItemProps {
   note: TNote;
+  tripId: number;
 }
 
-export default function NoteItem({ note }: INoteItemProps) {
+export default function NoteItem({ note, tripId }: INoteItemProps) {
   const { showPopup } = usePopupStore();
 
   const { data } = useLogin();
@@ -35,8 +39,24 @@ export default function NoteItem({ note }: INoteItemProps) {
   //   });
   // };
 
+  const queryClient = useQueryClient();
+
+  const { mutate } = useDeleteTripNote();
+
   const handleDelete = () => {
-    alert('삭제하기 API 호출');
+    mutate(note.noteId, {
+      onSuccess: (result) => {
+        if (result.success === true) {
+          toast('노트 삭제 성공', { duration: 500 });
+
+          setTimeout(() => {
+            queryClient.invalidateQueries({
+              queryKey: ['note', 'noteAllTrip', tripId],
+            });
+          }, 1000);
+        }
+      },
+    });
   };
 
   const handleDeletePopup = () => {
@@ -84,6 +104,7 @@ export default function NoteItem({ note }: INoteItemProps) {
           <NoteTaskInfo taskTitle={note.title} />
         </>
       )}
+      <Toaster />
     </Link>
   );
 }

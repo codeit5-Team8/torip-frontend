@@ -32,8 +32,10 @@ export const getNoteDetail = async (noteId: number) => {
   return response.data;
 };
 
-// 노트 삭제
+// 여행 노트 삭제
 export const deleteNote = async (noteId: number) => {
-  const response = await del<TNoteResponse>(`/api/v1/torip/note/${noteId}`);
+  const response = await del<TNoteResponse>(
+    `/api/v1/torip/trip/note/${noteId}`,
+  );
   return response.data;
 };
