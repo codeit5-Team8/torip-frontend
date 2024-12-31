@@ -11,7 +11,9 @@
     "prepare": "husky install",
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch --passWithNoTests",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "e2e": "cypress run",
+    "e2e:open": "cypress open"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
