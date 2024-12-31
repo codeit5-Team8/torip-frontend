@@ -6,6 +6,7 @@ import Popup from '@ui/common/Popup';
 import Modal from '@ui/Modal/Modal';
 import SessionWrapper from '@provider/SessionWrapper';
 import Drawer from '@ui/common/Drawer';
+import UIProvider from '@provider/UIProvider';
 import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
@@ -23,18 +24,21 @@ export default function RootLayout({
       <SessionWrapper>
         <html lang="en">
           <body>
-            <Popup />
-            <Modal />
-            <Drawer />
-            <Toaster
-              toastOptions={{
-                success: {
-                  iconTheme: { primary: '#28D7D2', secondary: '#ffffff' },
-                },
-              }}
-            />
-            {children}
             <SpeedInsights />
+            <UIProvider>
+              <Popup />
+              <Modal />
+              <Drawer />
+              <Toaster
+                toastOptions={{
+                  success: {
+                    iconTheme: { primary: '#28D7D2', secondary: '#ffffff' },
+                  },
+                }}
+              />
+              {children}
+              <SpeedInsights />
+            </UIProvider>
           </body>
         </html>
       </SessionWrapper>

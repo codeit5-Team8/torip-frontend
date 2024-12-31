@@ -28,5 +28,5 @@ export default function NavTitle({
 
   // TODO 모든 노트 등 같은 경우 동적으로 받아야 하기에 api 받은후 수정필요함
   const pageTitle = pageTitleProp || ROUTE_TITLE_MAP[basePath];
-  return <h1 className={twMerge(baseStyles, className)}>{pageTitle}</h1>;
+  return <nav className={twMerge(baseStyles, className)}>{pageTitle}</nav>;
 }
