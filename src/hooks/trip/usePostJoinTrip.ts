@@ -9,14 +9,14 @@ export const usePostJoinTrip = () => {
   const mutation = useMutation({
     mutationFn: async (id: number) => {
       const response = await postJoinTrip(id);
-      return { response, id };
+      return response;
     },
-    onSuccess: ({ response, id }) => {
+    onSuccess: (response) => {
       if (response.success) {
-        toast.success(response.message);
+        toast.success(TRIP_POPUP_MESSAGE.joinSent);
 
         queryClient.invalidateQueries({
-          queryKey: tripQueryKeys.joinList(id).queryKey,
+          queryKey: tripQueryKeys.joinList(response.result.tripId).queryKey,
         });
       } else {
         toast.error(response.message || TRIP_POPUP_MESSAGE.joinFailed);

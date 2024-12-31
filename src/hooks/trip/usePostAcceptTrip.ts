@@ -11,14 +11,13 @@ export const usePostAcceptTrip = () => {
       return response;
     },
     onSuccess: (response) => {
-      // TODO: api 수정 후 여행 id 넘겨 참여 리스트 재호출 처리 확인 필요
       if (response.success) {
-        // queryClient.invalidateQueries(
-        //   {
-        //     queryKey: tripQueryKeys.joinList(response..result.id).queryKey,
-        //   },
-        //   { throwOnError: true },
-        // );
+        queryClient.invalidateQueries({
+          queryKey: tripQueryKeys.members(response.result.tripId).queryKey,
+        });
+        queryClient.invalidateQueries({
+          queryKey: tripQueryKeys.joinList(response.result.tripId).queryKey,
+        });
       }
     },
     onError: (error) => {
