@@ -13,14 +13,20 @@ export default async function middleware(req: NextRequest) {
       redirectUrl.searchParams.set('redirectTo', req.nextUrl.toString());
     }
 
+    if (pathname === '/signin' || pathname === '/signup') {
+      return NextResponse.next();
+    }
+
     return NextResponse.redirect(redirectUrl);
+  }
+
+  if (pathname === '/signin' || pathname === '/signup') {
+    return NextResponse.redirect(new URL('/', req.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: [
-    '/((?!api|_next/static|_next/image|.*\\.png$|favicon.ico|signin|signup).*)',
-  ],
+  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$|favicon.ico).*)'],
 };
