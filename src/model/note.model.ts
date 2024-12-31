@@ -15,7 +15,6 @@ export type TNoteTrip = {
   noteContent: string;
   ownerId: number; // 여행 오너
   registrantId: number; // 노트 작성자
-  title: string; // 할 일 제목
   createdBy: string;
   createdAt: string;
   modifiedBy: string;
@@ -23,8 +22,8 @@ export type TNoteTrip = {
 };
 
 export type TNoteTask = TNoteTrip & {
-  taskStatus: 'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP';
-  taskTitle: string;
+  status: 'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP';
+  title: string;
 };
 
 export type TNote = TNoteTrip | TNoteTask;

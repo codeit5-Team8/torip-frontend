@@ -6,9 +6,6 @@ import NoteIframe from './NoteIframe';
 import NoteViewer from './NoteViewer';
 
 export default function NoteDetail({ noteContent, ...noteRest }: TNote) {
-  // TODO tripTitle api 통신
-  const tripTitle = 'sample';
-
   const [iframeSrc, setIframeSrc] = useState<string>('');
 
   const checkIframeSupport = async (url: string) => {
