@@ -24,7 +24,8 @@ export default function TaskCard({
   const totalTasks = tasks?.length || 0;
   const completedTasks =
     tasks?.filter((task) => task.taskCompletionDate)?.length || 0;
-  const progress = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+  const progress =
+    totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
   return (
     <div
