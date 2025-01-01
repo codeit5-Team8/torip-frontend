@@ -18,7 +18,7 @@ export default function TripStep({ taskStatus, setTaskStatus }: ITripStep) {
 
   return (
     <>
-      <header className="my-4 text-base font-semibold text-slate-800">
+      <header className="my-5 text-base font-semibold text-slate-800">
         여행 단계
       </header>
       <div className="inline-flex gap-2.5">

@@ -14,7 +14,7 @@ export default function TodoScope({ taskScope, setTaskScope }: ITodoScope) {
 
   return (
     <>
-      <header className="my-4 text-base font-semibold text-slate-800">
+      <header className="my-5 text-base font-semibold text-slate-800">
         역할 범위
       </header>
       <div className="inline-flex gap-2.5">

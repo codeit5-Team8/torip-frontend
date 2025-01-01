@@ -53,7 +53,7 @@ const MultiSelectInput = ({ id, onChange }: IMultiSelectInputProps) => {
     <>
       {!isLoading && (
         <>
-          <header className="my-4 text-base font-semibold text-slate-800">
+          <header className="my-5 text-base font-semibold text-slate-800">
             담당자
           </header>
           <div className="relative w-full">
