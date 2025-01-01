@@ -39,7 +39,7 @@ export default function SelectInput(props: ISelectInputProps) {
   const selectedOptions = options.find((option) => option.value === value);
 
   return (
-    <div className="relative pb-7">
+    <div className="relative">
       <Select onValueChange={onChange} defaultValue={`${defaultTrip}`}>
         <SelectTrigger className={selectTriggerClassName}>
           <div className="flex w-full items-center justify-between">
