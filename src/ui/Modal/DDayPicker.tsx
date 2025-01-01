@@ -17,7 +17,7 @@ export default function DDayPicker({ DDay, setDDay }: IDDayPickerProps) {
       <div className="flex flex-col space-y-2">
         <section className="flex w-full flex-col justify-between gap-2 tablet:flex-row">
           {/* D-Day 날짜 선택 */}
-          <section className="flex w-full flex-col px-1 tablet:w-1/2">
+          <section className="flex w-full flex-col">
             <DatePicker
               id="end-date"
               selected={DDay}
