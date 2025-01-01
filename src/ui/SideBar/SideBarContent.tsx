@@ -9,6 +9,7 @@ import TripModal from '@ui/Modal/TripModal';
 import { usePostTrip } from '@hooks/trip/usePostTrip';
 import { TPostTripRequest } from '@model/trip.model';
 import { useGetUserTripList } from '@hooks/trip/useGetUserTripList';
+import { usePostTask } from '@hooks/task/usePostTask';
 
 interface ISideBarContentProps {
   toggleSideBar: () => void;
@@ -19,6 +20,7 @@ export default function SideBarContent({
   clickSideBarContent,
 }: ISideBarContentProps) {
   const { showModal } = useModalStore();
+  const postTask = usePostTask();
   const postTrip = usePostTrip();
   const { data: tripList } = useGetUserTripList({
     lastSeenId: 0,
@@ -27,7 +29,7 @@ export default function SideBarContent({
   const handleAddTodo = () => {
     showModal({
       title: '할 일 생성',
-      content: <TodoModal />,
+      content: <TodoModal onConfirm={(data) => postTask.mutate(data)} />,
     });
   };
 
