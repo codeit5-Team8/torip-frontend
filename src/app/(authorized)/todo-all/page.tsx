@@ -1,5 +1,5 @@
 'use client';
-import { EMPTY_TASK_MESSAGE, FILTER_MAPPING } from '@constant/Task';
+import { EMPTY_TASK_MESSAGE, FILTER_MAPPING } from '@constant/task';
 import { useGetTasks } from '@hooks/task/useGetTasks';
 import { usePostTask } from '@hooks/task/usePostTask';
 import { TTaskScope } from '@model/task.model';

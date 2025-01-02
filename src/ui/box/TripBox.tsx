@@ -6,7 +6,7 @@ import AddTaskButton from '@ui/trip/tripTask/AddTaskButton';
 import { TTaskScope } from '@model/task.model';
 import { useRouter } from 'next/navigation';
 import { useModalStore } from '@store/modal.store';
-import { FILTER_MAPPING } from '@constant/Task';
+import { FILTER_MAPPING } from '@constant/task';
 import { useState } from 'react';
 import { useGetTasks } from '@hooks/task/useGetTasks';
 import TodoModal from '@ui/Modal/TodoModal';
