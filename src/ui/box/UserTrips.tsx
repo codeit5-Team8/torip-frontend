@@ -1,3 +1,5 @@
+'use client';
+
 import { useGetUserTripList } from '@hooks/trip/useGetUserTripList';
 import TripBox from './TripBox';
 import { UserTripsSkeleton } from '@ui/skeleton/Skeletons';

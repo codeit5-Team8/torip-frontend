@@ -1,5 +1,3 @@
-'use client';
-
 import AllTodoBox from '@ui/box/AllTodoBox';
 import MyProgressBox from '@ui/box/MyProgrssBox';
 import UserTrips from '@ui/box/UserTrips';
