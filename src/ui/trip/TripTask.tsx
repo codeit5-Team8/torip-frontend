@@ -10,6 +10,7 @@ import { TTaskScope } from '@model/task.model';
 import { FILTER_MAPPING } from '@constant/task';
 import { useModalStore } from '@store/modal.store';
 import TodoModal from '@ui/Modal/TodoModal';
+import { usePostTask } from '@hooks/task/usePostTask';
 
 type TTripTaskProps = Pick<TTrip, 'id'>;
 
@@ -25,11 +26,11 @@ export default function TripTask({ id }: TTripTaskProps) {
   const { data } = useGetTasks(params);
 
   const { showModal } = useModalStore();
-
+  const postTask = usePostTask();
   const handleAddTaskClick = () => {
     showModal({
       title: '할 일 생성',
-      content: <TodoModal />,
+      content: <TodoModal onConfirm={(data) => postTask.mutate(data)} />,
     });
   };
 
