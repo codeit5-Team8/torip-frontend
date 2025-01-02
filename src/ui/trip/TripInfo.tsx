@@ -12,15 +12,15 @@ import { useRouter } from 'next/navigation';
 import { TRIP_POPUP_MESSAGE } from '@constant/trip';
 import Skeleton from '@ui/common/Skeleton';
 import { calculateDDday } from '@util/\bcalculateDDay';
+import toast from 'react-hot-toast';
 import { usePatchTrip } from '@hooks/trip/usePatchTrip';
 import TripModal from '@ui/Modal/TripModal';
-import { useSession } from 'next-auth/react';
+import { useLogin } from '@hooks/auth/useLogin';
 
 type TTripInfoProps = Pick<TTrip, 'id'>;
 
 export default function TripInfo({ id }: TTripInfoProps) {
-  const { data: session } = useSession();
-  const { user: userInfo } = session || { user: null };
+  const { data: userInfo } = useLogin();
 
   const { data: tripInfo, isLoading } = useGetTrip(id);
   const deleteTrip = useDeleteTrip();
@@ -36,7 +36,21 @@ export default function TripInfo({ id }: TTripInfoProps) {
       ? calculateDDday(tripInfo.result.startDate)
       : 'D-0';
 
-  const isOwner = userInfo?.id === tripInfo?.result?.owner.id;
+  const isOwner = userInfo?.user.id === tripInfo?.result?.owner.id;
+
+  const handleCopyInviteLink = async () => {
+    try {
+      const url = window.location.href;
+      await navigator.clipboard.writeText(url);
+      toast.success(TRIP_POPUP_MESSAGE.copyInviteLink, {
+        iconTheme: { primary: '#28D7D2', secondary: '#ffffff' },
+      });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to copy URL: ', err);
+      toast.error(TRIP_POPUP_MESSAGE.copyInviteLinkError);
+    }
+  };
 
   const handleShowTripMember = () => {
     showModal({
@@ -46,7 +60,7 @@ export default function TripInfo({ id }: TTripInfoProps) {
   };
 
   const handleEditTrip = () => {
-    if (tripInfo && tripInfo.success) {
+    if (tripInfo?.success) {
       showModal({
         title: '여행 수정',
         content: (
@@ -105,18 +119,14 @@ export default function TripInfo({ id }: TTripInfoProps) {
     >
       <div className="relative z-10 flex flex-col gap-3 py-4">
         <h3 className="text-lg font-semibold leading-7">
-          {tripInfo && tripInfo?.success
-            ? tripInfo?.result.name
-            : tripInfo?.message}
+          {tripInfo?.success ? tripInfo?.result.name : tripInfo?.message}
         </h3>
         <div className="text-[2rem] font-black leading-none">{dDay}</div>
       </div>
       <div className="absolute right-4 top-4">
         <DropdownMenu
           items={[
-            // TODO: 기능 추가 필요
-            /* eslint-disable no-console */
-            { label: '공유하기', onClick: () => console.log('Edit clicked') },
+            { label: '공유하기', onClick: handleCopyInviteLink },
             { label: '멤버관리', onClick: handleShowTripMember },
             ...(isOwner
               ? [
@@ -124,7 +134,6 @@ export default function TripInfo({ id }: TTripInfoProps) {
                   { label: '삭제하기', onClick: handleDeleteTrip },
                 ]
               : []),
-            /* eslint-disable no-console */
           ]}
           className="bg-transparent font-black"
         >

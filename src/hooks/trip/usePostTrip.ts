@@ -1,5 +1,6 @@
+import { tripQueryKeys } from '@constant/queryKeyFactory';
 import { postTrip } from '@lib/api/service/trip.api';
-import { TPostTripRequest } from '@model/trip.model';
+import { TGetTripListProps, TPostTripRequest } from '@model/trip.model';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const usePostTrip = () => {
@@ -11,7 +12,7 @@ export const usePostTrip = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['tripList'],
+        queryKey: tripQueryKeys.list({} as TGetTripListProps).queryKey,
       });
     },
     onError: (error) => {

@@ -39,6 +39,7 @@ export default function DropdownMenu({
         {items?.map((item, index) => (
           <DropdownMenuItem
             key={index}
+            onClick={(event) => event.stopPropagation()}
             onSelect={item.onClick}
             disabled={item.disabled}
           >

@@ -3,7 +3,10 @@ import { Metadata } from 'next';
 import TripInfo from '@ui/trip/TripInfo';
 import TripNotesButton from '@ui/trip/TripNotesButton';
 import TripTask from '@ui/trip/TripTask';
+import NavTitle from '@ui/common/NavTitle';
+import TripJoinAccess from '@ui/trip/TripJoinAccess';
 import { getTrip } from '@lib/api/service/trip.api';
+import { useGetTrip } from '@hooks/trip/useGetTrip';
 
 export async function generateMetadata({
   params,
@@ -36,9 +39,15 @@ export async function generateMetadata({
 
 export default function Trip({ params }: { params: { id: string } }) {
   const { id } = params;
+  const { data: tripInfo } = useGetTrip(Number(id));
+
+  if (tripInfo && !tripInfo.success) {
+    return <TripJoinAccess id={Number(id)} />;
+  }
 
   return (
     <>
+      <NavTitle />
       {/* 여행 상세 정보 */}
       <TripInfo id={Number(id)} />
       {/* 노트 모아보기 */}

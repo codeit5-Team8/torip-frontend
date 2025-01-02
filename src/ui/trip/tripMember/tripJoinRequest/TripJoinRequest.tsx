@@ -18,42 +18,42 @@ export default function TripJoinRequestList({ id }: TTripMember) {
 
   const { showPopup } = usePopupStore();
 
-  const onAcceptConfirm = () => {
+  const onAcceptConfirm = (id: number) => {
     acceptTrip.mutate(id);
   };
 
-  const onRejectConfirm = () => {
+  const onRejectConfirm = (id: number) => {
     rejectTrip.mutate(id);
   };
 
-  const handleAcceptClick = () => {
+  const handleAcceptClick = (id: number) => {
     showPopup({
       popupText: TRIP_POPUP_MESSAGE.acceptInvite,
       showCancelButton: true,
       confirmButtonText: '확인',
-      onConfirm: onAcceptConfirm,
+      onConfirm: () => onAcceptConfirm(id),
     });
   };
 
-  const handleRejectClick = () => {
+  const handleRejectClick = (id: number) => {
     showPopup({
       popupText: TRIP_POPUP_MESSAGE.rejectInvite,
       showCancelButton: true,
       confirmButtonText: '확인',
-      onConfirm: onRejectConfirm,
+      onConfirm: () => onRejectConfirm(id),
     });
   };
 
   return (
     <TripMemberSection title="여행 멤버 승인">
       <ul className="flex flex-col">
-        {joinTripList?.result.map((item, index) => (
+        {joinTripList?.result.map((item) => (
           <TripJoinRequestItem
-            key={index}
+            key={item.id}
             invitee={item.invitee}
             createdAt={item.createdAt}
-            onAccept={handleAcceptClick}
-            onReject={handleRejectClick}
+            onAccept={() => handleAcceptClick(item.id)}
+            onReject={() => handleRejectClick(item.id)}
           />
         ))}
       </ul>

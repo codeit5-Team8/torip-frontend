@@ -68,7 +68,10 @@ export default function SideBar({
           toggleSideBar={toggleSideBar}
         />
         {isSideBarOpen && (
-          <SideBarContent clickSideBarContent={clickSideBarContent} />
+          <SideBarContent
+            toggleSideBar={toggleSideBar}
+            clickSideBarContent={clickSideBarContent}
+          />
         )}
       </div>
     </>

@@ -2,6 +2,7 @@
 
 import Header from '@ui/common/Header';
 import SideBar from '@ui/SideBar/SideBar';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 interface IMainLayoutProps {
@@ -9,10 +10,16 @@ interface IMainLayoutProps {
 }
 
 export default function MainLayout({ children }: IMainLayoutProps) {
+  const pathname = usePathname();
+  const backgroundColor = getBackgroundColorByPathname(pathname);
+
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+
   return (
     <>
-      <div className="flex min-h-[100vh] w-full flex-col items-center bg-slate-100">
+      <div
+        className={`flex min-h-[100vh] w-full flex-col items-center ${backgroundColor}`}
+      >
         <Header setIsSideBarOpen={setIsSideBarOpen} />
         <SideBar
           isSideBarOpen={isSideBarOpen}
@@ -26,3 +33,10 @@ export default function MainLayout({ children }: IMainLayoutProps) {
     </>
   );
 }
+
+const getBackgroundColorByPathname = (pathname: string): string => {
+  if (pathname.startsWith('/note-detail') || pathname.startsWith('/note-add')) {
+    return 'bg-white';
+  }
+  return 'bg-slate-100';
+};
