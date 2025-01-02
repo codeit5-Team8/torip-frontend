@@ -1,3 +1,4 @@
+import { tasksQueryKeys } from '@constant/queryKeyFactory';
 import { deleteTask } from '@lib/api/service/task.api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -5,17 +6,20 @@ export const useDeleteTask = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: async (taskId: number) => {
-      await deleteTask(taskId);
-      return taskId;
+      const response = await deleteTask(taskId);
+      return response;
     },
-    onSuccess: (taskId: number) => {
-      // TODO: 삭제 후 데이터 리프레쉬
-      queryClient.invalidateQueries({
-        queryKey: ['tasksList', taskId],
-      });
-      // queryClient.refetchQueries({
-      //   queryKey: ['tasksList', taskId],
-      // });
+    onSuccess: (response) => {
+      if (response.success) {
+        const props = {
+          tripId: response.result.tripId,
+          taskSeq: 0,
+          all: true,
+        };
+        queryClient.invalidateQueries({
+          queryKey: tasksQueryKeys.list(props).queryKey,
+        });
+      }
     },
     onError: (error) => {
       // eslint-disable-next-line no-console
