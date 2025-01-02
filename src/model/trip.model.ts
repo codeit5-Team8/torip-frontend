@@ -1,6 +1,7 @@
 import { TResponse } from './model';
 
 type TUserResponse = {
+  id: number;
   username: string;
   email: string;
 };
@@ -17,14 +18,16 @@ export type TTrip = {
 };
 
 export type TJoinTrip = {
-  travelName: string;
+  id: number;
+  tripId: number;
+  tripName: string;
   invitee: TUserResponse;
   status: 'Accepted' | 'Pending' | 'Rejected';
   createdAt: string;
   updatedAt: string;
 };
 
-// post - /api/v1/torip/travel
+// post - /api/v1/torip/trip
 export type TPostTripRequest = {
   name: string;
   startDate: string;
@@ -40,16 +43,19 @@ export type TJoinTripListResponse = TResponse<TJoinTrip[]>;
 // post - /api/v1/torip/{id}/request
 export type TJoinTripResponse = TResponse<TJoinTrip>;
 
+// post - /api/v1/torip/request/{id}/reject
+export type TRejectTripResponse = TResponse<TJoinTrip>;
+
 // post - /api/v1/torip/request/{id}/accept
 export type TAcceptTripResponse = TResponse<TJoinTrip>;
 
-// get - /api/v1/torip/travel/{id}
+// get - /api/v1/torip/trip/{id}
 export type TGetTripResponse = TResponse<TTrip>;
 
-// delete - /api/v1/torip/travel/{id}
+// delete - /api/v1/torip/trip/{id}
 export type TDeleteTripResponse = TResponse<Record<string, never>>;
 
-// patch - /api/v1/torip/travel/{id}
+// patch - /api/v1/torip/trip/{id}
 export type TPatchTripRequest = {
   name: string;
   startDate: string;
@@ -58,10 +64,10 @@ export type TPatchTripRequest = {
 
 export type TPatchTripResponse = TResponse<TTrip>;
 
-// get - /api/v1/torip/travel/{id}/members
+// get - /api/v1/torip/trip/{id}/members
 export type TGetTripMembersResponse = TResponse<TUserResponse[]>;
 
-// get - /api/v1/torip/travel/list
+// get - /api/v1/torip/trip/list
 /**
  
 @property {number}

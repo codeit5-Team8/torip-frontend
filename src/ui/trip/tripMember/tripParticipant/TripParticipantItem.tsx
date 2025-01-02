@@ -8,7 +8,7 @@ type TTripParticipantItemProps = Pick<TGetUserResponse, 'username'>;
 
 function TripParticipantItem({ username }: TTripParticipantItemProps) {
   return (
-    <li className="flex items-center justify-between border-b border-slate-200 py-[0.625rem] last:border-0">
+    <li className="flex items-center justify-between border-b border-slate-200 py-[0.625rem]">
       <div className="text-sm font-normal leading-tight">{username}</div>
     </li>
   );
