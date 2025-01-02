@@ -3,7 +3,7 @@
 import { useFormContext } from 'react-hook-form';
 import { TNoteFormInput } from '@type/note';
 import Button from '@ui/common/Button';
-import { isEmptyText } from '@util/note';
+import { isEmptyText, removeHtmlTags } from '@util/note';
 import { usePopupStore } from '@store/popup.store';
 import NavTitle from '@ui/common/NavTitle';
 
@@ -36,7 +36,7 @@ export default function NoteHeader({
         <Button
           size="middle"
           variant="outlined"
-          className="border-white bg-white px-4 py-2 text-primary hover:text-mint-700 sm:px-6 sm:py-3"
+          className="border-white bg-white px-4 py-2 text-primary hover:text-mint-700 disabled:cursor-not-allowed sm:px-6 sm:py-3"
           onClick={handlePopup}
           type="button"
           disabled={
@@ -49,10 +49,11 @@ export default function NoteHeader({
         <Button
           size="middle"
           variant="solid"
-          className="border-slate-400 bg-slate-400 px-4 py-2 text-white hover:border-primary hover:bg-primary hover:text-white sm:px-6 sm:py-3"
+          className="border-slate-400 bg-slate-400 px-4 py-2 text-white hover:border-primary hover:bg-primary hover:text-white disabled:cursor-not-allowed sm:px-6 sm:py-3"
           disabled={
             isEmptyText({ value: watch('title'), hasHtml: false }) ||
-            isEmptyText({ value: watch('content'), hasHtml: true })
+            isEmptyText({ value: watch('content'), hasHtml: true }) ||
+            removeHtmlTags(watch('content')).length >= 1000
           }
           type="submit"
         >
