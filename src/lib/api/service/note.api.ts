@@ -1,6 +1,8 @@
 import {
   TGetNoteAllTripProps,
+  TGetNoteDetailProp,
   TNoteAllTripResponse,
+  TNoteDetailResponse,
   TNoteRequest,
   TNoteResponse,
 } from 'src/model/note.model';
@@ -26,9 +28,11 @@ export const postTripNote = async (data: TNoteRequest) => {
   return response.data;
 };
 
-// 노트 상세 조회
-export const getNoteDetail = async (noteId: number) => {
-  const response = await get<TNoteResponse>(`/api/v1/torip/note/${noteId}`);
+// 여행 노트 상세 조회
+export const getTripNoteDetail = async (noteId: TGetNoteDetailProp) => {
+  const response = await get<TNoteDetailResponse>(
+    `/api/v1/torip/trip/note/${noteId}`,
+  );
   return response.data;
 };
 

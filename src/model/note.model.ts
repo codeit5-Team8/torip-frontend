@@ -9,26 +9,21 @@ export type TNoteRequest = {
   noteContent: string;
 };
 
-export type TNoteTrip = {
+// 여행 별 노트 모아보기
+export type TNote = {
   noteId: number;
   noteTitle: string;
   noteContent: string;
-  ownerId: number; // 여행 오너
-  registrantId: number; // 노트 작성자
   createdBy: string;
   createdAt: string;
   modifiedBy: string;
   modifiedAt: string;
+  ownerId: number; // 여행 오너
+  registrantId: number; // 노트 작성자
+  taskStatus?: 'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP';
+  taskTitle?: string;
 };
 
-export type TNoteTask = TNoteTrip & {
-  status: 'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP';
-  title: string;
-};
-
-export type TNote = TNoteTrip | TNoteTask;
-
-// 여행 별 노트 모아보기
 export type TGetNoteAllTripProps = {
   id: number;
   tripNoteSeq: number;
@@ -36,10 +31,30 @@ export type TGetNoteAllTripProps = {
 };
 
 export type TNoteAllTrip = {
-  title: string;
+  tripTitle: string;
   noteDetails: TNote[];
 };
 
 export type TNoteAllTripResponse = TResponse<TNoteAllTrip>;
+
+// 여행 상세보기
+export type TGetNoteDetailProp = number;
+
+export type TNoteDetail = {
+  noteId: number;
+  noteTitle: string;
+  noteContent: string;
+  createdBy: string;
+  createdAt: string;
+  modifiedBy: string;
+  modifiedAt: string;
+  tripTitle: string;
+  ownerId: number; // 여행 오너
+  registrantId: number; // 노트 작성자
+  taskStatus?: 'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP';
+  taskTitle?: string;
+};
+
+export type TNoteDetailResponse = TResponse<TNoteDetail>;
 
 export type TNoteResponse = TResponse<TNote>;
