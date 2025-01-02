@@ -6,26 +6,42 @@ import Dashboard from '@ui/SideBar/Dashboard';
 import TripList from '@ui/SideBar/TripList';
 import TodoModal from '@ui/Modal/TodoModal';
 import TripModal from '@ui/Modal/TripModal';
+import { usePostTrip } from '@hooks/trip/usePostTrip';
+import { TPostTripRequest } from '@model/trip.model';
+import { useGetUserTripList } from '@hooks/trip/useGetUserTripList';
+import { usePostTask } from '@hooks/task/usePostTask';
 
 interface ISideBarContentProps {
+  toggleSideBar: () => void;
   clickSideBarContent: () => void;
 }
 export default function SideBarContent({
+  toggleSideBar,
   clickSideBarContent,
 }: ISideBarContentProps) {
   const { showModal } = useModalStore();
+  const postTask = usePostTask();
+  const postTrip = usePostTrip();
+  const { data: tripList } = useGetUserTripList({
+    lastSeenId: 0,
+  });
 
   const handleAddTodo = () => {
     showModal({
       title: '할 일 생성',
-      content: <TodoModal />,
+      content: <TodoModal onConfirm={(data) => postTask.mutate(data)} />,
     });
   };
 
   const handleAddTrip = () => {
     showModal({
       title: '여행 생성',
-      content: <TripModal />,
+      content: (
+        <TripModal
+          onConfirm={(data: TPostTripRequest) => postTrip.mutate(data)}
+          toggleSideBar={toggleSideBar}
+        />
+      ),
     });
   };
 
@@ -48,7 +64,10 @@ export default function SideBarContent({
       </section>
       <Dashboard clickSideBarContent={clickSideBarContent} />
       <section className="p-6">
-        <TripList clickSideBarContent={clickSideBarContent} />
+        <TripList
+          tripList={tripList}
+          clickSideBarContent={clickSideBarContent}
+        />
         <Button
           variant="outlined"
           className="h-12 w-full gap-0.5 p-3 text-base font-semibold"
