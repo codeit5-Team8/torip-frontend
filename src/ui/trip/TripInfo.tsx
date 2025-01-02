@@ -70,6 +70,7 @@ export default function TripInfo({ id }: TTripInfoProps) {
             startDate={tripInfo.result.startDate}
             endDate={tripInfo.result.endDate}
             onConfirm={(id, data) => editTrip.mutate({ id, data })}
+            toggleSideBar={() => {}} // TODO build error
           />
         ),
       });

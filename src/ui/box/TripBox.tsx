@@ -6,10 +6,11 @@ import AddTaskButton from '@ui/trip/tripTask/AddTaskButton';
 import { TTaskScope } from '@model/task.model';
 import { useRouter } from 'next/navigation';
 import { useModalStore } from '@store/modal.store';
-import { FILTER_MAPPING } from '@constant/Task';
+import { FILTER_MAPPING } from '@constant/task';
 import { useState } from 'react';
 import { useGetTasks } from '@hooks/task/useGetTasks';
 import TodoModal from '@ui/Modal/TodoModal';
+import { usePostTask } from '@hooks/task/usePostTask';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
@@ -26,6 +27,7 @@ export default function TripBox({ id, name }: ITripCardProps) {
     all: true,
     ...(taskScope ? { taskScope } : {}),
   };
+  const postTask = usePostTask();
   const { data: tasks } = useGetTasks(params);
   const navigate = useRouter();
   const { showModal } = useModalStore();
@@ -37,7 +39,7 @@ export default function TripBox({ id, name }: ITripCardProps) {
   const handleAddTaskClick = () => {
     showModal({
       title: '할 일 생성',
-      content: <TodoModal />,
+      content: <TodoModal onConfirm={(data) => postTask.mutate(data)} />,
     });
   };
   const handleMoveTrip = () => {

@@ -1,6 +1,6 @@
 'use client';
 
-import { EMPTY_TASK_MESSAGE } from '@constant/Task';
+import { EMPTY_TASK_MESSAGE } from '@constant/task';
 import TaskList from '@ui/card/taskCard/TaskList';
 import Button from '@ui/common/Button';
 import EmptyMessage from '@ui/common/EmptyMessage';
