@@ -124,24 +124,22 @@ export default function Page({
           }
         />
 
-        <div className="rounded-md bg-white p-4">
-          {draft && (
-            <NoteDraft
-              handleLoadDraft={handleLoadDraft}
-              handleDeleteDraft={handleDeleteDraft}
-            />
+        {draft && (
+          <NoteDraft
+            handleLoadDraft={handleLoadDraft}
+            handleDeleteDraft={handleDeleteDraft}
+          />
+        )}
+
+        <section className="flex flex-col gap-3">
+          <NoteTripTitle tripTitle={tripInfo?.result.name ?? ''} />
+
+          {taskId && typeof taskId === 'string' && (
+            <NoteTaskInfoWrapper taskId={taskId} />
           )}
+        </section>
 
-          <section className="flex flex-col gap-3">
-            <NoteTripTitle tripTitle={tripInfo?.result.name ?? ''} />
-
-            {taskId && typeof taskId === 'string' && (
-              <NoteTaskInfoWrapper taskId={taskId} />
-            )}
-          </section>
-
-          <NoteForm editorRef={editorRef} />
-        </div>
+        <NoteForm editorRef={editorRef} />
       </form>
       <Toaster />
     </FormProvider>
