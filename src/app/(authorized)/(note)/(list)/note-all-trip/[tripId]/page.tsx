@@ -23,7 +23,7 @@ export default function Page({
   }
 
   const {
-    result: { noteDetails: notes, title: tripTitle },
+    result: { noteDetails: notes, tripTitle },
   } = data;
 
   return (

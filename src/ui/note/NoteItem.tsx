@@ -47,6 +47,7 @@ export default function NoteItem({ note, tripId }: INoteItemProps) {
     mutate(note.noteId, {
       onSuccess: (result) => {
         if (result.success === true) {
+          // TODO 토스트 깜빡임 제거
           toast('노트 삭제 성공', { duration: 500 });
 
           setTimeout(() => {
@@ -97,11 +98,11 @@ export default function NoteItem({ note, tripId }: INoteItemProps) {
 
       <p>{note.noteTitle}</p>
 
-      {note.title && (
+      {note.taskTitle && (
         <>
           <Divider className="my-3" />
 
-          <NoteTaskInfo taskTitle={note.title} />
+          <NoteTaskInfo taskTitle={note.taskTitle} />
         </>
       )}
       <Toaster />
