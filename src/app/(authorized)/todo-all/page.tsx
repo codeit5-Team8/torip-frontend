@@ -1,6 +1,7 @@
 'use client';
 import { EMPTY_TASK_MESSAGE, FILTER_MAPPING } from '@constant/Task';
 import { useGetTasks } from '@hooks/task/useGetTasks';
+import { usePostTask } from '@hooks/task/usePostTask';
 import { TTaskScope } from '@model/task.model';
 import { useModalStore } from '@store/modal.store';
 import TaskList from '@ui/card/taskCard/TaskList';
@@ -20,10 +21,11 @@ export default function TodoAllPage() {
     ...(taskScope ? { taskScope } : {}),
   };
   const { showModal } = useModalStore();
+  const postTask = usePostTask();
   const handleAddTaskClick = () => {
     showModal({
       title: '할 일 생성',
-      content: <TodoModal />,
+      content: <TodoModal onConfirm={(data) => postTask.mutate(data)} />,
     });
   };
   const { data: tasks, isLoading: isTasksLoading } = useGetTasks(params);

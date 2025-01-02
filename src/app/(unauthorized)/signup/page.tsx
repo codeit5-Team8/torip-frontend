@@ -31,7 +31,7 @@ export default function SignUpPage() {
   // 이메일 중복 체크 함수
   const checkEmailExists = async (email: string): Promise<boolean | string> => {
     const response = await getEmailExists(email);
-    if (response.result.exists) {
+    if (response?.result.exists) {
       return '이미 사용 중인 이메일입니다.';
     }
     return true;
