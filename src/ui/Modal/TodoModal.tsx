@@ -46,7 +46,6 @@ export default function TodoModal({
   const [taskFilePath, setTaskFilePath] = useState<string | undefined>(
     propsTaskFilePath ?? '',
   );
-  const [defaultFile, setDefaultFile] = useState('');
   const [taskStatus, setTaskStatus] = useState(
     propsTasksStatus ?? 'BEFORE_TRIP',
   );
@@ -66,21 +65,6 @@ export default function TodoModal({
       }
     }
   };
-
-  const handleDefaultFile = async () => {
-    if (taskFilePath) {
-      const fileUrl = taskFilePath;
-      const response = await get(fileUrl, { responseType: 'blob' });
-      const blob = response.data as Blob;
-      setDefaultFile(window.URL.createObjectURL(blob));
-    }
-  };
-
-  useEffect(() => {
-    if (taskFilePath) {
-      handleDefaultFile();
-    }
-  }, [taskFilePath, handleDefaultFile]);
 
   // 문자열을 Date 객체로 변환하는 함수
   const parseDate = (dateString?: string): Date | null => {
@@ -112,7 +96,7 @@ export default function TodoModal({
     <main className="mt-4">
       <TodoTitle todoTitle={todoTitle} setTodoTitle={setTodoTitle} />
       <FileUploader
-        defaultFile={defaultFile}
+        defaultFile={taskFilePath}
         onFileChange={(value) => handleFile(value)}
       />
       <TripPicker tripId={tripId} setTripId={setTripId} />

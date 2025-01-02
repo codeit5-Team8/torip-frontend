@@ -57,8 +57,8 @@ const FileUploader: React.FC<IFileUploaderProps> = ({
               width={0}
               height={0}
               style={{ width: '100%', height: 'auto' }}
-              src={previewURL}
-              alt={uploadedFile!.name}
+              src={`/${previewURL}`}
+              alt={`/${uploadedFile!.name ?? previewURL}`}
               className="mb-4 h-auto max-h-64 w-full rounded-lg border object-contain"
             />
             <button
