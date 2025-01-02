@@ -24,7 +24,6 @@ export default function RootLayout({
       <SessionWrapper>
         <html lang="en">
           <body>
-            <SpeedInsights />
             <UIProvider>
               <Popup />
               <Modal />
