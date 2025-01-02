@@ -34,6 +34,18 @@ export type TGetTaskResponse = {
   taskAssignees: TTaskAssignee[];
 };
 
+export type TUploadTodo = {
+  tripId: number;
+  taskId?: number;
+  taskTitle: string;
+  taskFilePath?: string;
+  taskStatus: TTaskStatus;
+  taskDDay?: string;
+  taskScope: TTaskScope;
+  taskCompletionDate?: string;
+  taskAssignees?: string[];
+};
+
 export type TTask = {
   tripId: number;
   taskId?: number;

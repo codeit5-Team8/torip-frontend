@@ -1,4 +1,5 @@
 import {
+  TUploadTodo,
   TDeleteTaskRequest,
   TDeleteTaskResponse,
   TGetTaskDetailRequest,
@@ -38,7 +39,7 @@ export const putEditTask = async (data: TTask) => {
   return response.data;
 };
 
-export const postAddTask = async (data: TTask) => {
+export const postAddTask = async (data: TUploadTodo) => {
   const response = await post<TResponse<TPostAddTaskResponse>>(
     '/api/v1/torip/task',
     data,
