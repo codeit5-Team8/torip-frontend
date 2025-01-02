@@ -55,7 +55,7 @@ export type TTask = {
   taskDDay?: string;
   taskScope: TTaskScope;
   taskCompletionDate?: string;
-  taskAssignees?: TTaskAssignee[];
+  taskAssignees?: string[];
 };
 
 export type TGetTaskDetailResponse = {
