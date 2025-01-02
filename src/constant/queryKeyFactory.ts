@@ -1,4 +1,9 @@
-import { getTask, getTaskProgress } from '@lib/api/service/task.api';
+import { getNoteAllTrip, getTripNoteDetail } from '@lib/api/service/note.api';
+import {
+  getTask,
+  getTaskDetail,
+  getTaskProgress,
+} from '@lib/api/service/task.api';
 import {
   getJoinTripList,
   getTrip,
@@ -6,6 +11,7 @@ import {
 } from '@lib/api/service/trip.api';
 import { getTripList } from '@lib/api/service/trip.api';
 import { createQueryKeys } from '@lukemorales/query-key-factory';
+import { TGetNoteAllTripProps, TGetNoteDetailProp } from '@model/note.model';
 import { TGetTaskRequest } from '@model/task.model';
 import { TGetTripListProps } from '@model/trip.model';
 
@@ -25,6 +31,10 @@ export const tasksQueryKeys = createQueryKeys('tasks', {
     queryKey: ['taskProgress'],
     queryFn: () => getTaskProgress(),
   }),
+  detail: (id: number) => ({
+    queryKey: [id],
+    queryFn: () => getTaskDetail(id),
+  }),
 });
 
 export const tripQueryKeys = createQueryKeys('trip', {
@@ -43,5 +53,16 @@ export const tripQueryKeys = createQueryKeys('trip', {
   joinList: (id: number) => ({
     queryKey: ['member', id],
     queryFn: () => getJoinTripList(id),
+  }),
+});
+
+export const noteQueryKeys = createQueryKeys('note', {
+  noteAllTrip: (query: TGetNoteAllTripProps) => ({
+    queryKey: [query.id],
+    queryFn: () => getNoteAllTrip(query),
+  }),
+  noteDetail: (id: TGetNoteDetailProp) => ({
+    queryKey: [id],
+    queryFn: () => getTripNoteDetail(id),
   }),
 });

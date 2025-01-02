@@ -1,14 +1,11 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { TNote } from '@model/note.model';
+import { TNoteDetail } from '@model/note.model';
 import NoteIframe from './NoteIframe';
 import NoteViewer from './NoteViewer';
 
-export default function NoteDetail({ noteContent, ...noteRest }: TNote) {
-  // TODO tripTitle api 통신
-  const tripTitle = 'sample';
-
+export default function NoteDetail({ noteContent, ...noteRest }: TNoteDetail) {
   const [iframeSrc, setIframeSrc] = useState<string>('');
 
   const checkIframeSupport = async (url: string) => {
@@ -85,14 +82,9 @@ export default function NoteDetail({ noteContent, ...noteRest }: TNote) {
   }
 
   return (
-    // TODO 태블릿 이상 에서 헤더가 없어지면 수정 md:max-h-screen
-    <div className="flex max-h-[calc(100vh-40px)] flex-col overflow-hidden bg-white md:flex-row">
+    <div className="flex h-full flex-col overflow-hidden bg-white md:flex-row">
       <NoteIframe iframeSrc={iframeSrc} />
-      <NoteViewer
-        {...noteRest}
-        noteContent={transformContent(noteContent)}
-        tripTitle={tripTitle}
-      />
+      <NoteViewer {...noteRest} noteContent={transformContent(noteContent)} />
     </div>
   );
 }

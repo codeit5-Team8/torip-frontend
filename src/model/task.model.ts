@@ -58,10 +58,6 @@ export type TTask = {
   taskAssignees?: TTaskAssignee[];
 };
 
-export type TGetTaskDetailRequest = {
-  taskId: number;
-};
-
 export type TGetTaskDetailResponse = {
   travelName: string;
   taskFilePath: string;
@@ -83,6 +79,8 @@ export type TPutEditTaskResponse = number;
 export type TPostAddTaskResponse = number;
 
 export type TDeleteTaskRequest = number;
+
+export type TGetTaskDetailRequest = number;
 
 export type TDeleteTaskResponse = number;
 
