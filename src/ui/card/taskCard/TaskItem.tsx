@@ -2,7 +2,7 @@
 
 'use client';
 
-import { memo } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { TGetTaskResponse } from '@model/task.model';
 import CheckBox from '@ui/common/CheckBox';
 import ButtonIconGroup from '@ui/common/ButtonIconGroup';
@@ -14,6 +14,7 @@ import { ScrollShadow } from '@nextui-org/react';
 import { useModalStore } from '@store/modal.store';
 import TodoModal from '@ui/Modal/TodoModal';
 import { usePutTask } from '@hooks/task/usePutTask';
+import { usePutCompleteTask } from '@hooks/task/usePutCompleteTask';
 
 interface ITaskItemProps
   extends Omit<
@@ -27,19 +28,43 @@ function TaskItem({
   tripId,
   taskId,
   taskTitle,
-  taskStatus,
-  createdBy,
-  taskScope,
-  taskCompletionDate,
-  taskDDay,
   taskFilePath,
+  taskStatus,
+  taskDDay,
+  taskScope,
+  isCompleted,
+  taskCompletionDate,
+  createdBy,
   taskAssignees,
 }: ITaskItemProps) {
+  const [isCompletedTask, setIsCompletedTask] = useState(isCompleted || false);
+
   const deleteTask = useDeleteTask();
   const editTask = usePutTask();
+  const putCompleteTask = usePutCompleteTask();
 
   const { showPopup } = usePopupStore();
   const { showModal } = useModalStore();
+
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleCompleteTaskChange = useCallback(() => {
+    setIsCompletedTask((prev) => {
+      const newCompletedState = !prev;
+
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+      timerRef.current = setTimeout(() => {
+        putCompleteTask.mutate({
+          taskId: taskId,
+          isCompleted: newCompletedState,
+        });
+      }, 300);
+
+      return newCompletedState;
+    });
+  }, [taskId, putCompleteTask]);
 
   const handleFileClick = () => {
     if (!taskFilePath) {
@@ -112,8 +137,9 @@ function TaskItem({
   return (
     <ScrollShadow>
       <li className="flex items-center justify-between gap-2 transition-colors duration-200 ease-in-out hover:text-primary">
-        {/* TODO: 할 일 체크 */}
-        <CheckBox>{taskTitle}</CheckBox>
+        <CheckBox checked={isCompletedTask} onChange={handleCompleteTaskChange}>
+          {taskTitle}
+        </CheckBox>
         <ButtonIconGroup
           taskAssignees={taskAssignees}
           taskId={taskId}

@@ -25,7 +25,7 @@ export default function CheckBox(props: TCheckBoxProps) {
       <label
         htmlFor={uid}
         className={twMerge(
-          'flex-1 cursor-pointer truncate text-sm font-normal leading-tight',
+          'flex-1 cursor-pointer truncate text-sm font-normal leading-tight hover:text-mint-700 active:text-mint-800',
           checked ? 'line-through' : '',
         )}
       >

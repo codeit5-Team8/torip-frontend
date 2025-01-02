@@ -23,7 +23,7 @@ export default function TaskCard({
 }: ITaskCardProps) {
   const totalTasks = tasks?.length || 0;
   const completedTasks =
-    tasks?.filter((task) => task.taskCompletionDate)?.length || 0;
+    tasks?.filter((task) => task.isCompleted === true)?.length || 0;
   const progress =
     totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
