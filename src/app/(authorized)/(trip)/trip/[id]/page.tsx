@@ -22,10 +22,10 @@ export async function generateMetadata({
       siteName: 'Torip',
       images: [
         {
-          url: '/images/og-image.jpg',
+          url: '/asset/image/logo.png',
           width: 1200,
           height: 630,
-          alt: 'Torip Trip Image',
+          alt: 'Torip Open Graph Image',
         },
       ],
       locale: 'ko_KR',
