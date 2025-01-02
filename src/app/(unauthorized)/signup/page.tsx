@@ -6,7 +6,7 @@ import Button from '@ui/common/Button';
 import { AUTH_VALIDATION_REGEX } from '@constant/auth';
 import Link from 'next/link';
 import { useLogin } from '@hooks/auth/useLogin';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { getEmailExists } from '@lib/api/service/auth.api';
 
 interface ISignUpFormInputs {
@@ -25,6 +25,8 @@ export default function SignUpPage() {
   } = useForm<ISignUpFormInputs>({ mode: 'onBlur' });
   const { loginHandler } = useLogin();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get('redirectTo');
 
   // 이메일 중복 체크 함수
   const checkEmailExists = async (email: string): Promise<boolean | string> => {
@@ -41,7 +43,11 @@ export default function SignUpPage() {
       redirect: false,
     });
     if (res?.ok) {
-      router.push('/');
+      if (redirectTo) {
+        router.push(redirectTo);
+      } else {
+        router.push('/');
+      }
     }
   };
 

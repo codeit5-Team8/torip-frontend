@@ -7,6 +7,7 @@ import Modal from '@ui/Modal/Modal';
 import SessionWrapper from '@provider/SessionWrapper';
 import Drawer from '@ui/common/Drawer';
 import UIProvider from '@provider/UIProvider';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -27,6 +28,13 @@ export default function RootLayout({
               <Popup />
               <Modal />
               <Drawer />
+              <Toaster
+                toastOptions={{
+                  success: {
+                    iconTheme: { primary: '#28D7D2', secondary: '#ffffff' },
+                  },
+                }}
+              />
               {children}
               <SpeedInsights />
             </UIProvider>

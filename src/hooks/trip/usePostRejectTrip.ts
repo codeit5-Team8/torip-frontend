@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { tripQueryKeys } from '@constant/queryKeyFactory';
 import { postRejectTrip } from '@lib/api/service/trip.api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -6,13 +7,15 @@ export const usePostRejectTrip = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: async (id: number) => {
-      await postRejectTrip(id);
-      return id;
+      const response = await postRejectTrip(id);
+      return response;
     },
-    onSuccess: (id: number) => {
-      queryClient.invalidateQueries({
-        queryKey: tripQueryKeys.joinList(id).queryKey,
-      });
+    onSuccess: (response) => {
+      if (response.success) {
+        queryClient.invalidateQueries({
+          queryKey: tripQueryKeys.joinList(response.result.tripId).queryKey,
+        });
+      }
     },
     onError: (error) => {
       // eslint-disable-next-line no-console
