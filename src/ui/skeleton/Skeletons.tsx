@@ -99,3 +99,35 @@ export function MyProgressBoxSkeleton() {
     </div>
   );
 }
+
+// alltodopage
+
+export function AllTodoPageSkeleton() {
+  return (
+    <div className="flex min-h-full w-full flex-1 flex-col gap-4">
+      <nav className="flex w-full items-center justify-between">
+        {/* "모든 할일" 제목 */}
+        <div className="text-base font-semibold leading-normal text-slate-900 tablet:text-lg tablet:leading-7">
+          모든 할일
+        </div>
+        {/* "할 일 추가" 버튼 */}
+        <button className="flex items-center gap-1 bg-slate-100 text-sm font-semibold leading-tight text-primary before:inline-block before:h-4 before:w-4 before:bg-[url('/asset/icon/plusprimary.png')] before:bg-contain before:bg-no-repeat hover:text-primary active:text-primary">
+          할일 추가
+        </button>
+      </nav>
+      {/* Skeleton UI */}
+      <div className="flex flex-1 flex-col gap-7 rounded-xl border border-slate-100 bg-white p-6">
+        <div className="flex gap-2">
+          <Skeleton className="h-7 w-10" />
+          <Skeleton className="h-7 w-10" />
+          <Skeleton className="h-7 w-10" />
+        </div>
+        <div className="space-y-2.5">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <Skeleton key={index} className="h-6 w-full" />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
