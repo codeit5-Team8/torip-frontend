@@ -1,18 +1,15 @@
+import { TTaskStatus } from '@model/task.model';
 import { twMerge } from 'tailwind-merge';
 
 interface ITripStep {
-  taskStatus: 'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP';
-  setTaskStatus: React.Dispatch<
-    React.SetStateAction<'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP'>
-  >;
+  taskStatus: TTaskStatus;
+  setTaskStatus: React.Dispatch<React.SetStateAction<TTaskStatus>>;
 }
 
 const FILTERS = ['BEFORE_TRIP', 'DURING_TRIP', 'AFTER_TRIP'];
 
 export default function TripStep({ taskStatus, setTaskStatus }: ITripStep) {
-  const handleFilterClick = (
-    filter: 'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP',
-  ) => {
+  const handleFilterClick = (filter: TTaskStatus) => {
     setTaskStatus(filter);
   };
 
@@ -25,11 +22,7 @@ export default function TripStep({ taskStatus, setTaskStatus }: ITripStep) {
         {FILTERS.map((filter) => (
           <button
             key={filter}
-            onClick={() =>
-              handleFilterClick(
-                filter as 'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP',
-              )
-            }
+            onClick={() => handleFilterClick(filter as TTaskStatus)}
             className={twMerge(
               'rounded-[17px] border px-3 py-1 text-sm font-medium leading-tight',
               filter === taskStatus

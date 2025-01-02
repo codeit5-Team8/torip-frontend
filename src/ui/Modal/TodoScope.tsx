@@ -1,14 +1,15 @@
+import { TTaskScope } from '@model/task.model';
 import { twMerge } from 'tailwind-merge';
 
 interface ITodoScope {
-  taskScope: 'PUBLIC' | 'PRIVATE';
-  setTaskScope: React.Dispatch<React.SetStateAction<'PUBLIC' | 'PRIVATE'>>;
+  taskScope: TTaskScope;
+  setTaskScope: React.Dispatch<React.SetStateAction<TTaskScope>>;
 }
 
 const FILTERS = ['PUBLIC', 'PRIVATE'];
 
 export default function TodoScope({ taskScope, setTaskScope }: ITodoScope) {
-  const handleFilterClick = (filter: 'PUBLIC' | 'PRIVATE') => {
+  const handleFilterClick = (filter: TTaskScope) => {
     setTaskScope(filter);
   };
 
@@ -21,7 +22,7 @@ export default function TodoScope({ taskScope, setTaskScope }: ITodoScope) {
         {FILTERS.map((filter) => (
           <button
             key={filter}
-            onClick={() => handleFilterClick(filter as 'PUBLIC' | 'PRIVATE')}
+            onClick={() => handleFilterClick(filter as TTaskScope)}
             className={twMerge(
               'rounded-[17px] border px-3 py-1 text-sm font-medium leading-tight',
               filter === taskScope
