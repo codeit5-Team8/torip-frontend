@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
@@ -58,7 +59,7 @@ const FileUploader: React.FC<IFileUploaderProps> = ({
               height={0}
               style={{ width: '100%', height: 'auto' }}
               src={`/${previewURL}`}
-              alt={`/${uploadedFile!.name ?? previewURL}`}
+              alt={`/${previewURL}`}
               className="mb-4 h-auto max-h-64 w-full rounded-lg border object-contain"
             />
             <button
