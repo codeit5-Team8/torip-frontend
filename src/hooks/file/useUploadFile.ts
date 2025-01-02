@@ -1,5 +1,5 @@
+import { put } from '@lib/api/axios';
 import { postFileUpload } from '@lib/api/service/file.api';
-import axios from 'axios';
 
 export const useUploadFile = async (file: File, fileName: string) => {
   const response = await postFileUpload({ fileName });
@@ -9,5 +9,5 @@ export const useUploadFile = async (file: File, fileName: string) => {
 };
 
 const uploadImageToS3 = async (url: string, file: File) => {
-  axios.put(url, file);
+  await put(url, file);
 };
