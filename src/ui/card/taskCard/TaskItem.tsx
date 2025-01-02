@@ -15,7 +15,6 @@ import { useModalStore } from '@store/modal.store';
 import TodoModal from '@ui/Modal/TodoModal';
 import { usePutTask } from '@hooks/task/usePutTask';
 
-
 interface ITaskItemProps
   extends Omit<
     TGetTaskResponse,

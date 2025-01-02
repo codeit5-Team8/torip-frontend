@@ -37,7 +37,7 @@ export const postJoinTrip = async (id: number) => {
 
 export const postRejectTrip = async (id: number) => {
   const response = await post<TAcceptTripResponse>(
-    `/api/1v/torip/trip/request/${id}/reject`,
+    `/api/v1/torip/trip/request/${id}/reject`,
   );
 
   return response.data;
