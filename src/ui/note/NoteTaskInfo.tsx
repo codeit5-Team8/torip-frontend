@@ -2,10 +2,13 @@ import { HTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface INoteTaskInfoProps extends HTMLAttributes<HTMLDivElement> {
-  title: string;
+  taskTitle: string;
 }
 
-export default function NoteTaskInfo({ title, className }: INoteTaskInfoProps) {
+export default function NoteTaskInfo({
+  taskTitle,
+  className,
+}: INoteTaskInfoProps) {
   const classNames = twMerge('flex items-center gap-[6px]', className);
   return (
     <div className={classNames}>
@@ -13,7 +16,7 @@ export default function NoteTaskInfo({ title, className }: INoteTaskInfoProps) {
         To do
       </span>
       <span className="text-sm font-normal leading-tight text-slate-700">
-        {title}
+        {taskTitle}
       </span>
     </div>
   );

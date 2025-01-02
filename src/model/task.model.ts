@@ -1,46 +1,68 @@
+import { TUserModel } from './user.model';
+
+export type TTaskStatus = 'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP';
+export type TTaskScope = 'PUBLIC' | 'PRIVATE';
+
 export type TGetTaskRequest = {
-  travelId: string;
-  seq: string;
-  tripStatus?: 'BEFORE_TRAVEL' | 'DURING_TRAVEL' | 'AFTER_TRAVEL';
-  scope?: 'PUBLIC' | 'PRIVATE';
+  tripId?: number;
+  taskSeq: number;
+  taskStatus?: TTaskStatus;
+  taskScope?: TTaskScope;
   all: boolean;
+};
+
+export type TTaskAssignee = {
+  taskId: number;
+  userId: number;
+  username: string;
+  email: string;
 };
 
 export type TGetTaskResponse = {
   taskId: number;
-  travelName: string;
+  tripName: string;
   taskTitle: string;
-  taskFilePath: string;
-  taskStatus: 'BEFORE_TRAVEL' | 'DURING_TRAVEL' | 'AFTER_TRAVEL';
+  taskFilePath?: string;
+  taskStatus: TTaskStatus;
   taskDDay: string;
-  taskScope: 'PUBLIC' | 'PRIVATE';
-  taskCompletionDate: string;
-  taskCreatedBy: string;
-  taskCreatedAt: string;
-  taskModifiedBy: string;
-  taskUpdatedAt: string;
-  assignees: string[];
+  taskScope: TTaskScope;
+  taskCompletionDate?: string;
+  createdBy: TUserModel;
+  createdAt: string;
+  modifiedBy: TUserModel;
+  modifiedAt: string;
+  taskAssignees: TTaskAssignee[];
+};
+
+export type TUploadTodo = {
+  tripId: number;
+  taskId?: number;
+  taskTitle: string;
+  taskFilePath?: string;
+  taskStatus: TTaskStatus;
+  taskDDay?: string;
+  taskScope: TTaskScope;
+  taskCompletionDate?: string;
+  taskAssignees?: string[];
 };
 
 export type TTask = {
-  travelId: number;
-  taskId: number;
+  tripId: number;
+  taskId?: number;
   taskTitle: string;
-  travelStatus: 'BEFORE_TRAVEL' | 'DURING_TRAVEL' | 'AFTER_TRAVEL';
-  scope: 'PUBLIC' | 'PRIVATE';
-  completionDate: string;
+  taskFilePath?: string;
+  taskStatus: TTaskStatus;
   taskDDay?: string;
-  filePath?: string;
-  assignees?: string[];
+  taskScope: TTaskScope;
+  taskCompletionDate?: string;
+  taskAssignees?: string[];
 };
-
-export type TGetTaskDetailRequest = Pick<TTask, 'taskId'>;
 
 export type TGetTaskDetailResponse = {
   travelName: string;
   taskFilePath: string;
-  taskStatus: 'BEFORE_TRAVEL / DURING_TRAVEL / AFTER_TRAVEL';
-  taskScope: 'PUBLIC' | 'PRIVATE';
+  taskStatus: TTaskStatus;
+  taskScope: TTaskScope;
   taskCompletionDate: string;
   taskCreatedBy: string;
   taskCreatedAt: string;
@@ -56,7 +78,9 @@ export type TPutEditTaskResponse = number;
 
 export type TPostAddTaskResponse = number;
 
-export type TDeleteTaskRequest = Pick<TTask, 'taskId'>;
+export type TDeleteTaskRequest = number;
+
+export type TGetTaskDetailRequest = number;
 
 export type TDeleteTaskResponse = number;
 

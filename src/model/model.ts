@@ -8,4 +8,5 @@ export type TResponse<T> = {
 export type TTokenResponse = {
   accessToken: string;
   refreshToken: string;
+  expiredAt: string;
 };
