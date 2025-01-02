@@ -8,6 +8,8 @@ import {
   TGetTaskRequest,
   TGetTaskResponse,
   TPostAddTaskResponse,
+  TPutCompleteTaskRequest,
+  TPutCompleteTaskResponse,
   TPutEditTaskResponse,
   TTask,
 } from '@model/task.model';
@@ -64,6 +66,13 @@ export const deleteTask = async (taskId: TDeleteTaskRequest) => {
 export const getTaskProgress = async () => {
   const response = await get<TResponse<TGetTaskProgressResponse>>(
     '/api/v1/torip/task/progress',
+  );
+  return response.data;
+};
+
+export const putCompleteTask = async (data: TPutCompleteTaskRequest) => {
+  const response = await put<TResponse<TPutCompleteTaskResponse>>(
+    `/api/v1/torip/task/${data.taskId}?isCompleted=${data.isCompleted}`,
   );
   return response.data;
 };
