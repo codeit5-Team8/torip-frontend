@@ -20,10 +20,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <QueryProvider>
-      <SessionWrapper>
-        <html lang="en">
-          <body>
+    <html lang="en">
+      <body>
+        <QueryProvider>
+          <SessionWrapper>
             <UIProvider>
               <Popup />
               <Modal />
@@ -38,9 +38,9 @@ export default function RootLayout({
               {children}
               <SpeedInsights />
             </UIProvider>
-          </body>
-        </html>
-      </SessionWrapper>
-    </QueryProvider>
+          </SessionWrapper>
+        </QueryProvider>
+      </body>
+    </html>
   );
 }
