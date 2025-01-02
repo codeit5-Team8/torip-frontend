@@ -40,17 +40,17 @@ export default function TripTask({ id }: TTripTaskProps) {
   };
 
   return (
-    <div className="section-box flex flex-1 flex-col gap-5">
-      <div className="flex items-center justify-between">
+    <div className="section-box flex flex-1 flex-col gap-5 pr-0">
+      <div className="flex flex-col gap-5 pr-6">
         <h4 className="text-lg font-semibold leading-7 text-slate-800">Todo</h4>
-      </div>
-      <div className="flex items-center justify-between">
-        <FilterButton onClick={handleTaskFilterClick} />
-        <AddTaskButton onClick={handleAddTaskClick} />
+        <div className="flex items-center justify-between">
+          <FilterButton onClick={handleTaskFilterClick} />
+          <AddTaskButton onClick={handleAddTaskClick} />
+        </div>
       </div>
       <TaskCarousel
         tripId={id}
-        tasks={data?.result ? data?.result : []}
+        tasks={data?.success ? data?.result : []}
         height="500px"
       />
     </div>
