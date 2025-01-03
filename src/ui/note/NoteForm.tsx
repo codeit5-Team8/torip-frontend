@@ -4,11 +4,10 @@ import dynamic from 'next/dynamic';
 import NoteTitleInput from './NoteTitleInput';
 import { Editor } from '@toast-ui/react-editor';
 import NoteContentCounter from './NoteContentCounter';
-import Skeleton from '@ui/common/Skeleton';
 
 const NoteEditor = dynamic(() => import('@ui/note/NoteEditor'), {
   ssr: false,
-  loading: () => <Skeleton className="h-[500px] w-full" />,
+  loading: () => <>{/* TODO 로딩 UI */}</>,
 });
 
 interface INoteFormProps {

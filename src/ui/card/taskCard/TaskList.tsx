@@ -1,27 +1,24 @@
-import { TGetTaskResponse } from '@model/task.model';
+import { TTask } from '@model/task.model';
 import TaskItem from './TaskItem';
 
 interface ITaskListProps {
-  tripId?: number;
-  tasks: TGetTaskResponse[];
+  tasks: TTask[];
 }
 
-export default function TaskList({ tripId, tasks }: ITaskListProps) {
+export default function TaskList({ tasks }: ITaskListProps) {
   return (
     <ul className="scroll flex flex-1 flex-col gap-2 overflow-y-auto">
       {tasks.map((task) => (
         <TaskItem
           key={task.taskId}
-          tripId={tripId ? tripId : 0}
           taskId={task.taskId}
           taskTitle={task.taskTitle}
-          createdBy={task.createdBy}
-          taskStatus={task.taskStatus}
-          taskScope={task.taskScope}
-          taskCompletionDate={task.taskCompletionDate}
+          travelStatus={task.travelStatus}
+          scope={task.scope}
+          completionDate={task.completionDate}
           taskDDay={task.taskDDay}
-          taskFilePath={task.taskFilePath}
-          taskAssignees={task.taskAssignees}
+          filePath={task.filePath}
+          assignees={task.assignees}
         />
       ))}
     </ul>

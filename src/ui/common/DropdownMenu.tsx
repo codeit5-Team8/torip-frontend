@@ -27,7 +27,7 @@ export default function DropdownMenu({
       <DropdownMenuTrigger asChild>
         <button
           className={twMerge(
-            'relative flex min-h-6 min-w-6 items-center justify-center rounded-full bg-white text-slate-400 outline-none',
+            'relative flex min-h-6 min-w-6 items-center justify-center rounded-full bg-white text-slate-400',
             className,
           )}
         >
@@ -39,7 +39,6 @@ export default function DropdownMenu({
         {items?.map((item, index) => (
           <DropdownMenuItem
             key={index}
-            onClick={(event) => event.stopPropagation()}
             onSelect={item.onClick}
             disabled={item.disabled}
           >

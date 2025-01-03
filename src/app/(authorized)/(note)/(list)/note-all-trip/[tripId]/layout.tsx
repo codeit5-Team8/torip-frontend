@@ -4,10 +4,7 @@ import NavTitle from '@ui/common/NavTitle';
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <NavTitle
-        pageTitleProp={ROUTE_TITLE_MAP['/note-all-trip']}
-        className="mb-[18px]"
-      />
+      <NavTitle pageTitleProp={ROUTE_TITLE_MAP['/note-all-trip']} />
       {children}
     </>
   );

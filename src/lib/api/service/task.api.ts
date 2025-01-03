@@ -1,5 +1,4 @@
 import {
-  TUploadTodo,
   TDeleteTaskRequest,
   TDeleteTaskResponse,
   TGetTaskDetailRequest,
@@ -15,18 +14,8 @@ import { get, post, put, del } from '../axios';
 import { TResponse } from '@model/model';
 
 export const getTask = async (data: TGetTaskRequest) => {
-  const { tripId, taskSeq, taskStatus, taskScope, all } = data;
-
-  const queryString = new URLSearchParams({
-    tripId: tripId ? tripId.toString() : '0',
-    taskSeq: taskSeq.toString(),
-    ...(taskStatus ? { taskStatus } : {}),
-    ...(taskScope ? { taskScope } : {}),
-    all: all.toString(),
-  }).toString();
-
-  const response = await get<TResponse<TGetTaskResponse[]>>(
-    `/api/v1/torip/task?${queryString}`,
+  const response = await get<TResponse<TGetTaskResponse>>(
+    `/api/v1/torip/task?travelId=${data.travelId}&seq=${data.seq}`,
   );
   return response.data;
 };
@@ -39,7 +28,7 @@ export const putEditTask = async (data: TTask) => {
   return response.data;
 };
 
-export const postAddTask = async (data: TUploadTodo) => {
+export const postAddTask = async (data: TTask) => {
   const response = await post<TResponse<TPostAddTaskResponse>>(
     '/api/v1/torip/task',
     data,
@@ -47,16 +36,16 @@ export const postAddTask = async (data: TUploadTodo) => {
   return response.data;
 };
 
-export const getTaskDetail = async (taskId: TGetTaskDetailRequest) => {
+export const getTaskDetail = async (data: TGetTaskDetailRequest) => {
   const response = await get<TResponse<TGetTaskDetailResponse>>(
-    `/api/v1/torip/task/${taskId}`,
+    `/api/v1/torip/task?taskId=${data.taskId}`,
   );
   return response.data;
 };
 
-export const deleteTask = async (taskId: TDeleteTaskRequest) => {
+export const deleteTask = async (data: TDeleteTaskRequest) => {
   const response = await del<TResponse<TDeleteTaskResponse>>(
-    `/api/v1/torip/task/${taskId}`,
+    `/api/v1/torip/task?taskId=${data.taskId}`,
   );
   return response.data;
 };

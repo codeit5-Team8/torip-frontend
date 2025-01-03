@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import NoteDraft from '@ui/note/NoteDraft';
 import NoteForm from '@ui/note/NoteForm';
 import NoteHeader from '@ui/note/NoteHeader';
+import NoteInfo from '@ui/note/NoteInfo';
 import { useForm, FormProvider } from 'react-hook-form';
 import {
   LOCAL_STORAGE_NOTE_DRAFT_KEY,
@@ -12,25 +13,8 @@ import {
 import { Editor } from '@toast-ui/react-editor';
 import { TNoteFormInput } from '@type/note';
 import { saveToLocalStorage } from '@util/note';
-import NoteTripTitle from '@ui/note/NoteTripTitle';
-import { useGetTrip } from '@hooks/trip/useGetTrip';
-import NoteTaskInfoWrapper from '@ui/note/NoteTaskInfoWrapper';
-import { usePostTripNote } from '@hooks/note/usePostTripNote';
-import toast, { Toaster } from 'react-hot-toast';
-import { useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 
-export default function Page({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
-  const { tripId, taskId } = searchParams;
-
-  const tripIdNumber = Number(tripId);
-
-  const { data: tripInfo } = useGetTrip(tripIdNumber);
-
+export default function Page() {
   const methods = useForm<TNoteFormInput>({
     defaultValues: {
       title: '',
@@ -42,8 +26,6 @@ export default function Page({
 
   const [draft, setDraft] = useState<string | null>(null);
 
-  const router = useRouter();
-
   useEffect(() => {
     // draft 가져오기
     const draft = localStorage.getItem(LOCAL_STORAGE_NOTE_DRAFT_KEY);
@@ -52,33 +34,11 @@ export default function Page({
     }
   }, []);
 
-  const queryClient = useQueryClient();
-
-  const notify = (message: string) => toast(message);
-
-  const { mutate } = usePostTripNote();
-
   const handleSubmit = () => {
-    const params = {
-      id: tripIdNumber,
-      noteTitle: methods.getValues('title').trim(),
-      noteContent: editorRef.current?.getInstance().getHTML(),
-    };
-
-    mutate(params, {
-      onSuccess: (result) => {
-        if (result.success === true) {
-          queryClient.invalidateQueries({
-            queryKey: ['note', 'noteAllTrip', tripId],
-          });
-          notify('노트 작성 성공');
-
-          setTimeout(() => {
-            router.push(`/note-all-trip/${tripId}`);
-          }, 1000);
-        }
-      },
-    });
+    // TODO 전송하기 api 연동
+    const title = methods.getValues('title').trim();
+    const content = editorRef.current?.getInstance().getHTML();
+    alert({ title, content });
 
     // form 초기화
     methods.reset();
@@ -114,7 +74,7 @@ export default function Page({
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(handleSubmit)} className="pt-4">
+      <form onSubmit={methods.handleSubmit(handleSubmit)}>
         <NoteHeader
           handleSaveDraft={handleSaveDraft}
           popupText={
@@ -123,25 +83,15 @@ export default function Page({
               : NOTE_POPUP_MESSAGE.saveDraft
           }
         />
-
         {draft && (
           <NoteDraft
             handleLoadDraft={handleLoadDraft}
             handleDeleteDraft={handleDeleteDraft}
           />
         )}
-
-        <section className="flex flex-col gap-3">
-          <NoteTripTitle tripTitle={tripInfo?.result.name ?? ''} />
-
-          {taskId && typeof taskId === 'string' && (
-            <NoteTaskInfoWrapper taskId={taskId} />
-          )}
-        </section>
-
+        <NoteInfo />
         <NoteForm editorRef={editorRef} />
       </form>
-      <Toaster />
     </FormProvider>
   );
 }

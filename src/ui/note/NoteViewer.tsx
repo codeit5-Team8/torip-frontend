@@ -1,4 +1,4 @@
-import { TNoteDetail } from '@model/note.model';
+import { TNote } from '@model/note.model';
 import NoteTaskInfo from './NoteTaskInfo';
 import NoteTitle from './NoteTitle';
 import NoteTripTitle from './NoteTripTitle';
@@ -10,15 +10,15 @@ export default function NoteViewer({
   noteTitle,
   noteContent,
   createdAt,
-}: TNoteDetail) {
+}: TNote) {
   return (
-    <div className="flex-1 overflow-y-scroll">
-      <header className="sticky top-0 bg-white px-4 pb-2 pt-6">
+    <div className="flex-1 overflow-y-scroll px-4 pt-6">
+      <header className="sticky top-0 bg-white px-2 py-2">
         <div className="flex flex-col gap-3">
           <NoteTripTitle tripTitle={tripTitle} />
           <div className="flex items-center justify-between">
-            {taskTitle && <NoteTaskInfo taskTitle={taskTitle} />}
-            <div className="ml-auto text-xs font-normal leading-none text-slate-500">
+            <NoteTaskInfo title={taskTitle} />
+            <div className="text-xs font-normal leading-none text-slate-500">
               {formatIsoDateToYYYYMMDD(createdAt)}
             </div>
           </div>
@@ -27,7 +27,7 @@ export default function NoteViewer({
       </header>
 
       <div
-        className="note-viewer px-4"
+        className="note-viewer"
         dangerouslySetInnerHTML={{
           __html: noteContent,
         }}

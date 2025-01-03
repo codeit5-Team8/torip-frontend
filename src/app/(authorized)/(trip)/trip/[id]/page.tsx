@@ -1,29 +1,39 @@
-'use client';
-
+import NavTitle from '@ui/common/NavTitle';
 import TripNotesButton from '@ui/trip/TripNotesButton';
 import TripInfo from '@ui/trip/TripInfo';
-import NavTitle from '@ui/common/NavTitle';
 import TripTask from '@ui/trip/TripTask';
-import TripJoinAccess from '@ui/trip/TripJoinAccess';
-import { useGetTrip } from '@hooks/trip/useGetTrip';
 
-export default function Trip({ params }: { params: { id: string } }) {
-  const { id } = params;
-  const { data: tripInfo } = useGetTrip(Number(id));
+// TODO: API 연동시 제거 예정
+const tripInfo = {
+  id: 1,
+  name: '제주도 여행',
+  startDate: '2021-10-01',
+  endDate: '2021-10-05',
+  owner: {
+    id: 1,
+    username: 'test',
+    email: 'test@test.com',
+  },
+  createdAt: '2024-12-16T07:45:43.447Z',
+  lastUpdatedUser: {
+    id: 1,
+    username: 'test',
+    email: 'test@test.com',
+  },
+  updatedAt: '2024-12-16T07:45:43.447Z',
+};
 
-  if (tripInfo && !tripInfo.success) {
-    return <TripJoinAccess id={Number(id)} />;
-  }
-
+export default function Trip() {
   return (
-    <>
+    <div className="flex min-h-full flex-1 flex-col gap-[1.625rem]">
       <NavTitle />
       {/* 여행 상세 정보 */}
-      <TripInfo id={Number(id)} />
+      <TripInfo tripInfo={tripInfo} />
       {/* 노트 모아보기 */}
-      <TripNotesButton id={Number(id)} />
+      <TripNotesButton />
+      <div className="1000px"></div>
       {/* 여행 할 일 */}
-      <TripTask id={Number(id)} />
-    </>
+      <TripTask />
+    </div>
   );
 }
