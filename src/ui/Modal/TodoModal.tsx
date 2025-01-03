@@ -13,7 +13,6 @@ import TodoScope from './TodoScope';
 import MultiSelectInput from './MultiselectInput';
 import FileUploader from './FileUploader';
 import Button from '@ui/common/Button';
-import { get } from '@lib/api/axios';
 import { useUploadFile } from '@hooks/file/useUploadFile';
 
 interface ITodoModal {

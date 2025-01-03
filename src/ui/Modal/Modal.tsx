@@ -7,26 +7,23 @@ import { useModalStore } from '@store/modal.store';
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 
-interface IModal {
-  confirmMessage?: string;
-}
-
-export default function Modal({ confirmMessage }: IModal) {
+export default function Modal() {
   const { isOpen, title, content, closeModal } = useModalStore();
 
   const modalRef = useRef<HTMLDivElement>(null);
 
   const handleCloseModal = () => {
-    if (confirmMessage) {
-      // TODO: Popup 컴포넌트 띄우는 작업 필요
-      if (confirm(confirmMessage)) {
-        closeModal();
-      }
-    } else {
-      if (confirm('작성된 내용이 모두 삭제됩니다. 정말 나가시겠어요?')) {
-        closeModal();
-      }
-    }
+    // if (confirmMessage) {
+    //   // TODO: Popup 컴포넌트 띄우는 작업 필요
+    //   if (confirm(confirmMessage)) {
+    //     closeModal();
+    //   }
+    // } else {
+    //   if (confirm('작성된 내용이 모두 삭제됩니다. 정말 나가시겠어요?')) {
+    //     closeModal();
+    //   }
+    // }
+    closeModal();
   };
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
