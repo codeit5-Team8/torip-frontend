@@ -3,11 +3,9 @@ import './globals.css';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import QueryProvider from '@provider/QueryProvider';
 import Popup from '@ui/common/Popup';
-import Modal from '@ui/Modal/Modal';
+import Modal from '@ui/common/Modal';
 import SessionWrapper from '@provider/SessionWrapper';
 import Drawer from '@ui/common/Drawer';
-import UIProvider from '@provider/UIProvider';
-import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -20,27 +18,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <QueryProvider>
-          <SessionWrapper>
-            <UIProvider>
-              <Popup />
-              <Modal />
-              <Drawer />
-              <Toaster
-                toastOptions={{
-                  success: {
-                    iconTheme: { primary: '#28D7D2', secondary: '#ffffff' },
-                  },
-                }}
-              />
-              {children}
-              <SpeedInsights />
-            </UIProvider>
-          </SessionWrapper>
-        </QueryProvider>
-      </body>
-    </html>
+    <QueryProvider>
+      <SessionWrapper>
+        <html lang="en">
+          <body>
+            <Popup />
+            <Modal />
+            <Drawer />
+            {children}
+            <SpeedInsights />
+          </body>
+        </html>
+      </SessionWrapper>
+    </QueryProvider>
   );
 }

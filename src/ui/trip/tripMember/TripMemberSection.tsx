@@ -9,11 +9,11 @@ export default function TripMemberSection({
   children, // 참여 리스트
 }: ITripMemberSectionProps) {
   return (
-    <div className="flex min-h-[136px] flex-1 flex-col">
+    <section>
       {/* 소제목 */}
       <h4 className="mb-2 text-base font-semibold leading-normal">{title}</h4>
       {/* 참여 리스트 */}
-      <div className="flex-1 overflow-y-auto">{children}</div>
-    </div>
+      <div className="max-h-64">{children}</div>
+    </section>
   );
 }

@@ -1,17 +1,10 @@
+
 import { withSentryConfig } from '@sentry/nextjs';
 
 const nextConfig = {
   /* config options here */
-  async redirects() {
-    return [
-      {
-        source: '/trip',
-        destination: '/trip/1',
-        permanent: false,
-      },
-    ];
-  },
 };
+
 
 export default withSentryConfig(nextConfig, {
   // For all available options, see:
@@ -52,3 +45,4 @@ export default withSentryConfig(nextConfig, {
   // https://vercel.com/docs/cron-jobs
   automaticVercelMonitors: true,
 });
+

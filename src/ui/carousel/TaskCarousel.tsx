@@ -1,4 +1,4 @@
-import { TGetTaskResponse, TTaskStatus } from '@model/task.model';
+import { TTask } from '@model/task.model';
 import TaskCard from '@ui/card/taskCard/TaskCard';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
@@ -9,14 +9,12 @@ import 'swiper/css/navigation';
 import { twMerge } from 'tailwind-merge';
 
 interface ITaskCarouselProps {
-  tripId: number; // 여행 ID
-  tasks: TGetTaskResponse[]; // 할 일 데이터
+  tasks: TTask[]; // 할 일 데이터
   height?: string; // 캐러셀 height 값 지정
   className?: string; // 캐러셀 스타일 지정
 }
 
 export default function TaskCarousel({
-  tripId,
   tasks,
   height,
   className,
@@ -25,74 +23,50 @@ export default function TaskCarousel({
 
   const groupedTasks = tasks.reduce(
     (acc, task) => {
-      acc[task.taskStatus] = [...(acc[task.taskStatus] || []), task];
+      acc[task.travelStatus] = [...(acc[task.travelStatus] || []), task];
       return acc;
     },
-    {} as Record<TTaskStatus, TGetTaskResponse[]>,
+    {} as Record<TTask['travelStatus'], TTask[]>,
   );
 
   return (
     <div className="swiper-container">
       <Swiper
+        // loop={true} // 슬라이드 루프
         slidesPerView={3} // 데스크톱 기준 3개
         spaceBetween={22}
-        slidesOffsetAfter={20}
-        slidesOffsetBefore={20}
+        // 추가적인 계산이나 다른 좋은 로직으로 교체하기
         breakpoints={{
           1280: {
             slidesPerView: 3,
-            slidesOffsetAfter: 0,
-            slidesOffsetBefore: 0,
           },
           1024: {
             slidesPerView: 2.5,
-            slidesOffsetAfter: 20,
-            slidesOffsetBefore: 20,
           },
           768: {
             slidesPerView: 2,
-            slidesOffsetAfter: 20,
-            slidesOffsetBefore: 20,
           },
           640: {
             slidesPerView: 1.5,
-            slidesOffsetAfter: 20,
-            slidesOffsetBefore: 20,
           },
           520: {
             slidesPerView: 1.2,
-            slidesOffsetAfter: 0,
-            slidesOffsetBefore: 0,
           },
           0: {
             slidesPerView: 1,
-            slidesOffsetAfter: 0,
-            slidesOffsetBefore: 0,
           },
         }}
         className={twMerge(className)}
         style={{ height: height ? `${height}` : 'auto' }}
       >
         <SwiperSlide className="h-full">
-          <TaskCard
-            status="ready"
-            tripId={tripId}
-            tasks={groupedTasks['BEFORE_TRIP']}
-          />
+          <TaskCard status="ready" tasks={groupedTasks['BEFORE_TRAVEL']} />
         </SwiperSlide>
         <SwiperSlide>
-          <TaskCard
-            status="ongoing"
-            tripId={tripId}
-            tasks={groupedTasks['DURING_TRIP']}
-          />
+          <TaskCard status="ongoing" tasks={groupedTasks['DURING_TRAVEL']} />
         </SwiperSlide>
         <SwiperSlide>
-          <TaskCard
-            status="done"
-            tripId={tripId}
-            tasks={groupedTasks['AFTER_TRIP']}
-          />
+          <TaskCard status="done" tasks={groupedTasks['AFTER_TRAVEL']} />
         </SwiperSlide>
       </Swiper>
     </div>

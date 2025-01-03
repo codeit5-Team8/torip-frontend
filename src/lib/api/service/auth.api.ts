@@ -21,11 +21,6 @@ export const postRefreshToken = async (data: TPostRefreshTokenRequest) => {
   const response = await post<TResponse<TTokenResponse>>(
     '/api/v1/torip/auth/refresh',
     data,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    },
   );
   return response.data;
 };
@@ -40,13 +35,8 @@ export const postLogin = async (data: TPostLoginRequest) => {
 };
 
 export const getEmailExists = async (data: TGetEmailExistsRequest) => {
-  try {
-    const response = await get<TResponse<TGetEmailExistsResponse>>(
-      `/api/v1/torip/auth/register/username/exists?email=${data}`,
-    );
-    return response.data;
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
-  }
+  const response = await get<TResponse<TGetEmailExistsResponse>>(
+    `/api/v1/torip/auth/register/username/exists?email=${data}`,
+  );
+  return response.data;
 };

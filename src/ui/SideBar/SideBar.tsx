@@ -4,20 +4,13 @@
 'use client';
 
 import { twMerge } from 'tailwind-merge';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useResize } from '@hooks/useResize';
 import SideBarContent from './SideBarContent';
 import SideBarHeader from './SideBarHeader';
 
-interface ISideBarProps {
-  isSideBarOpen: boolean;
-  setIsSideBarOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export default function SideBar({
-  isSideBarOpen,
-  setIsSideBarOpen,
-}: ISideBarProps) {
+export default function SideBar() {
+  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
   const { isMobileSize } = useResize();
 
   useEffect(() => {
@@ -48,7 +41,7 @@ export default function SideBar({
   };
 
   const sidebarClassname = twMerge(
-    'bg-white hidden z-50 md:block tablet:transition-width tablet:duration-300 tablet:fixed tablet:left-0 tablet:top-0 tablet:h-screen',
+    'bg-white hidden tablet:z-50 md:block tablet:transition-width tablet:duration-300 tablet:fixed tablet:left-0 tablet:top-0 tablet:h-screen',
     isSideBarOpen
       ? 'block absolute w-full h-full tablet:w-[280px]'
       : 'tablet:w-[60px]',
@@ -68,10 +61,7 @@ export default function SideBar({
           toggleSideBar={toggleSideBar}
         />
         {isSideBarOpen && (
-          <SideBarContent
-            toggleSideBar={toggleSideBar}
-            clickSideBarContent={clickSideBarContent}
-          />
+          <SideBarContent clickSideBarContent={clickSideBarContent} />
         )}
       </div>
     </>

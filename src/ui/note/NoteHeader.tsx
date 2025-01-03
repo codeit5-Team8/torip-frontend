@@ -3,9 +3,8 @@
 import { useFormContext } from 'react-hook-form';
 import { TNoteFormInput } from '@type/note';
 import Button from '@ui/common/Button';
-import { isEmptyText, removeHtmlTags } from '@util/note';
+import { isEmptyText } from '@util/note';
 import { usePopupStore } from '@store/popup.store';
-import NavTitle from '@ui/common/NavTitle';
 
 interface INoteHeaderProps {
   handleSaveDraft: () => void;
@@ -30,13 +29,15 @@ export default function NoteHeader({
 
   return (
     <section className="mb-4 flex h-9 items-center justify-between gap-2 sm:h-11">
-      <NavTitle />
+      <div className="text-base font-semibold leading-normal text-slate-900 dark:text-white sm:text-lg sm:leading-7">
+        노트 작성
+      </div>
 
       <div className="flex w-[176px] gap-2 sm:w-[206px]">
         <Button
           size="middle"
           variant="outlined"
-          className="border-white bg-white px-4 py-2 text-primary hover:text-mint-700 disabled:cursor-not-allowed sm:px-6 sm:py-3"
+          className="border-white bg-white px-4 py-2 text-primary hover:text-mint-700 sm:px-6 sm:py-3"
           onClick={handlePopup}
           type="button"
           disabled={
@@ -49,11 +50,10 @@ export default function NoteHeader({
         <Button
           size="middle"
           variant="solid"
-          className="border-slate-400 bg-slate-400 px-4 py-2 text-white hover:border-primary hover:bg-primary hover:text-white disabled:cursor-not-allowed sm:px-6 sm:py-3"
+          className="border-slate-400 bg-slate-400 px-4 py-2 text-white hover:border-primary hover:bg-primary hover:text-white sm:px-6 sm:py-3"
           disabled={
-            isEmptyText({ value: watch('title'), hasHtml: false }) ||
-            isEmptyText({ value: watch('content'), hasHtml: true }) ||
-            removeHtmlTags(watch('content')).length >= 1000
+            isEmptyText({ value: watch('title'), hasHtml: false }) &&
+            isEmptyText({ value: watch('content'), hasHtml: true })
           }
           type="submit"
         >

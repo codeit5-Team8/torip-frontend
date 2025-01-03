@@ -2,59 +2,44 @@
 
 import { TResponse } from './model';
 
+/**
+ 
+@property {'TRAVEL'|'TASK'} 여행 / 할일 필터링 구분
+@property { number} 여행/할일 고유키
+@seq {number} 현재 페이지에서 가장 작은 노트 고유*/
+export type TGetNotesProps = {
+  key: 'TRAVEL' | 'TASK';
+  id: number;
+  seq: number;
+};
+
+export type TNote = {
+  // 추가 정의 필요
+  noteId: number;
+  tripTitle: string;
+  tripStatus: 'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP';
+  noteTitle: string;
+  noteContent: string;
+  createdBy: string;
+  createdAt: string;
+  modifiedBy: string;
+  modifiedAt: string;
+  taskTitle: string;
+};
+
+export type TNotes = {
+  // 추가 정의 필요
+  result: TNote[];
+};
+
 // 노트 등록, 수정 ,삭제
 export type TNoteRequest = {
-  id: number;
-  noteTitle: string;
-  noteContent: string;
-};
-
-// 여행 별 노트 모아보기
-export type TNote = {
+  taskId: number;
   noteId: number;
-  noteTitle: string;
-  noteContent: string;
-  createdBy: string;
-  createdAt: string;
-  modifiedBy: string;
-  modifiedAt: string;
-  ownerId: number; // 여행 오너
-  registrantId: number; // 노트 작성자
-  taskStatus?: 'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP';
-  taskTitle?: string;
+  title: string;
+  content: string;
 };
 
-export type TGetNoteAllTripProps = {
-  id: number;
-  tripNoteSeq: number;
-  taskNoteSeq: number;
-};
-
-export type TNoteAllTrip = {
-  tripTitle: string;
-  noteDetails: TNote[];
-};
-
-export type TNoteAllTripResponse = TResponse<TNoteAllTrip>;
-
-// 여행 상세보기
-export type TGetNoteDetailProp = number;
-
-export type TNoteDetail = {
-  noteId: number;
-  noteTitle: string;
-  noteContent: string;
-  createdBy: string;
-  createdAt: string;
-  modifiedBy: string;
-  modifiedAt: string;
-  tripTitle: string;
-  ownerId: number; // 여행 오너
-  registrantId: number; // 노트 작성자
-  taskStatus?: 'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP';
-  taskTitle?: string;
-};
-
-export type TNoteDetailResponse = TResponse<TNoteDetail>;
-
+// 노트들 목록 response
+export type TNotesResponse = TResponse<TNotes>;
 export type TNoteResponse = TResponse<TNote>;

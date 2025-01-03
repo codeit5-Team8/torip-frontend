@@ -3,7 +3,6 @@
 import { memo } from 'react';
 import { TJoinTrip } from '@model/trip.model';
 import Button from '@ui/common/Button';
-import { formatIsoDateToYYYYMMDD } from '@util/note';
 
 interface ITripJoinRequestItemProps
   extends Pick<TJoinTrip, 'invitee' | 'createdAt'> {
@@ -17,7 +16,6 @@ function TripJoinRequestItem({
   onAccept,
   onReject,
 }: ITripJoinRequestItemProps) {
-  const date = formatIsoDateToYYYYMMDD(createdAt);
   return (
     <li className="flex items-center justify-between border-b border-slate-200 py-1 last:border-0">
       <div className="text-sm font-normal leading-tight">
@@ -25,7 +23,7 @@ function TripJoinRequestItem({
       </div>
       <div className="flex items-center gap-16">
         <div className="hidden text-sm font-normal leading-tight tablet:block">
-          {date}
+          {createdAt}
         </div>
 
         <div className="flex gap-[0.375rem]">

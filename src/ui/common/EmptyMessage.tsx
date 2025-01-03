@@ -11,7 +11,7 @@ export default function EmptyMessage({
 }: IEmptyMessageProps) {
   return (
     <div className={twMerge('item-center h-full w-full', className)}>
-      <p className="text-center text-sm font-normal leading-normal text-slate-500">
+      <p className="text-sm font-normal leading-tight text-slate-500">
         {message}
       </p>
     </div>
