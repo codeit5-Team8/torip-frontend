@@ -10,12 +10,13 @@ import { useDeleteTrip } from '@hooks/trip/useDeleteTrip';
 import { usePopupStore } from '@store/popup.store';
 import { useRouter } from 'next/navigation';
 import { TRIP_POPUP_MESSAGE } from '@constant/trip';
-import Skeleton from '@ui/common/Skeleton';
 import { calculateDDday } from '@util/\bcalculateDDay';
 import toast from 'react-hot-toast';
 import { usePatchTrip } from '@hooks/trip/usePatchTrip';
 import TripModal from '@ui/Modal/TripModal';
 import { useLogin } from '@hooks/auth/useLogin';
+import { TripInfoSkeleton } from '@ui/skeleton/Skeletons';
+import Image from 'next/image';
 
 type TTripInfoProps = Pick<TTrip, 'id'>;
 
@@ -93,14 +94,7 @@ export default function TripInfo({ id }: TTripInfoProps) {
   };
 
   if (isLoading) {
-    return (
-      <section className="section-box min-h-[136px]">
-        <div className="flex flex-col gap-3 py-4">
-          <Skeleton className="h-7 w-52" />
-          <Skeleton className="h-8 w-32" />
-        </div>
-      </section>
-    );
+    return <TripInfoSkeleton />;
   }
 
   return (
@@ -138,7 +132,12 @@ export default function TripInfo({ id }: TTripInfoProps) {
           ]}
           className="bg-transparent font-black"
         >
-          {/* 케밥 아이콘 부분 */} :
+          <Image
+            src="/asset/icon/kebab.png"
+            width={24}
+            height={24}
+            alt="케밥 메뉴 아이콘"
+          />
         </DropdownMenu>
       </div>
     </section>

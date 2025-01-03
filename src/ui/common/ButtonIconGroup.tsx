@@ -84,7 +84,12 @@ export default function ButtonIconGroup({
             { label: '삭제하기', onClick: onDeleteTaskClick },
           ]}
         >
-          {/* 케밥 아이콘 부분 */}:
+          <Image
+            src="/asset/icon/kebab.png"
+            width={24}
+            height={24}
+            alt="케밥 메뉴 아이콘"
+          />
         </DropdownMenu>
       )}
     </div>
