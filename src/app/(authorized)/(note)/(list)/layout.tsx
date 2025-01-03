@@ -1,3 +1,5 @@
+import NavTitle from '@ui/common/NavTitle';
+
 export default function Layout({
   children,
   drawer,
@@ -7,6 +9,7 @@ export default function Layout({
 }) {
   return (
     <>
+      <NavTitle className="pb-4" />
       {children}
       {drawer}
     </>
