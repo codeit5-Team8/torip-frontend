@@ -11,6 +11,7 @@ import { FILTER_MAPPING } from '@constant/task';
 import { useModalStore } from '@store/modal.store';
 import TodoModal from '@ui/Modal/TodoModal';
 import { usePostTask } from '@hooks/task/usePostTask';
+import { TripTaskSkeleton } from '@ui/skeleton/Skeletons';
 
 type TTripTaskProps = Pick<TTrip, 'id'>;
 
@@ -23,7 +24,7 @@ export default function TripTask({ id }: TTripTaskProps) {
     all: true,
     ...(taskScope ? { taskScope } : {}),
   };
-  const { data } = useGetTasks(params);
+  const { data, isLoading } = useGetTasks(params);
 
   const { showModal } = useModalStore();
   const postTask = usePostTask();
@@ -39,9 +40,13 @@ export default function TripTask({ id }: TTripTaskProps) {
     setTaskScope(scope);
   };
 
+  if (isLoading) {
+    return <TripTaskSkeleton />;
+  }
+
   return (
-    <div className="section-box flex flex-1 flex-col gap-5 pr-0">
-      <div className="flex flex-col gap-5 pr-6">
+    <div className="section-box flex flex-1 flex-col gap-5 px-0 pr-0">
+      <div className="flex flex-col gap-5 px-6">
         <h4 className="text-lg font-semibold leading-7 text-slate-800">Todo</h4>
         <div className="flex items-center justify-between">
           <FilterButton onClick={handleTaskFilterClick} />

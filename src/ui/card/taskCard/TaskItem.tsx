@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 'use client';
 
-import { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useRef, useState } from 'react';
 import { TGetTaskResponse } from '@model/task.model';
 import CheckBox from '@ui/common/CheckBox';
 import ButtonIconGroup from '@ui/common/ButtonIconGroup';
@@ -10,11 +8,11 @@ import { useDeleteTask } from '@hooks/task/useDeleteTask';
 import { usePopupStore } from '@store/popup.store';
 import { TASK_POPUP_MESSAGE } from '@constant/task';
 import { get } from '@lib/api/axios';
-import { ScrollShadow } from '@nextui-org/react';
 import { useModalStore } from '@store/modal.store';
 import TodoModal from '@ui/Modal/TodoModal';
 import { usePutTask } from '@hooks/task/usePutTask';
 import { usePutCompleteTask } from '@hooks/task/usePutCompleteTask';
+import NameTag from '@ui/common/NameTag';
 
 interface ITaskItemProps
   extends Omit<
@@ -104,9 +102,6 @@ function TaskItem({
   };
 
   const handleEditTaskClick = () => {
-    // TODO: 모달 담당자 타입 수정 필요. 임시 처리 수정 후 제거 예정
-    const assigneesEmail = taskAssignees.map((assignee) => assignee.email);
-
     showModal({
       title: '할 일 수정',
       content: (
@@ -119,7 +114,7 @@ function TaskItem({
           taskDDay={taskDDay}
           taskScope={taskScope}
           taskCompletionDate={taskCompletionDate}
-          taskAssignees={assigneesEmail}
+          taskAssignees={taskAssignees}
           onConfirm={(data) => editTask.mutate(data)}
         />
       ),
@@ -138,8 +133,8 @@ function TaskItem({
   };
 
   return (
-    <ScrollShadow>
-      <li className="flex items-center justify-between gap-2 transition-colors duration-200 ease-in-out hover:text-primary">
+    <li className="flex w-full flex-col gap-1 transition-colors duration-200 ease-in-out hover:text-primary">
+      <div className="flex items-center justify-between">
         <CheckBox checked={isCompletedTask} onChange={handleCompleteTaskChange}>
           {taskTitle}
         </CheckBox>
@@ -152,8 +147,13 @@ function TaskItem({
           onEditTaskClick={handleEditTaskClick}
           onDeleteTaskClick={handleDeleteTaskClick}
         />
-      </li>
-    </ScrollShadow>
+      </div>
+      <div className="ml-6 flex gap-1">
+        {taskAssignees.map((assignees) => (
+          <NameTag key={assignees.userId}>{assignees.username}</NameTag>
+        ))}
+      </div>
+    </li>
   );
 }
 
