@@ -44,7 +44,7 @@ export type TUploadTodo = {
   taskDDay?: string;
   taskScope: TTaskScope;
   taskCompletionDate?: string;
-  taskAssignees?: string[] | TTaskAssignee[];
+  taskAssignees?: TTaskAssignee[] | string[];
 };
 
 export type TTask = {
