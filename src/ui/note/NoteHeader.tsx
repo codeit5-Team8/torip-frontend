@@ -6,6 +6,7 @@ import Button from '@ui/common/Button';
 import { isEmptyText, removeHtmlTags } from '@util/note';
 import { usePopupStore } from '@store/popup.store';
 import NavTitle from '@ui/common/NavTitle';
+import { ROUTE_TITLE_MAP } from '@constant/path';
 
 interface INoteHeaderProps {
   handleSaveDraft: () => void;
@@ -30,7 +31,10 @@ export default function NoteHeader({
 
   return (
     <section className="mb-4 flex h-9 items-center justify-between gap-2 sm:h-11">
-      <NavTitle />
+      <NavTitle
+        pageTitleProp={ROUTE_TITLE_MAP['/note-all-trip']}
+        className="mb-[18px]"
+      />
 
       <div className="flex w-[176px] gap-2 sm:w-[206px]">
         <Button
