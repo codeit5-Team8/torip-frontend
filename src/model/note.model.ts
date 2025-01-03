@@ -64,6 +64,7 @@ export type TNoteDetail = {
 // 할일 별 노트 모아보기
 export type TTaskNotes = {
   tripTitle: string;
+  taskTitle?: string;
   details: TNoteDetail[];
 };
 
