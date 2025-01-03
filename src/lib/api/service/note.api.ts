@@ -5,8 +5,10 @@ import {
   TNoteDetailResponse,
   TNoteRequest,
   TNoteResponse,
+  TTaskNotes,
 } from 'src/model/note.model';
 import { del, get, post, put } from '../axios';
+import { TResponse } from '@model/model';
 
 // 여행 별 노트 목록 조회
 export const getNoteAllTrip = async (query: TGetNoteAllTripProps) => {
@@ -41,5 +43,21 @@ export const deleteNote = async (noteId: number) => {
   const response = await del<TNoteResponse>(
     `/api/v1/torip/trip/note/${noteId}`,
   );
+  return response.data;
+};
+
+export const getNoteAllTask = async (params: {
+  id: number;
+  noteSeq: number;
+}) => {
+  const { id, noteSeq } = params;
+
+  const response = await get<TResponse<TTaskNotes>>(`/api/v1/torip/task/note`, {
+    params: {
+      id,
+      noteSeq,
+    },
+  });
+
   return response.data;
 };

@@ -1,4 +1,8 @@
-import { getNoteAllTrip, getTripNoteDetail } from '@lib/api/service/note.api';
+import {
+  getNoteAllTask,
+  getNoteAllTrip,
+  getTripNoteDetail,
+} from '@lib/api/service/note.api';
 import {
   getTask,
   getTaskDetail,
@@ -11,7 +15,11 @@ import {
 } from '@lib/api/service/trip.api';
 import { getTripList } from '@lib/api/service/trip.api';
 import { createQueryKeys } from '@lukemorales/query-key-factory';
-import { TGetNoteAllTripProps, TGetNoteDetailProp } from '@model/note.model';
+import {
+  TGetNoteAllTaskProps,
+  TGetNoteAllTripProps,
+  TGetNoteDetailProp,
+} from '@model/note.model';
 import { TGetTaskRequest } from '@model/task.model';
 import { TGetTripListProps } from '@model/trip.model';
 
@@ -64,5 +72,9 @@ export const noteQueryKeys = createQueryKeys('note', {
   noteDetail: (id: TGetNoteDetailProp) => ({
     queryKey: [id],
     queryFn: () => getTripNoteDetail(id),
+  }),
+  noteAllTask: (query: TGetNoteAllTaskProps) => ({
+    queryKey: [query.id],
+    queryFn: () => getNoteAllTask(query),
   }),
 });
