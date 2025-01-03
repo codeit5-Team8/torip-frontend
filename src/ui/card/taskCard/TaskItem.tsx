@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 'use client';
 
 import { memo, useCallback, useRef, useState } from 'react';
@@ -104,9 +102,6 @@ function TaskItem({
   };
 
   const handleEditTaskClick = () => {
-    // TODO: 모달 담당자 타입 수정 필요. 임시 처리 수정 후 제거 예정
-    const assigneesEmail = taskAssignees.map((assignee) => assignee.email);
-
     showModal({
       title: '할 일 수정',
       content: (
@@ -119,7 +114,7 @@ function TaskItem({
           taskDDay={taskDDay}
           taskScope={taskScope}
           taskCompletionDate={taskCompletionDate}
-          taskAssignees={assigneesEmail}
+          taskAssignees={taskAssignees}
           onConfirm={(data) => editTask.mutate(data)}
         />
       ),

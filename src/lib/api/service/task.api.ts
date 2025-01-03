@@ -11,7 +11,6 @@ import {
   TPutCompleteTaskRequest,
   TPutCompleteTaskResponse,
   TPutEditTaskResponse,
-  TTask,
 } from '@model/task.model';
 import { get, post, put, del } from '../axios';
 import { TResponse } from '@model/model';
@@ -33,7 +32,7 @@ export const getTask = async (data: TGetTaskRequest) => {
   return response.data;
 };
 
-export const putEditTask = async (data: TTask) => {
+export const putEditTask = async (data: TUploadTodo) => {
   const response = await put<TResponse<TPutEditTaskResponse>>(
     '/api/v1/torip/task',
     data,

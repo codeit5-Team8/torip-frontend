@@ -3,7 +3,12 @@
 /* eslint-disable no-console */
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { TUploadTodo, TTaskScope, TTaskStatus } from '@model/task.model';
+import {
+  TUploadTodo,
+  TTaskScope,
+  TTaskStatus,
+  TTaskAssignee,
+} from '@model/task.model';
 import TodoTitle from './TodoTitle';
 import { useEffect, useState } from 'react';
 import DDayPicker from './DDayPicker';
@@ -25,7 +30,7 @@ interface ITodoModal {
   taskDDay?: string;
   taskScope?: TTaskScope;
   taskCompletionDate?: string;
-  taskAssignees?: string[];
+  taskAssignees?: TTaskAssignee[] | string[];
   onConfirm: (data: TUploadTodo) => void;
 }
 
