@@ -1,13 +1,18 @@
+import { TTrip } from '@model/trip.model';
 import Image from 'next/image';
 import Link from 'next/link';
 
 interface ITripList {
+  tripList:
+    | {
+        lastSeenId: number;
+        content: TTrip[];
+      }
+    | undefined;
   clickSideBarContent: () => void;
 }
 
-export default function TripList({ clickSideBarContent }: ITripList) {
-  const mockTrip = ['서울 여행', '부산 여행', '유럽 여행'];
-
+export default function TripList({ tripList, clickSideBarContent }: ITripList) {
   return (
     <>
       <section className="flex items-center gap-2">
@@ -19,16 +24,20 @@ export default function TripList({ clickSideBarContent }: ITripList) {
         />
         <p className="text-lg font-medium">여행</p>
       </section>
-      <ul className="pb-6 pt-4">
-        {mockTrip.map((trip, index) => (
-          <li key={index} className="cursor-pointer list-inside list-disc p-2">
-            {/* TODO : 여행 별 링크 작업 필요 */}
-            <Link href="/playground" onClick={clickSideBarContent}>
-              {trip}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {tripList!.content && (
+        <ul className="pb-6 pt-4">
+          {tripList!.content.map((trip) => (
+            <li
+              key={trip.id}
+              className="cursor-pointer list-inside list-disc p-2"
+            >
+              <Link href={`/trip/${trip.id}`} onClick={clickSideBarContent}>
+                {trip.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 }

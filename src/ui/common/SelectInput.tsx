@@ -18,13 +18,15 @@ export type TSelectOptionsType = {
 interface ISelectInputProps
   extends Omit<ComponentPropsWithRef<'select'>, 'onChange'> {
   options: TSelectOptionsType;
-  onChange: (value: string | undefined) => void;
+  onChange: (value: number | string | undefined) => void;
   placeholder: string;
+  defaultTrip?: number | string | undefined;
   errorType?: TInputErrorType;
 }
 
 export default function SelectInput(props: ISelectInputProps) {
-  const { placeholder, options, value, onChange, errorType } = props;
+  const { placeholder, defaultTrip, options, value, onChange, errorType } =
+    props;
 
   const selectTriggerClassName = twMerge(
     INPUT_CLASSNAME.base,
@@ -32,13 +34,13 @@ export default function SelectInput(props: ISelectInputProps) {
   );
 
   const SelectOptionClassName =
-    'p-0 gap-0 rounded-bl-xl rounded-br-xl bg-gray-50 font-normal leading-normal text-slate-800 text-sm sm:text-base';
+    'p-0 z-[5555] gap-0 rounded-bl-xl rounded-br-xl bg-gray-50 font-normal leading-normal text-slate-800 text-sm sm:text-base';
 
   const selectedOptions = options.find((option) => option.value === value);
 
   return (
-    <div className="relative pb-7">
-      <Select onValueChange={onChange}>
+    <div className="relative">
+      <Select onValueChange={onChange} defaultValue={`${defaultTrip}`}>
         <SelectTrigger className={selectTriggerClassName}>
           <div className="flex w-full items-center justify-between">
             {selectedOptions ? (

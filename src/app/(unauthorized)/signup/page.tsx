@@ -5,7 +5,7 @@ import AuthInput from '@ui/auth/AuthInput';
 import Button from '@ui/common/Button';
 import { AUTH_VALIDATION_REGEX } from '@constant/auth';
 import Link from 'next/link';
-import { useLogin } from '@hooks/useLogin';
+import { useLogin } from '@hooks/auth/useLogin';
 import { useRouter } from 'next/navigation';
 import { getEmailExists } from '@lib/api/service/auth.api';
 
@@ -15,8 +15,11 @@ interface ISignUpFormInputs {
   password: string;
   passwordConfirm: string;
 }
-
-export default function SignUpPage() {
+export default function SignUpPage({
+  searchParams: redirectTo,
+}: {
+  searchParams: string;
+}) {
   const {
     register,
     handleSubmit,
@@ -29,7 +32,7 @@ export default function SignUpPage() {
   // 이메일 중복 체크 함수
   const checkEmailExists = async (email: string): Promise<boolean | string> => {
     const response = await getEmailExists(email);
-    if (response.result.exists) {
+    if (response?.result.exists) {
       return '이미 사용 중인 이메일입니다.';
     }
     return true;
@@ -41,7 +44,11 @@ export default function SignUpPage() {
       redirect: false,
     });
     if (res?.ok) {
-      router.push('/');
+      if (redirectTo) {
+        router.push(redirectTo);
+      } else {
+        router.push('/');
+      }
     }
   };
 

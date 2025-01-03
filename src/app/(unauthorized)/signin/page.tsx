@@ -7,7 +7,7 @@ import { AUTH_VALIDATION_REGEX } from '@constant/auth';
 import AuthInput from '@ui/auth/AuthInput';
 import Button from '@ui/common/Button';
 import { INPUT_MESSAGE } from '@constant/input';
-import { useLogin } from '@hooks/useLogin';
+import { useLogin } from '@hooks/auth/useLogin';
 import { useRouter } from 'next/navigation';
 
 type TLoginFormInputs = {
@@ -15,7 +15,11 @@ type TLoginFormInputs = {
   password: string;
 };
 
-export default function SignInPage() {
+export default function SignInPage({
+  searchParams: redirectTo,
+}: {
+  searchParams: string;
+}) {
   const {
     register,
     formState: { errors, isValid },
@@ -28,7 +32,11 @@ export default function SignInPage() {
   const onSubmit: SubmitHandler<TLoginFormInputs> = async (data) => {
     const res = await loginHandler('credentials', { ...data, redirect: false });
     if (res?.ok) {
-      router.push('/');
+      if (redirectTo) {
+        router.push(redirectTo);
+      } else {
+        router.push('/');
+      }
     } else if (res) {
       // 에러 메시지에 따라 필드별로 에러 설정
       if (res?.error === '비밀번호가 일치하지 않습니다.') {
@@ -109,7 +117,11 @@ export default function SignInPage() {
             Torip이 처음이신가요?
           </div>
           <Link
-            href="/signup"
+            href={
+              redirectTo
+                ? `/signup?redirectTo=${encodeURIComponent(redirectTo)}`
+                : '/signup'
+            }
             className="text-sm font-medium leading-tight text-mint-500 underline"
           >
             회원가입
