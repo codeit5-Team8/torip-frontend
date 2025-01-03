@@ -1,9 +1,9 @@
 import AuthLayout from '@ui/layout/AuthLayout';
 
-export default function UnAuthorizedLayout({
-  children,
-}: {
+interface ILayoutProps {
   children: React.ReactNode;
-}) {
+}
+
+export default function UnAuthorizedLayout({ children }: ILayoutProps) {
   return <AuthLayout>{children}</AuthLayout>;
 }
