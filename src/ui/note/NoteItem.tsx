@@ -12,6 +12,7 @@ import { useLogin } from '@hooks/auth/useLogin';
 import { useDeleteTripNote } from '@hooks/note/useDeleteTripNote';
 import { useQueryClient } from '@tanstack/react-query';
 import toast, { Toaster } from 'react-hot-toast';
+import Image from 'next/image';
 
 interface INoteItemProps {
   note: TNote;
@@ -75,7 +76,12 @@ export default function NoteItem({ note, tripId }: INoteItemProps) {
       href={`/note-detail/${note.noteId}`}
     >
       <div className="mb-4 flex items-center gap-1">
-        <>아이콘</>
+        <Image
+          src={`/asset/icon/note.png`}
+          alt="노트 아이콘"
+          width={28}
+          height={28}
+        />
         <span className="text-sm font-medium leading-tight text-slate-800">
           {note.createdBy}
         </span>
@@ -90,7 +96,12 @@ export default function NoteItem({ note, tripId }: INoteItemProps) {
                 },
               ]}
             >
-              <span>케밥 아이콘</span>
+              <Image
+                src={`/asset/icon/kebab.png`}
+                alt="note"
+                width={24}
+                height={24}
+              />
             </DropdownMenu>
           </span>
         )}
