@@ -132,6 +132,50 @@ export function AllTodoPageSkeleton() {
   );
 }
 
+// note-all-task page
+
+export function NoteAllTaskPageSkeleton() {
+  return (
+    <div className="flex flex-col gap-4">
+      <section className="mb-4 flex h-[52px] items-center justify-between gap-2 rounded-xl bg-white px-[11px] py-[9px] sm:h-[88px] sm:px-6 sm:py-5">
+        <div className="flex items-center gap-2">
+          <Skeleton className="h-4 w-4" />
+          <Skeleton className="h-5 w-[52px]" />
+        </div>
+        <Skeleton className="inline-flex h-[34px] w-[94px] items-center justify-center rounded-xl bg-primary text-white sm:h-12 sm:w-[180px]" />
+      </section>
+
+      <section className="mb-4 flex h-[192px] gap-4 rounded-xl bg-white px-[11px] py-[9px] sm:h-[164px] sm:px-6 sm:py-6">
+        <div className="flex gap-2">
+          <Skeleton className="h-4 w-4" />
+        </div>
+        <div className="flex w-full flex-col gap-4">
+          <Skeleton className="h-5 w-[52px]" />
+          <Skeleton className="h-7 w-full pl-6 desktop:w-1/2" />
+        </div>
+      </section>
+      <section className="mb-4 flex h-[192px] gap-4 rounded-xl bg-white px-[11px] py-[9px] sm:h-[164px] sm:px-6 sm:py-6">
+        <div className="flex gap-2">
+          <Skeleton className="h-4 w-4" />
+        </div>
+        <div className="flex w-full flex-col gap-4">
+          <Skeleton className="h-5 w-[52px]" />
+          <Skeleton className="h-7 w-full pl-6 desktop:w-1/2" />
+        </div>
+      </section>
+      <section className="mb-4 flex h-[192px] gap-4 rounded-xl bg-white px-[11px] py-[9px] sm:h-[164px] sm:px-6 sm:py-6">
+        <div className="flex gap-2">
+          <Skeleton className="h-4 w-4" />
+        </div>
+        <div className="flex w-full flex-col gap-4">
+          <Skeleton className="h-5 w-[52px]" />
+          <Skeleton className="h-7 w-full pl-6 desktop:w-1/2" />
+        </div>
+      </section>
+    </div>
+  );
+}
+
 // 여행 상세
 export function TripInfoSkeleton() {
   return (

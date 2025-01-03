@@ -30,8 +30,14 @@ export type TGetNoteAllTripProps = {
   taskNoteSeq: number;
 };
 
+export type TGetNoteAllTaskProps = {
+  id: number;
+  noteSeq: number;
+};
+
 export type TNoteAllTrip = {
   tripTitle: string;
+  taskTitle: string;
   noteDetails: TNote[];
 };
 
@@ -53,6 +59,13 @@ export type TNoteDetail = {
   registrantId: number; // 노트 작성자
   taskStatus?: 'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP';
   taskTitle?: string;
+};
+
+// 할일 별 노트 모아보기
+export type TTaskNotes = {
+  tripTitle: string;
+  taskTitle?: string;
+  details: TNoteDetail[];
 };
 
 export type TNoteDetailResponse = TResponse<TNoteDetail>;

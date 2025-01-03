@@ -9,6 +9,7 @@ import { twMerge } from 'tailwind-merge';
 import { ComponentPropsWithRef } from 'react';
 import { TInputErrorType } from '@type/input';
 import { INPUT_CLASSNAME, INPUT_MESSAGE } from '@constant/input';
+import Image from 'next/image';
 
 export type TSelectOptionsType = {
   label: string;
@@ -48,7 +49,12 @@ export default function SelectInput(props: ISelectInputProps) {
             ) : (
               <span className="text-slate-400">{placeholder}</span>
             )}
-            <>icon{/* 아이콘 들어올 자리 */}</>
+            <Image
+              src={`/asset/icon/dropdown.png`}
+              alt="드롭다운 아이콘"
+              width={24}
+              height={24}
+            />
           </div>
         </SelectTrigger>
         <SelectContent className={SelectOptionClassName}>
