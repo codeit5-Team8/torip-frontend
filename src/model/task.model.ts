@@ -26,6 +26,7 @@ export type TGetTaskResponse = {
   taskStatus: TTaskStatus;
   taskDDay: string;
   taskScope: TTaskScope;
+  isCompleted: boolean;
   taskCompletionDate?: string;
   createdBy: TUserModel;
   createdAt: string;
@@ -43,7 +44,7 @@ export type TUploadTodo = {
   taskDDay?: string;
   taskScope: TTaskScope;
   taskCompletionDate?: string;
-  taskAssignees?: string[];
+  taskAssignees?: TTaskAssignee[];
 };
 
 export type TTask = {
@@ -82,7 +83,7 @@ export type TDeleteTaskRequest = number;
 
 export type TGetTaskDetailRequest = number;
 
-export type TDeleteTaskResponse = number;
+export type TDeleteTaskResponse = { tripId: number };
 
 export type TGetTaskProgressResponse = {
   personalTask: number;
@@ -92,3 +93,7 @@ export type TGetTaskProgressResponse = {
   totalTask: number;
   totalCompletionTask: number;
 };
+
+export type TPutCompleteTaskRequest = { taskId: number; isCompleted: boolean };
+
+export type TPutCompleteTaskResponse = { tripId: number; taskId: number };

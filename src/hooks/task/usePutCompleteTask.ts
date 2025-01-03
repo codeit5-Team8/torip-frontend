@@ -1,12 +1,13 @@
 import { tasksQueryKeys } from '@constant/queryKeyFactory';
-import { deleteTask } from '@lib/api/service/task.api';
+import { putCompleteTask } from '@lib/api/service/task.api';
+import { TPutCompleteTaskRequest } from '@model/task.model';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const useDeleteTask = () => {
+export const usePutCompleteTask = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: async (taskId: number) => {
-      const response = await deleteTask(taskId);
+    mutationFn: async (data: TPutCompleteTaskRequest) => {
+      const response = await putCompleteTask(data);
       return response;
     },
     onSuccess: (response) => {
@@ -23,7 +24,7 @@ export const useDeleteTask = () => {
     },
     onError: (error) => {
       // eslint-disable-next-line no-console
-      console.error('할일 삭제 중 오류 발생:', error);
+      console.error('할일 완료 중 오류 발생:', error);
     },
   });
 
