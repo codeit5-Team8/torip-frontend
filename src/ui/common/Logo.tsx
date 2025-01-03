@@ -15,7 +15,7 @@ export default function Logo(props: ILogoProps) {
         <Link href="/">
           {iconOnly ? (
             <Image
-              src="/asset/image/logo.png"
+              src="/asset/logo_icon.png"
               width="32"
               height="32"
               alt="Torip 아이콘"
@@ -23,7 +23,7 @@ export default function Logo(props: ILogoProps) {
             />
           ) : (
             <Image
-              src="/asset/image/logo_full.png"
+              src="/asset/logo.png"
               width={size === 'small' ? 106 : 270}
               height={size === 'small' ? 35 : 90}
               alt="Torip 로고"
