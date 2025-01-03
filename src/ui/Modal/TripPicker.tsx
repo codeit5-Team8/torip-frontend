@@ -18,7 +18,6 @@ export default function TripPicker({ tripId = 33, setTripId }: ITripPicker) {
           <header className="my-5 text-base font-semibold text-slate-800">
             여행 선택
           </header>
-          {/* TODO: 옵션 선택 후 반영되도록 수정하기. (사용법 설명 여쭤보기) */}
           <SelectInput
             options={tripList!.content.map((trip) => {
               return { label: trip.name, value: `${trip.id}` };
@@ -26,7 +25,7 @@ export default function TripPicker({ tripId = 33, setTripId }: ITripPicker) {
             onChange={(newValue) => {
               setTripId(Number(newValue));
             }}
-            value={tripId}
+            value={`${tripId}`}
             defaultTrip={tripId}
             placeholder="여행을 선택해주세요."
           />
