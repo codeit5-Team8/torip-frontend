@@ -4,6 +4,7 @@ import { NOTE_POPUP_MESSAGE } from '@constant/note';
 import { usePopupStore } from '@store/popup.store';
 
 import Button from '@ui/common/Button';
+import Image from 'next/image';
 
 interface INoteDraftProps {
   handleLoadDraft: () => void;
@@ -37,9 +38,13 @@ export default function NoteDraft({
   return (
     <section className="mb-4 flex h-14 items-center rounded-[28px] bg-slate-50 px-4 py-[18px]">
       <button className="mr-5" onClick={handleDeleteDraftPopup} type="button">
-        X
+        <Image
+          src={`/asset/icon/delete-mint.png`}
+          alt="삭제 아이콘"
+          width={24}
+          height={24}
+        />
       </button>
-      {/* TODO 아이콘  */}
       <p className="mr-3 flex-1 break-keep text-sm font-semibold leading-tight text-primary">
         임시 저장된 노트가 있어요. 저장된 노트를 불러오시겠어요?
       </p>
