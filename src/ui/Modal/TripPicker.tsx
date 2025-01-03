@@ -26,7 +26,7 @@ export default function TripPicker({ tripId = 33, setTripId }: ITripPicker) {
             onChange={(newValue) => {
               setTripId(Number(newValue));
             }}
-            value={tripId}
+            value={`${tripId}`}
             defaultTrip={tripId}
             placeholder="여행을 선택해주세요."
           />
