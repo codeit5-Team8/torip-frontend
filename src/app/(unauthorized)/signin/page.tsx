@@ -16,9 +16,9 @@ type TLoginFormInputs = {
 };
 
 export default function SignInPage({
-  searchParams: redirectTo,
+  searchParams,
 }: {
-  searchParams: string;
+  searchParams: { redirectTo?: string };
 }) {
   const {
     register,
@@ -32,8 +32,8 @@ export default function SignInPage({
   const onSubmit: SubmitHandler<TLoginFormInputs> = async (data) => {
     const res = await loginHandler('credentials', { ...data, redirect: false });
     if (res?.ok) {
-      if (redirectTo) {
-        router.push(redirectTo);
+      if (searchParams.redirectTo) {
+        router.push(searchParams.redirectTo);
       } else {
         router.push('/');
       }
@@ -118,8 +118,8 @@ export default function SignInPage({
           </div>
           <Link
             href={
-              redirectTo
-                ? `/signup?redirectTo=${encodeURIComponent(redirectTo)}`
+              searchParams.redirectTo
+                ? `/signup?redirectTo=${encodeURIComponent(searchParams.redirectTo)}`
                 : '/signup'
             }
             className="text-sm font-medium leading-tight text-mint-500 underline"
