@@ -8,18 +8,14 @@ import AuthInput from '@ui/auth/AuthInput';
 import Button from '@ui/common/Button';
 import { INPUT_MESSAGE } from '@constant/input';
 import { useLogin } from '@hooks/auth/useLogin';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 type TLoginFormInputs = {
   email: string;
   password: string;
 };
 
-export default function SignInPage({
-  searchParams: redirectTo,
-}: {
-  searchParams: string;
-}) {
+export default function SignInPage() {
   const {
     register,
     formState: { errors, isValid },
@@ -28,6 +24,8 @@ export default function SignInPage({
   } = useForm<TLoginFormInputs>({ mode: 'onBlur' });
   const { loginHandler } = useLogin();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get('redirectTo');
 
   const onSubmit: SubmitHandler<TLoginFormInputs> = async (data) => {
     const res = await loginHandler('credentials', { ...data, redirect: false });
