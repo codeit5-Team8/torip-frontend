@@ -112,7 +112,6 @@ export default function TodoModal({
         variant={
           tripId &&
           todoTitle &&
-          taskFilePath &&
           taskStatus &&
           DDay &&
           taskScope &&
@@ -126,7 +125,6 @@ export default function TodoModal({
         disabled={
           tripId &&
           todoTitle &&
-          taskFilePath &&
           taskStatus &&
           DDay &&
           taskScope &&
