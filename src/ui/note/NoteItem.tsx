@@ -21,7 +21,9 @@ interface INoteItemProps {
 
 export default function NoteItem({ note, tripId, taskId }: INoteItemProps) {
   const { showPopup } = usePopupStore();
-  const id = taskId ? { taskId } : { tripId };
+  const queryKey = taskId
+    ? ['note', 'noteAllTask', taskId]
+    : ['note', 'noteAllTrip', tripId];
   const { data } = useLogin();
   const userId = data?.user?.id;
   const hasUserRight = userId === 40 || userId === note.registrantId;
@@ -38,7 +40,7 @@ export default function NoteItem({ note, tripId, taskId }: INoteItemProps) {
 
           setTimeout(() => {
             queryClient.invalidateQueries({
-              queryKey: ['note', 'noteAllTrip', id],
+              queryKey,
             });
           }, 1000);
         }
