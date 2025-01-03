@@ -4,6 +4,7 @@
 'use client';
 
 import { useModalStore } from '@store/modal.store';
+import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 
 interface IModal {
@@ -78,8 +79,14 @@ export default function Modal({ confirmMessage }: IModal) {
             <article className="flex h-full flex-col gap-[10px]">
               <section className="flex items-center justify-between">
                 <p className="text-lg font-bold">{title}</p>
-                {/* TODO: X 아이콘 삽입 */}
-                <button onClick={handleCloseModal}>X</button>
+                <Image
+                  className="cursor-pointer"
+                  src="/asset/icon/delete.png"
+                  alt="모달 닫기"
+                  width={24}
+                  height={24}
+                  onClick={handleCloseModal}
+                />
               </section>
               <section className="h-full overflow-auto">{content}</section>
             </article>
