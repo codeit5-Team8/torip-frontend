@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AUTH_VALIDATION_REGEX } from '@constant/auth';
@@ -98,7 +98,8 @@ export default function SignInPage({
           >
             로그인하기
           </Button>
-          <Button
+          {/* TODO: 2차 개발에 추가 */}
+          {/* <Button
             size="large"
             fullWidth={true}
             className="border-[#FEE500] bg-[#FEE500] text-slate-800 hover:border-[#FEE500] hover:bg-[#FEE500] active:border-[#FEE500] active:bg-[#FEE500]"
@@ -110,7 +111,7 @@ export default function SignInPage({
               alt="카카오 아이콘"
             />
             카카오톡으로 로그인하기
-          </Button>
+          </Button> */}
         </div>
         <div className="flex h-5 gap-1">
           <div className="text-sm font-medium leading-tight">
