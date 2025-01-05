@@ -31,11 +31,13 @@ export default function DropdownMenu({
             className,
           )}
         >
-          {/* 아이콘이나 텍스트 */}
-          {children}
+          <div className="pointer-events-none">
+            {/* 아이콘이나 텍스트 */}
+            {children}
+          </div>
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="z-50">
         {items?.map((item, index) => (
           <DropdownMenuItem
             key={index}
