@@ -16,9 +16,9 @@ interface ISignUpFormInputs {
   passwordConfirm: string;
 }
 export default function SignUpPage({
-  searchParams: redirectTo,
+  searchParams,
 }: {
-  searchParams: string;
+  searchParams: { redirectTo?: string };
 }) {
   const {
     register,
@@ -44,8 +44,8 @@ export default function SignUpPage({
       redirect: false,
     });
     if (res?.ok) {
-      if (redirectTo) {
-        router.push(redirectTo);
+      if (searchParams.redirectTo) {
+        router.push(searchParams.redirectTo);
       } else {
         router.push('/');
       }
