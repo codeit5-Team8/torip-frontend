@@ -26,6 +26,7 @@ function TaskItem({
   tripId,
   taskId,
   taskTitle,
+  ownerId,
   taskFilePath,
   taskStatus,
   taskDDay,
@@ -139,6 +140,7 @@ function TaskItem({
           {taskTitle}
         </CheckBox>
         <ButtonIconGroup
+          ownerId={ownerId}
           taskAssignees={taskAssignees}
           taskId={taskId}
           hasFilePath={!!taskFilePath}

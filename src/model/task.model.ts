@@ -20,6 +20,7 @@ export type TGetTaskResponse = {
   taskId: number;
   tripName: string;
   taskTitle: string;
+  ownerId: number;
   taskFilePath?: string;
   taskStatus: TTaskStatus;
   taskDDay: string;

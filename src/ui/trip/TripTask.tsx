@@ -23,7 +23,6 @@ export default function TripTask({ id }: TTripTaskProps) {
   });
 
   const { data, isLoading } = useGetTasks(params);
-
   const { showModal } = useModalStore();
   const postTask = usePostTask();
   const handleAddTaskClick = () => {
@@ -43,7 +42,6 @@ export default function TripTask({ id }: TTripTaskProps) {
   };
 
   return (
-    // <div className="flex w-full flex-col gap-4 rounded-xl bg-white py-6 desktop:px-6"></div>
     <div className="section-box flex flex-1 flex-col gap-5 px-0 pr-0 desktop:px-6">
       <div className="flex flex-col gap-5 px-6 desktop:px-0">
         <h4 className="text-lg font-semibold leading-7 text-slate-800">Todo</h4>

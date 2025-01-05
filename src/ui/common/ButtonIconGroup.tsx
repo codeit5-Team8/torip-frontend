@@ -27,6 +27,7 @@ interface IButtonIconGroupProps {
   onEditTaskClick: () => void;
   onDeleteTaskClick: () => void;
   registrantId: number;
+  ownerId: number;
   className?: string;
   taskAssignees: TTaskAssignee[];
 }
@@ -35,6 +36,7 @@ export default function ButtonIconGroup({
   taskId,
   hasFilePath,
   onFileClick,
+  ownerId,
   taskAssignees,
   registrantId,
   onEditTaskClick,
@@ -48,6 +50,7 @@ export default function ButtonIconGroup({
 
   //오너 response로 받아서추가처리
   const showDropdownMenu =
+    ownerId === user?.user.id ||
     registrantId === user?.user.id ||
     taskAssignees.some((assignee) => assignee.userId === user?.user.id);
 

@@ -16,6 +16,7 @@ export default function TaskList({ tripId, tasks }: ITaskListProps) {
             key={task.taskId}
             tripId={tripId ? tripId : 0}
             taskId={task.taskId}
+            ownerId={task.ownerId}
             taskTitle={task.taskTitle}
             taskFilePath={task.taskFilePath}
             taskStatus={task.taskStatus}
