@@ -2,7 +2,6 @@ import { twMerge } from 'tailwind-merge';
 import DropdownMenu from './DropdownMenu';
 import Link from 'next/link';
 import Image from 'next/image';
-import { TUserModel } from '@model/user.model';
 import { useLogin } from '@hooks/auth/useLogin';
 import { TTaskAssignee } from '@model/task.model';
 
@@ -27,7 +26,7 @@ interface IButtonIconGroupProps {
   onFileClick: () => void;
   onEditTaskClick: () => void;
   onDeleteTaskClick: () => void;
-  createdBy: TUserModel;
+  registrantId: number;
   className?: string;
   taskAssignees: TTaskAssignee[];
 }
@@ -37,7 +36,7 @@ export default function ButtonIconGroup({
   hasFilePath,
   onFileClick,
   taskAssignees,
-  createdBy,
+  registrantId,
   onEditTaskClick,
   onDeleteTaskClick,
   className,
@@ -47,8 +46,9 @@ export default function ButtonIconGroup({
   const buttonStyle =
     'relative flex h-6 w-6 items-center justify-center rounded-full bg-slate-50';
 
+  //오너 response로 받아서추가처리
   const showDropdownMenu =
-    createdBy.id === user?.user.id ||
+    registrantId === user?.user.id ||
     taskAssignees.some((assignee) => assignee.userId === user?.user.id);
 
   return (

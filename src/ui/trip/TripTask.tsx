@@ -43,8 +43,9 @@ export default function TripTask({ id }: TTripTaskProps) {
   };
 
   return (
-    <div className="section-box flex flex-1 flex-col gap-5 px-0 pr-0">
-      <div className="flex flex-col gap-5 px-6">
+    // <div className="flex w-full flex-col gap-4 rounded-xl bg-white py-6 desktop:px-6"></div>
+    <div className="section-box flex flex-1 flex-col gap-5 px-0 pr-0 desktop:px-6">
+      <div className="flex flex-col gap-5 px-6 desktop:px-0">
         <h4 className="text-lg font-semibold leading-7 text-slate-800">Todo</h4>
         <div className="flex items-center justify-between">
           <FilterButton
@@ -57,11 +58,13 @@ export default function TripTask({ id }: TTripTaskProps) {
       {isLoading ? (
         <TripTaskSkeleton />
       ) : (
-        <TaskCarousel
-          tripId={id}
-          tasks={data?.success ? data?.result : []}
-          height="500px"
-        />
+        <div className="px-4 tablet:px-0">
+          <TaskCarousel
+            tripId={id}
+            tasks={data?.success ? data?.result : []}
+            height="500px"
+          />
+        </div>
       )}
     </div>
   );

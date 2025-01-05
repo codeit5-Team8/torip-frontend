@@ -30,7 +30,7 @@ export default function AllTodoBox() {
   }
 
   return (
-    <div className="flex h-[250px] flex-col gap-4 rounded-xl bg-white px-4 pb-6 pt-4 tablet:px-6">
+    <div className="flex h-[250px] flex-col gap-4 rounded-xl bg-white px-6 pb-6 pt-4 tablet:px-6">
       <div className="flex items-center justify-between">
         <Subtitle
           title="모든 할 일"
@@ -52,7 +52,7 @@ export default function AllTodoBox() {
         </Button>
       </div>
       {/* 데이터 렌더링 */}
-      <div className="flex flex-1">
+      <div className="flex flex-1 overflow-auto">
         {displayedTasks.length > 0 ? (
           <TaskList tasks={displayedTasks} />
         ) : (

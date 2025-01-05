@@ -32,7 +32,7 @@ function TaskItem({
   taskScope,
   isCompleted,
   taskCompletionDate,
-  createdBy,
+  registrantId,
   taskAssignees,
 }: ITaskItemProps) {
   const [isCompletedTask, setIsCompletedTask] = useState(isCompleted || false);
@@ -142,7 +142,7 @@ function TaskItem({
           taskAssignees={taskAssignees}
           taskId={taskId}
           hasFilePath={!!taskFilePath}
-          createdBy={createdBy}
+          registrantId={registrantId}
           onFileClick={handleFileClick}
           onEditTaskClick={handleEditTaskClick}
           onDeleteTaskClick={handleDeleteTaskClick}

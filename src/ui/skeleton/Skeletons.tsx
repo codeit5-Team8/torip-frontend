@@ -190,12 +190,12 @@ export function TripInfoSkeleton() {
 
 export function TripTaskSkeleton() {
   return (
-    <div className="flex w-full flex-col gap-4 rounded-xl bg-white pl-6 desktop:pr-6">
+    <div className="flex w-full flex-col gap-4 rounded-xl bg-white px-6 tablet:pl-6 tablet:pr-0">
       <div className="flex h-[500px] gap-[22px]">
         {/* 기본 (mobile): 1개 */}
         <Skeleton className="h-full w-full rounded-3xl" />
         {/* tablet: 2개 (1개는 반만 보여줌) */}
-        <Skeleton className="hidden h-full rounded-3xl tablet:block tablet:w-1/2 desktop:w-full" />
+        <Skeleton className="hidden h-full rounded-3xl tablet:block tablet:rounded-br-none tablet:rounded-tr-none desktop:w-full desktop:rounded-3xl" />
         {/* desktop: 정확히 3개 */}
         <Skeleton className="hidden h-full rounded-3xl desktop:block desktop:w-full" />
       </div>

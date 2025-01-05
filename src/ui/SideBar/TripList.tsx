@@ -24,7 +24,7 @@ export default function TripList({ tripList, clickSideBarContent }: ITripList) {
         />
         <p className="text-lg font-medium">여행</p>
       </section>
-      {tripList!.content && (
+      {tripList && tripList.content.length > 0 ? (
         <ul className="pb-6 pt-4">
           {tripList!.content.map((trip) => (
             <li
@@ -37,7 +37,7 @@ export default function TripList({ tripList, clickSideBarContent }: ITripList) {
             </li>
           ))}
         </ul>
-      )}
+      ) : null}
     </>
   );
 }

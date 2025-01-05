@@ -1,5 +1,3 @@
-import { TUserModel } from './user.model';
-
 export type TTaskStatus = 'BEFORE_TRIP' | 'DURING_TRIP' | 'AFTER_TRIP';
 export type TTaskScope = 'PUBLIC' | 'PRIVATE';
 
@@ -28,9 +26,10 @@ export type TGetTaskResponse = {
   taskScope: TTaskScope;
   isCompleted: boolean;
   taskCompletionDate?: string;
-  createdBy: TUserModel;
+  registrantId: number;
+  createdBy: string;
   createdAt: string;
-  modifiedBy: TUserModel;
+  modifiedBy: string;
   modifiedAt: string;
   taskAssignees: TTaskAssignee[];
 };

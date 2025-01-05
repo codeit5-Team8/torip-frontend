@@ -21,6 +21,7 @@ export default function TaskList({ tripId, tasks }: ITaskListProps) {
             taskStatus={task.taskStatus}
             taskDDay={task.taskDDay}
             taskScope={task.taskScope}
+            registrantId={task.registrantId}
             isCompleted={task.isCompleted}
             taskCompletionDate={task.taskCompletionDate}
             createdBy={task.createdBy}
