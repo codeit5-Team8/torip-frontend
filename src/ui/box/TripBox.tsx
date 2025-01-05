@@ -51,8 +51,8 @@ export default function TripBox({ id, name }: ITripCardProps) {
         <div className="flex justify-between">
           <Subtitle
             title={name}
-            icon="whiteflag"
-            iconBg="bg-blue-500"
+            icon="trip-dark"
+            iconBg="bg-slate-800"
             link="#"
           />
           <ShowAllTasksButton onClick={handleMoveTrip} />
