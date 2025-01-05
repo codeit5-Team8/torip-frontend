@@ -23,7 +23,6 @@ export default function NoteDetailPage({
 
   const tripTitle = data?.result?.tripTitle || '';
   const notes = data?.result?.details || [];
-  // tasktitle을 detail 배열 안에만 내려줘서 이렇게 작성할 수 밖에 없습니다.. 수정필요
   const taskTitle = data?.result?.taskTitle || '';
 
   return (
