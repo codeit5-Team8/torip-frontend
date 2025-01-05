@@ -1,4 +1,3 @@
-import { tasksQueryKeys } from '@constant/queryKeyFactory';
 import { putCompleteTask } from '@lib/api/service/task.api';
 import { TPutCompleteTaskRequest } from '@model/task.model';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -12,13 +11,8 @@ export const usePutCompleteTask = () => {
     },
     onSuccess: (response) => {
       if (response.success) {
-        const props = {
-          tripId: response.result.tripId,
-          taskSeq: 0,
-          all: true,
-        };
         queryClient.invalidateQueries({
-          queryKey: tasksQueryKeys.list(props).queryKey,
+          queryKey: ['tasks', 'list'],
         });
       }
     },

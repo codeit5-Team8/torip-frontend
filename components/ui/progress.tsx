@@ -19,10 +19,8 @@ const Progress = React.forwardRef<
   const [progress, setProgress] = React.useState(0);
 
   React.useEffect(() => {
-    if (value) {
-      const timer = setTimeout(() => setProgress(value), 500);
-      return () => clearTimeout(timer);
-    }
+    const timer = setTimeout(() => setProgress(value || 0), 200);
+    return () => clearTimeout(timer);
   }, [value]);
 
   return (
