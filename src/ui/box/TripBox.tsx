@@ -1,9 +1,8 @@
 import Subtitle from '@ui/common/Subtitle';
-import FilterButton from '@ui/common/FilterButton';
+import FilterButton, { TFilterType } from '@ui/common/FilterButton';
 import TaskCarousel from '@ui/carousel/TaskCarousel';
 import ShowAllTasksButton from '@ui/trip/tripTask/ShowAllTasksButton';
 import AddTaskButton from '@ui/trip/tripTask/AddTaskButton';
-import { TTaskScope } from '@model/task.model';
 import { useRouter } from 'next/navigation';
 import { useModalStore } from '@store/modal.store';
 import { FILTER_MAPPING } from '@constant/task';
@@ -12,28 +11,31 @@ import { useGetTasks } from '@hooks/task/useGetTasks';
 import TodoModal from '@ui/Modal/TodoModal';
 import { usePostTask } from '@hooks/task/usePostTask';
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 interface ITripCardProps {
   id: number;
   name: string;
 }
 
 export default function TripBox({ id, name }: ITripCardProps) {
-  const [taskScope, setTaskScope] = useState<TTaskScope | null>(null);
-  const params = {
+  const [activeFilter, setActiveFilter] = useState<TFilterType>('All');
+  const [params, setParams] = useState({
     tripId: id,
     taskSeq: 0,
     all: true,
-    ...(taskScope ? { taskScope } : {}),
-  };
+  });
+
   const postTask = usePostTask();
   const { data: tasks } = useGetTasks(params);
   const navigate = useRouter();
   const { showModal } = useModalStore();
-  const handleTaskFilterClick = (filter: string) => {
+
+  const handleTaskFilterClick = (filter: TFilterType) => {
+    setActiveFilter(filter);
     const scope = FILTER_MAPPING[filter];
-    setTaskScope(scope);
+    setParams((prev) => ({
+      ...prev,
+      taskScope: scope || null,
+    }));
   };
 
   const handleAddTaskClick = () => {
@@ -58,7 +60,10 @@ export default function TripBox({ id, name }: ITripCardProps) {
           <ShowAllTasksButton onClick={handleMoveTrip} />
         </div>
         <div className="flex items-center justify-between">
-          <FilterButton onClick={handleTaskFilterClick} />
+          <FilterButton
+            activeFilter={activeFilter}
+            onClick={(filter) => handleTaskFilterClick(filter)}
+          />
           <AddTaskButton onClick={handleAddTaskClick} />
         </div>
       </div>
