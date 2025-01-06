@@ -37,52 +37,66 @@ export const authOptions: NextAuthOptions = {
           placeholder: '비밀번호를 입력해주세요.',
         },
       },
-      async authorize(
-        credentials: Record<'name' | 'email' | 'password', string> | undefined,
-      ) {
-        // 기존 authorize 함수 내용 유지
+      async authorize(credentials) {
         if (!credentials) {
-          throw new Error('No credentials provided.');
+          return null;
         }
+
         const { name, email, password } = credentials;
 
-        // 회원가입
-        if (name) {
+        try {
+          // 회원가입
+          if (name) {
+            const {
+              result: token,
+              success,
+              message,
+            } = await postRegister({
+              username: name,
+              email: email,
+              password: password,
+            });
+
+            if (success && token) {
+              return {
+                id: token.id.toString(),
+                name: token.username,
+                email: token.email,
+                accessToken: token.accessToken,
+                refreshToken: token.refreshToken,
+                expiredAt: token.expiredAt,
+              };
+            } else {
+              throw new Error(message || 'Signup failed.');
+            }
+          }
+
+          // 로그인
           const {
             result: token,
             success,
             message,
-          } = await postRegister({
-            username: name,
+          } = await postLogin({
             email: email,
             password: password,
           });
 
-          if (success) {
-            return { id: '1', name, email, ...token };
+          if (success && token) {
+            return {
+              id: token.id.toString(),
+              name: token.username,
+              email: token.email,
+              accessToken: token.accessToken,
+              refreshToken: token.refreshToken,
+              expiredAt: token.expiredAt,
+            };
           } else {
-            const error = new Error('Signup failed.');
-            (error as Error).message = message;
-            throw error;
+            throw new Error(message || 'Login failed.');
           }
-        }
-
-        // 로그인
-        const {
-          result: token,
-          success,
-          message,
-        } = await postLogin({
-          email: email,
-          password: password,
-        });
-
-        if (success) {
-          return { id: '1', name, email, ...token };
-        } else {
-          const error = new Error('Login failed.');
-          (error as Error).message = message;
-          throw error;
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.error('Authentication error:', error);
+          return null;
         }
       },
     }),

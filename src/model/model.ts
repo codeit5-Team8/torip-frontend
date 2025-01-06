@@ -6,6 +6,9 @@ export type TResponse<T> = {
 };
 
 export type TTokenResponse = {
+  id: number;
+  username: string;
+  email: string;
   accessToken: string;
   refreshToken: string;
   expiredAt: string;
