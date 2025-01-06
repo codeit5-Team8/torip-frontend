@@ -1,6 +1,7 @@
 import {
   TGetEmailExistsRequest,
   TGetEmailExistsResponse,
+  TPostKaKaoLoginRequest,
   TPostLoginRequest,
   TPostRefreshTokenRequest,
   TPostRegisterRequest,
@@ -49,4 +50,12 @@ export const getEmailExists = async (data: TGetEmailExistsRequest) => {
     // eslint-disable-next-line no-console
     console.error(err);
   }
+};
+
+export const postKaKaoLogin = async (data: TPostKaKaoLoginRequest) => {
+  const response = await post<TResponse<TTokenResponse | null>>(
+    '/api/v1/torip/auth/kakao/token',
+    data,
+  );
+  return response.data;
 };

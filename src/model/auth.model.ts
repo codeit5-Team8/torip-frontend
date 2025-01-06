@@ -13,3 +13,7 @@ export type TGetEmailExistsRequest = string;
 export type TGetEmailExistsResponse = {
   exists: boolean;
 };
+
+export type TPostKaKaoLoginRequest = {
+  accessToken: string;
+};

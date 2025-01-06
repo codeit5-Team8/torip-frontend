@@ -1,6 +1,6 @@
 'use client';
 
-// import Image from 'next/image';
+import Image from 'next/image';
 import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AUTH_VALIDATION_REGEX } from '@constant/auth';
@@ -9,6 +9,7 @@ import Button from '@ui/common/Button';
 import { INPUT_MESSAGE } from '@constant/input';
 import { useLogin } from '@hooks/auth/useLogin';
 import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 
 type TLoginFormInputs = {
   email: string;
@@ -98,11 +99,11 @@ export default function SignInPage({
           >
             로그인하기
           </Button>
-          {/* TODO: 2차 개발에 추가 */}
-          {/* <Button
+          <Button
             size="large"
             fullWidth={true}
             className="border-[#FEE500] bg-[#FEE500] text-slate-800 hover:border-[#FEE500] hover:bg-[#FEE500] active:border-[#FEE500] active:bg-[#FEE500]"
+            onClick={() => signIn('kakao')}
           >
             <Image
               src="/asset/image/kakao.png"
@@ -111,7 +112,7 @@ export default function SignInPage({
               alt="카카오 아이콘"
             />
             카카오톡으로 로그인하기
-          </Button> */}
+          </Button>
         </div>
         <div className="flex h-5 gap-1">
           <div className="text-sm font-medium leading-tight">

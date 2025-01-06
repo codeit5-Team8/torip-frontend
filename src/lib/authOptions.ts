@@ -1,8 +1,10 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
+import KakaoProvider from 'next-auth/providers/kakao';
 import { NextAuthOptions, Session, User } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import dayjs from 'dayjs';
 import {
+  postKaKaoLogin,
   postLogin,
   postRefreshToken,
   postRegister,
@@ -100,11 +102,45 @@ export const authOptions: NextAuthOptions = {
         }
       },
     }),
+    KakaoProvider({
+      clientId: process.env.KAKAO_CLIENT_ID!,
+      clientSecret: process.env.KAKAO_CLIENT_SECRET!,
+    }),
   ],
   pages: {
     signIn: '/signin',
   },
   callbacks: {
+    async signIn({ user, account }) {
+      // 카카오 로그인 서버 검증
+      if (account?.provider === 'kakao' && account.access_token) {
+        try {
+          const {
+            result: token,
+            success,
+            message,
+          } = await postKaKaoLogin({
+            accessToken: account.access_token,
+          });
+          if (success && token) {
+            user.id = token.id.toString();
+            user.name = token.username;
+            user.email = token.email;
+            user.accessToken = token.accessToken;
+            user.refreshToken = token.refreshToken;
+            user.expiredAt = token.expiredAt;
+            return true;
+          } else {
+            throw new Error(message || 'KAKAO Login failed.');
+          }
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.error('Error during Kakao login:', error);
+          return false;
+        }
+      }
+      return true;
+    },
     async jwt({ token, user }: { token: JWT; user?: IMyUser }) {
       if (user) {
         token.id = Number(user.id);
