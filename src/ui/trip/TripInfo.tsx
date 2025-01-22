@@ -106,7 +106,7 @@ export default function TripInfo({ id }: TTripInfoProps) {
         } as React.CSSProperties
       }
       className={twMerge(
-        'section-box relative min-h-[136px] overflow-hidden bg-cover bg-center bg-no-repeat',
+        'section-box relative flex min-h-[136px] flex-row justify-between overflow-hidden bg-cover bg-center bg-no-repeat',
         // 'before:to--[#888888]/30 before:absolute before:inset-0 before:bg-gradient-to-r before:from-black before:opacity-50 before:content-[""]',
         // 'bg-[image:var(--bg-img)]',
         // backgroundImage && 'bg-[image:var(--bg-img)]',
@@ -118,7 +118,7 @@ export default function TripInfo({ id }: TTripInfoProps) {
         </h3>
         <div className="text-[2rem] font-black leading-none">{dDay}</div>
       </div>
-      <div className="absolute right-4 top-4">
+      <div>
         <DropdownMenu
           items={[
             { label: '공유하기', onClick: handleCopyInviteLink },
@@ -130,7 +130,6 @@ export default function TripInfo({ id }: TTripInfoProps) {
                 ]
               : []),
           ]}
-          className="bg-transparent font-black"
         >
           <Image
             src="/asset/icon/kebab.png"
