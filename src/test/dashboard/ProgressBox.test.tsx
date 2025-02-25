@@ -3,12 +3,10 @@ import { useGetProgress } from '../../hooks/task/useGetProgress';
 import '@testing-library/jest-dom';
 import MyProgressBox from '@ui/box/MyProgrssBox';
 
-// React Query 훅을 직접 모킹
 jest.mock('../../hooks/task/useGetProgress', () => ({
   useGetProgress: jest.fn(),
 }));
 
-// Chart.js 모킹 (JSDOM에서 getContext 오류 방지)
 jest.mock('react-chartjs-2', () => ({
   Doughnut: () => <div data-testid="doughnut-chart" />,
 }));
