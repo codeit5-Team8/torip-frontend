@@ -74,7 +74,10 @@ export function AllTodoBoxSkeleton() {
 
 export function MyProgressBoxSkeleton() {
   return (
-    <div className="flex h-[250px] rounded-xl bg-[#28D7D2] bg-[url('/asset/image/progressBg.png')] px-4 py-4 tablet:px-6">
+    <div
+      data-testid="my-progress-box-skeleton"
+      className="flex h-[250px] rounded-xl bg-[#28D7D2] bg-[url('/asset/image/progressBg.png')] px-4 py-4 tablet:px-6"
+    >
       <div className="flex flex-1 flex-col gap-4">
         <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#0F172A]">
           <Image

@@ -15,8 +15,10 @@ const config: Config = {
   moduleNameMapper: {
     // ...
     '^@/components/(.*)$': '<rootDir>/components/$1',
+    '^@hooks/(.*)$': '<rootDir>/src/hooks/$1',
   },
   moduleDirectories: ['node_modules', '<rootDir>'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
