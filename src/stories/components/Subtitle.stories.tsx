@@ -19,7 +19,7 @@ type TStory = StoryObj<typeof Subtitle>;
 
 export const Default: TStory = {
   args: {
-    title: 'Example Subtitle',
+    title: 'Example Subtitle12',
     icon: 'flag',
     iconBg: 'bg-primary',
   },
