@@ -4,14 +4,14 @@
     "es2021": true,
     "node": true
   },
-
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
-    "next/core-web-vitals"
+    "next/core-web-vitals",
+    "plugin:storybook/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -38,13 +38,21 @@
       "error",
       {
         "selector": "typeAlias",
-        "format": ["PascalCase"],
-        "prefix": ["T"]
+        "format": [
+          "PascalCase"
+        ],
+        "prefix": [
+          "T"
+        ]
       },
       {
         "selector": "interface",
-        "format": ["PascalCase"],
-        "prefix": ["I"]
+        "format": [
+          "PascalCase"
+        ],
+        "prefix": [
+          "I"
+        ]
       }
     ]
   },
