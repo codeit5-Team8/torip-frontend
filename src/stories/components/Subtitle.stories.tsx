@@ -18,11 +18,7 @@ export default meta;
 type TStory = StoryObj<typeof Subtitle>;
 
 export const Default: TStory = {
-  args: {
-    title: 'Example Subtitle12',
-    icon: 'flag',
-    iconBg: 'bg-primary',
-  },
+  args: { title: 'Example Subtitle12', icon: 'flag', iconBg: 'bg-primary' },
 };
 
 export const WithLink: TStory = {
