@@ -6,7 +6,7 @@ import Button from '@ui/common/Button';
 import { AUTH_VALIDATION_REGEX } from '@constant/auth';
 import Link from 'next/link';
 import { useLogin } from '@hooks/auth/useLogin';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { getEmailExists } from '@lib/api/service/auth.api';
 
 interface ISignUpFormInputs {
@@ -15,11 +15,7 @@ interface ISignUpFormInputs {
   password: string;
   passwordConfirm: string;
 }
-export default function SignUpPage({
-  searchParams,
-}: {
-  searchParams: { redirectTo?: string };
-}) {
+export default function SignUpPage() {
   const {
     register,
     handleSubmit,
@@ -27,6 +23,10 @@ export default function SignUpPage({
     formState: { errors, isValid },
   } = useForm<ISignUpFormInputs>({ mode: 'onBlur' });
   const { loginHandler } = useLogin();
+
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get('redirectTo');
+
   const router = useRouter();
 
   // 이메일 중복 체크 함수
@@ -44,11 +44,7 @@ export default function SignUpPage({
       redirect: false,
     });
     if (res?.ok) {
-      if (searchParams.redirectTo) {
-        router.push(searchParams.redirectTo);
-      } else {
-        router.push('/');
-      }
+      router.push(redirectTo ? redirectTo : '/');
     }
   };
 
@@ -130,7 +126,14 @@ export default function SignUpPage({
 
       <div className="flex justify-center gap-1 text-sm font-medium text-slate-800">
         <p>이미 회원이신가요? </p>
-        <Link href={'/signin'} className="text-mint-500 underline">
+        <Link
+          href={
+            redirectTo
+              ? `/signin?redirectTo=${encodeURIComponent(redirectTo)}`
+              : '/signin'
+          }
+          className="text-mint-500 underline"
+        >
           로그인
         </Link>
       </div>

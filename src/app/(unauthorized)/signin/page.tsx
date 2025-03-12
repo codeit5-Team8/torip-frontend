@@ -8,7 +8,7 @@ import AuthInput from '@ui/auth/AuthInput';
 import Button from '@ui/common/Button';
 import { INPUT_MESSAGE } from '@constant/input';
 import { useLogin } from '@hooks/auth/useLogin';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 
 type TLoginFormInputs = {
@@ -16,11 +16,7 @@ type TLoginFormInputs = {
   password: string;
 };
 
-export default function SignInPage({
-  searchParams,
-}: {
-  searchParams: { redirectTo?: string };
-}) {
+export default function SignInPage() {
   const {
     register,
     formState: { errors, isValid },
@@ -28,16 +24,15 @@ export default function SignInPage({
     setError,
   } = useForm<TLoginFormInputs>({ mode: 'onBlur' });
   const { loginHandler } = useLogin();
+
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get('redirectTo');
   const router = useRouter();
 
   const onSubmit: SubmitHandler<TLoginFormInputs> = async (data) => {
     const res = await loginHandler('credentials', { ...data, redirect: false });
     if (res?.ok) {
-      if (searchParams.redirectTo) {
-        router.push(searchParams.redirectTo);
-      } else {
-        router.push('/');
-      }
+      router.push(redirectTo ? redirectTo : '/');
     } else if (res) {
       // 에러 메시지에 따라 필드별로 에러 설정
       if (res?.error === '비밀번호가 일치하지 않습니다.') {
@@ -120,8 +115,8 @@ export default function SignInPage({
           </div>
           <Link
             href={
-              searchParams.redirectTo
-                ? `/signup?redirectTo=${encodeURIComponent(searchParams.redirectTo)}`
+              redirectTo
+                ? `/signup?redirectTo=${encodeURIComponent(redirectTo)}`
                 : '/signup'
             }
             className="text-sm font-medium leading-tight text-mint-500 underline"
